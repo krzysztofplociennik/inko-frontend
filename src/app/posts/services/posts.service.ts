@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { baseUrl } from '../../../shared/urlUtils';
+import { baseUrl } from '../../shared/urlUtils';
 import { Observable, map, shareReplay } from 'rxjs';
 import { PostCreate, PostRead } from '../post';
 
