@@ -10,9 +10,6 @@ import { NgModel } from '@angular/forms';
 })  
 export class PostsComponent implements OnInit {
 
-    // titleInput: HTMLInputElement | null = document.getElementById('postTitle') as HTMLInputElement;
-    // titleContent: HTMLInputElement | null = document.getElementById('postContent') as HTMLInputElement;
-
     posts: PostRead[] = [];
 
     postID: number = 0;
@@ -36,8 +33,6 @@ export class PostsComponent implements OnInit {
   
       const postTitle = postTitleInput.value;
       const postContent = postContentInput.value;
-
-      // this.postsService.createPost(postTitle, postContent);
 
       this.postsService.createPost(postTitle, postContent).subscribe(
         (response: number) => {
