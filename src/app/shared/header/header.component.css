@@ -1,3 +1,5 @@
 div {
-    background: #1B74B8;
+    background: #fffbf0;
+    display: flex;
+    justify-content: center;
 }
