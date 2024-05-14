@@ -7,5 +7,8 @@ div {
 }
 
 .label {
-    margin: 20px 111px 4px 111px;
+    border-style: groove;
+    border-radius: 40%;
+    border-width: 2cap;
+    margin: 20px 111px 4px 111px;   
 }
