@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+home: string|any[]|null|undefined = 'home';
+about: string|any[]|null|undefined = 'about';
+
+
 }
 
