@@ -1,15 +1,4 @@
 <div>
-    
-    <app-header-button label="HOME" [buttonClass]="'custom-class'">
-    </app-header-button>
-
-    <app-header-button label="POSTS" [buttonClass]="'custom-class'">
-    </app-header-button>
-
-    <app-header-button label="ABOUT" [buttonClass]="'custom-class'">
-    </app-header-button>
-
-    <app-header-button label="CONTACT" [buttonClass]="'custom-class'">
-    </app-header-button>
-
+    <app-header-button [routerLink]="['/home']" label="HOME"></app-header-button>
+    <app-header-button [routerLink]="['/about']" label={{about}}></app-header-button>
 </div>

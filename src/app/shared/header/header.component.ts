@@ -7,5 +7,8 @@ import { ActivatedRoute, RouterLinkActive, RouterOutlet, RouterLink } from '@ang
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
+  home: string|any[]|null|undefined = 'home';
+  posts: string|any[]|null|undefined = 'posts';
+  about: string|any[]|null|undefined = 'aboutZ';
+  contact: string|any[]|null|undefined = 'contact';
 }
