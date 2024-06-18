@@ -9,6 +9,5 @@ import { ActivatedRoute, RouterLinkActive, RouterOutlet, RouterLink } from '@ang
 export class HeaderComponent {
   home: string|any[]|null|undefined = 'home';
   posts: string|any[]|null|undefined = 'posts';
-  about: string|any[]|null|undefined = 'aboutZ';
-  contact: string|any[]|null|undefined = 'contact';
+  about: string|any[]|null|undefined = 'about';
 }
