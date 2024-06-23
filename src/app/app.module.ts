@@ -8,7 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { HomeModule } from "./home/home.module";
 import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
-import { HeaderComponent } from './shared/header/header.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -24,7 +24,8 @@ import { HeaderComponent } from './shared/header/header.component';
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
-        HomeModule
+        HomeModule,
+        BrowserAnimationsModule
     ]
 })
 export class AppModule { }

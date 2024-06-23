@@ -5,6 +5,7 @@ import { FooterComponent } from '../shared/footer/footer.component';
 import { PostsComponent } from '../posts/posts.component';
 import { HeaderModule } from "../shared/header/header.module";
 import { RouterModule } from '@angular/router';
+import { MatPaginatorModule } from '@angular/material/paginator'
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { RouterModule } from '@angular/router';
     imports: [
         CommonModule,
         HeaderModule,
-        RouterModule
+        RouterModule,
+        MatPaginatorModule
     ]
 })
 export class HomeModule { }

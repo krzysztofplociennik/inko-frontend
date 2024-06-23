@@ -1,8 +1,6 @@
-import { Component, Input, NgModule, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PostsService } from './services/posts.service';
 import { PostRead } from './post';
-import { Observable, map } from 'rxjs';
-import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-posts',
@@ -17,11 +15,19 @@ export class PostsComponent implements OnInit {
     postsCount: number = 0;
 
     constructor(public postsService: PostsService) { 
-        this.postsService.getREALPosts().subscribe(
+        this.postsService.getREALPosts(1, 1).subscribe(
           (response: PostRead[]) => {
             this.posts = response;
             this.postsCount = this.posts.length; 
           });
+    }
+
+    getPosts() {
+      this.postsService.getREALPosts(1, 1).subscribe(
+        (response: PostRead[]) => {
+          this.posts = response;
+          this.postsCount = this.posts.length; 
+        });
     }
 
     ngOnInit() {}
@@ -40,5 +46,4 @@ export class PostsComponent implements OnInit {
         }
       );
     }
-
 }

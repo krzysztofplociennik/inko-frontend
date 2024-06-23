@@ -1,6 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
 
-/* Font style: normal */
 @font-face {
     font-family: 'jersey';
     src: url(/src/assets/fonts/jersey/Jersey10Charted-Regular.ttf) format('truetype');
@@ -10,3 +8,5 @@
     font-family: 'raleway';
     src: url(/src/assets/fonts/Raleway_Dots/RalewayDots-Regular.ttf) format('truetype');
   }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

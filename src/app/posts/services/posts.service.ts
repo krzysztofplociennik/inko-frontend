@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { baseUrl } from '../../shared/urlUtils';
 import { Observable, map, shareReplay } from 'rxjs';
 import { PostCreate, PostRead } from '../post';
@@ -11,13 +11,16 @@ export class PostsService {
 
   constructor(private http: HttpClient) {}
 
-  getREALPosts(): Observable<PostRead[]> {
+  getREALPosts(page: number, itemsPerPage: number): Observable<PostRead[]> {
     const url: string = baseUrl + '/posts/getPosts';
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('itemsPerPage', itemsPerPage.toString());
     
-    return this.http.get<PostRead[]>(url).pipe(
-    map((response: PostRead[]) => {
-      return response;
-    })
+    return this.http.get<PostRead[]>(url, { params }).pipe(
+      map((response: PostRead[]) => {
+        return response;
+      })
     );
   }
 
@@ -27,9 +30,7 @@ export class PostsService {
     const dummyPost: PostCreate = { title: title, content: content };
     
     return this.http.post<number>(url, dummyPost).pipe(
-      map((response: number) => {
-        console.log('yessss');
-        
+      map((response: number) => {        
         return response;
       })
     );
