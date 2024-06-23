@@ -11,11 +11,11 @@ export class PostsService {
 
   constructor(private http: HttpClient) {}
 
-  getREALPosts(page: number, itemsPerPage: number): Observable<PostRead[]> {
+  fetchPosts(page: number, itemsPerPage: number): Observable<PostRead[]> {
     const url: string = baseUrl + '/posts/getPosts';
     const params = new HttpParams()
-      .set('page', page.toString())
-      .set('itemsPerPage', itemsPerPage.toString());
+      .set('page', page)
+      .set('size', itemsPerPage);
     
     return this.http.get<PostRead[]>(url, { params }).pipe(
       map((response: PostRead[]) => {

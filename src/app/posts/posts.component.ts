@@ -15,15 +15,11 @@ export class PostsComponent implements OnInit {
     postsCount: number = 0;
 
     constructor(public postsService: PostsService) { 
-        this.postsService.getREALPosts(1, 1).subscribe(
-          (response: PostRead[]) => {
-            this.posts = response;
-            this.postsCount = this.posts.length; 
-          });
+      this.getPosts();
     }
 
     getPosts() {
-      this.postsService.getREALPosts(1, 1).subscribe(
+      this.postsService.fetchPosts(1, 1).subscribe(
         (response: PostRead[]) => {
           this.posts = response;
           this.postsCount = this.posts.length; 
@@ -32,7 +28,7 @@ export class PostsComponent implements OnInit {
 
     ngOnInit() {}
 
-    create() {
+    createPost() {
 
       const postTitleInput = document.getElementById('titleI') as HTMLInputElement;
       const postContentInput = document.getElementById('contentI') as HTMLInputElement;
