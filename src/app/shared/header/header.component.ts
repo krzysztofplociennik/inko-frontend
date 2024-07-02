@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, RouterLinkActive, RouterOutlet, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +7,6 @@ import { ActivatedRoute, RouterLinkActive, RouterOutlet, RouterLink } from '@ang
 })
 export class HeaderComponent {
   home: string|any[]|null|undefined = 'home';
-  posts: string|any[]|null|undefined = 'posts';
+  articles: string|any[]|null|undefined = 'articles';
   about: string|any[]|null|undefined = 'about';
 }

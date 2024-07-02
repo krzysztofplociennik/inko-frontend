@@ -9,6 +9,7 @@ import { HomeModule } from "./home/home.module";
 import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ArticlesComponent } from './articles/articles.component';
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         HomeComponent,
         AboutComponent,
         PageNotFoundComponent,
+        ArticlesComponent,
     ],
     providers: [],
     bootstrap: [AppComponent],
