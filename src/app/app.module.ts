@@ -10,6 +10,7 @@ import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ArticlesComponent } from './articles/articles.component';
+import { SearchArticlesComponent } from './search-articles/search-articles.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { ArticlesComponent } from './articles/articles.component';
         AboutComponent,
         PageNotFoundComponent,
         ArticlesComponent,
+        SearchArticlesComponent,
     ],
     providers: [],
     bootstrap: [AppComponent],
