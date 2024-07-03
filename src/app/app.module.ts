@@ -11,6 +11,7 @@ import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ArticlesComponent } from './articles/articles.component';
 import { SearchArticlesComponent } from './search-articles/search-articles.component';
+import { NewArticleComponent } from './new-article/new-article.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { SearchArticlesComponent } from './search-articles/search-articles.compo
         PageNotFoundComponent,
         ArticlesComponent,
         SearchArticlesComponent,
+        NewArticleComponent,
     ],
     providers: [],
     bootstrap: [AppComponent],
