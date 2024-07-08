@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "inkocherencja:build:production"
+              "buildTarget": "inkocherencja:build:production"
             },
             "development": {
-              "browserTarget": "inkocherencja:build:development"
+              "buildTarget": "inkocherencja:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "inkocherencja:build"
+            "buildTarget": "inkocherencja:build"
           }
         },
         "test": {
