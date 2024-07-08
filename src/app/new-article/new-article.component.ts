@@ -4,7 +4,7 @@ import { CreateArticleService } from './service/create-article.service';
 @Component({
   selector: 'app-new-article',
   templateUrl: './new-article.component.html',
-  styleUrls: ['./new-article.component.css']
+  styleUrls: ['./new-article.component.css'],
 })
 export class NewArticleComponent {
 

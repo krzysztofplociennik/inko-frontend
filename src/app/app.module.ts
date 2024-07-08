@@ -12,6 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ArticlesComponent } from './articles/articles.component';
 import { SearchArticlesComponent } from './search-articles/search-articles.component';
 import { NewArticleComponent } from './new-article/new-article.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { HeaderModule } from './shared/header/header.module';
 
 @NgModule({
     declarations: [
@@ -22,6 +25,12 @@ import { NewArticleComponent } from './new-article/new-article.component';
         ArticlesComponent,
         SearchArticlesComponent,
         NewArticleComponent,
+        HeaderComponent,
+        FooterComponent,
+    ],
+    exports: [
+        HeaderComponent, 
+        FooterComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
@@ -31,7 +40,8 @@ import { NewArticleComponent } from './new-article/new-article.component';
         HttpClientModule,
         FormsModule,
         HomeModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        HeaderModule,
     ]
 })
 export class AppModule { }
