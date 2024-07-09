@@ -1,9 +1,14 @@
 
 <app-header></app-header>
 <div>
-    <p>new-article works!</p>
-    <button (click)="createArticle()">
-        create
+
+    <label style="margin-right: 20px;">Title:</label>
+    <input size="241px" style="margin-bottom: 15px;" type="text" id="contentI">
+
+    <st-editor style="width: 100px;" [(ngModel)]="content" [config]="config"></st-editor>
+
+    <button style="width: auto; margin-top: 20px;" (click)="createArticle()">
+        create article
     </button>
 </div>
 <app-footer></app-footer>

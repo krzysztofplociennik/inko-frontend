@@ -15,6 +15,7 @@ import { NewArticleComponent } from './new-article/new-article.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { HeaderModule } from './shared/header/header.module';
+import { NgxSimpleTextEditorModule } from 'ngx-simple-text-editor';
 
 @NgModule({
     declarations: [
@@ -42,6 +43,7 @@ import { HeaderModule } from './shared/header/header.module';
         HomeModule,
         BrowserAnimationsModule,
         HeaderModule,
+        NgxSimpleTextEditorModule,
     ]
 })
 export class AppModule { }
