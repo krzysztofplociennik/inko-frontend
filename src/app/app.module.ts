@@ -16,6 +16,10 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { HeaderModule } from './shared/header/header.module';
 import { NgxSimpleTextEditorModule } from 'ngx-simple-text-editor';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { DropdownModule } from 'primeng/dropdown';
+import { EditorModule } from 'primeng/editor';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
     declarations: [
@@ -44,6 +48,10 @@ import { NgxSimpleTextEditorModule } from 'ngx-simple-text-editor';
         BrowserAnimationsModule,
         HeaderModule,
         NgxSimpleTextEditorModule,
+        FloatLabelModule,
+        DropdownModule,
+        EditorModule,
+        InputTextModule,
     ]
 })
 export class AppModule { }

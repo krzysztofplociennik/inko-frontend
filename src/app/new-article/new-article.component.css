@@ -3,4 +3,21 @@ div {
     /* display: flex; */
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+#article-title-input {
+    margin-bottom: 20px;
+    width: 800px;
+    height: 30px;
+}
+
+#article-type-dropdown {
+    margin-bottom: 20px;
+    width: 100px;
+}
+
+.article1 {
+    margin-bottom: 20px;
+    width: 100px;
 }

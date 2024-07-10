@@ -2,13 +2,20 @@
 <app-header></app-header>
 <div>
 
-    <label style="margin-right: 20px;">Title:</label>
-    <input size="241px" style="margin-bottom: 15px;" type="text" id="contentI">
+    <input type="text" placeholder="Write your title here!" pInputText [(ngModel)]="articleTitle" />
 
-    <st-editor style="width: 100px;" [(ngModel)]="content" [config]="config"></st-editor>
+    <p-dropdown 
+        styles="margin-bottom: 20px;"
+        [options]="articleTypes" 
+        [(ngModel)]="selectedType" 
+        optionLabel="name"
+        placeholder="Select a type" />
+
+    <p-editor [(ngModel)]="content" [style]="{ height: '420px' }" />
 
     <button style="width: auto; margin-top: 20px;" (click)="createArticle()">
         create article
     </button>
+
 </div>
 <app-footer></app-footer>

@@ -1,3 +1,6 @@
+/* // import Quill styles in styles.scss */
+@import "../node_modules/quill/dist/quill.core.css";
+@import "../node_modules/quill/dist/quill.snow.css";
 
 @font-face {
     font-family: 'jersey';
