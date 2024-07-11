@@ -3,13 +3,21 @@
 @import "../node_modules/quill/dist/quill.snow.css";
 
 @font-face {
-    font-family: 'jersey';
-    src: url(/src/assets/fonts/jersey/Jersey10Charted-Regular.ttf) format('truetype');
-  }
-  
-  @font-face {
-    font-family: 'raleway';
-    src: url(/src/assets/fonts/Raleway_Dots/RalewayDots-Regular.ttf) format('truetype');
-  }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  font-family: 'jersey';
+  src: url(/src/assets/fonts/jersey/Jersey10Charted-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'raleway';
+  src: url(/src/assets/fonts/Raleway_Dots/RalewayDots-Regular.ttf) format('truetype');
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
