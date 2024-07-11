@@ -2,18 +2,20 @@
 <app-header></app-header>
 <div>
 
-    <input type="text" placeholder="Write your title here!" pInputText [(ngModel)]="articleTitle" />
+    <input id="articleTitle" style="margin-bottom: 20px; margin-right: 20px;" type="text" placeholder="Write your title here!" pInputText [(ngModel)]="articleTitle" />
 
     <p-dropdown 
-        styles="margin-bottom: 20px;"
+        styles="margin-left: 20px;"
         [options]="articleTypes" 
         [(ngModel)]="selectedType" 
         optionLabel="name"
         placeholder="Select a type" />
 
+    <p-chips id="tagsInput" placeholder="Add your tags!" [(ngModel)]="tags" />
+
     <p-editor placeholder="Write your content here!" [(ngModel)]="content" [style]="{ height: '420px' }" />
 
-    <p-button label="Create!" (onClick)="createArticle()" />
+    <p-button id="createArticleButton" label="Create!" (onClick)="createArticle()" />
 
 </div>
 <app-footer></app-footer>

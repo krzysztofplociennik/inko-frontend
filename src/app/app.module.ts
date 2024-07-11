@@ -21,6 +21,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { EditorModule } from 'primeng/editor';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { ChipsModule } from 'primeng/chips';
 
 @NgModule({
     declarations: [
@@ -54,6 +55,7 @@ import { ButtonModule } from 'primeng/button';
         EditorModule,
         InputTextModule,
         ButtonModule,
+        ChipsModule,
     ]
 })
 export class AppModule { }

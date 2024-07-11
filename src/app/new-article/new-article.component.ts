@@ -29,6 +29,8 @@ export class NewArticleComponent implements OnInit {
 
   content = '';
 
+  tags: string[] | undefined;
+
   constructor(
     public service: CreateArticleService
   ) { 

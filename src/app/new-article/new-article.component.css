@@ -1,9 +1,9 @@
 div {
     margin: 111px 111px 111px 111px;
-    /* display: flex; */
-    flex-direction: column;
+    display: flex;
+    flex-direction:column;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
 #article-title-input {
@@ -20,4 +20,17 @@ div {
 .article1 {
     margin-bottom: 20px;
     width: 100px;
+}
+
+#createArticleButton {
+    margin-top: 20px;
+}
+
+#articleTitle {
+    width: 800px;
+}
+
+#tagsInput {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
