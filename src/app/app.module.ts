@@ -20,6 +20,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { DropdownModule } from 'primeng/dropdown';
 import { EditorModule } from 'primeng/editor';
 import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
     declarations: [
@@ -52,6 +53,7 @@ import { InputTextModule } from 'primeng/inputtext';
         DropdownModule,
         EditorModule,
         InputTextModule,
+        ButtonModule,
     ]
 })
 export class AppModule { }
