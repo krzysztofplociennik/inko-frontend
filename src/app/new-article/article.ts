@@ -4,3 +4,9 @@ export interface ArticleCreate {
     type: string;
     tags: string[];
 }
+
+export interface ArticleType {
+    code: string;
+    name: string;
+  }
+  

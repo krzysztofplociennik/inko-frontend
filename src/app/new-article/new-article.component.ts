@@ -1,15 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateArticleService } from './service/create-article.service';
-
-interface City {
-  name: string;
-  code: string;
-}
-
-interface ArticleType {
-  code: string;
-  name: string;
-}
+import { ArticleType } from './article';
 
 @Component({
   selector: 'app-new-article',
@@ -18,23 +9,14 @@ interface ArticleType {
 })
 export class NewArticleComponent implements OnInit {
 
-  articleTitle: string = '';
-  articleID: string = '';
-
-  cities: City[] | undefined;
-  selectedCity: City | undefined;
-
   articleTypes: ArticleType[] | undefined;
-  selectedType: ArticleType | undefined;
 
+  articleTitle: string = '';
+  selectedType!: ArticleType;
+  tags!: string[];
   content = '';
 
-  tags: string[] | undefined;
-
-  constructor(
-    public service: CreateArticleService
-  ) { 
-  }
+  constructor(public service: CreateArticleService) { }
 
   ngOnInit(): void {
 
@@ -43,21 +25,16 @@ export class NewArticleComponent implements OnInit {
       { code: '2', name: 'Tools' },
       { code: '3', name: 'OS' },
     ];
-
-    this.cities = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' }
-  ];
   }
 
   createArticle() {
 
-    this.service.create().subscribe(
+    const type: string = this.selectedType?.name
+    const tags: string[] = this.tags;
+
+    this.service.create(this.articleTitle, type, tags, this.content).subscribe(
       (response: string) => {
-        this.articleID = response;
+        console.log('response: ' + response);
       }
     );
   }
