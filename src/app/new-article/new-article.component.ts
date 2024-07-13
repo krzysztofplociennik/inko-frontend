@@ -37,6 +37,18 @@ export class NewArticleComponent implements OnInit {
         console.log('response: ' + response);
       }
     );
+
+    this.clearInputs();
+  }
+
+  reloadPage(): void {
+    window.location.reload();
+  }
+
+  clearInputs(): void {
+    this.articleTitle = '';
+    this.tags = [];
+    this.content = '';
   }
 
 }
