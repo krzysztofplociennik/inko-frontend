@@ -1,36 +1,21 @@
+<div id="bodyDiv">
+    <app-header class="header"></app-header>
+    <div id="contentWrapper">
+        <div id="searchForArticlesDiv">
 
-<app-header></app-header>
-<div id="searchForArticlesDiv">
-    <!-- <label styles="">Search for some articles here -> </label>
-    <input type="text" id="titleI" size="60" height="140">
+            <input id="searchInputText" type="text" placeholder="Search for articles here!" pInputText
+                [(ngModel)]="searchPhrase" />
 
-    <button [routerLink]="['/new-article']">
-        create new article
-    </button> -->
+            <p-button id="searchArticlesButton" icon="pi pi-search" [rounded]="true" [severity]="'secondary'"
+                (onClick)="searchForArticles(searchPhrase)" />
+        </div>
 
-    <input 
-        id="searchInputText" 
-        type="text" 
-        placeholder="Search for articles here!" 
-        pInputText 
-        [(ngModel)]="searchPhrase" />
+        <div id="createNewArticleDiv">
+            <span>... or create a new one!</span>
 
-    <p-button 
-        id="searchArticlesButton" 
-        icon="pi pi-search" 
-        [rounded]="true"
-        [severity]="'secondary'" 
-        (onClick)="searchForArticles(searchPhrase)" />
+            <p-button id="createNewArticleButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'"
+                [routerLink]="['/new-article']" />
+        </div>
+    </div>
+    <app-footer class="footer" id="footer"></app-footer>
 </div>
-
-<div id="createNewArticleDiv">
-    <span>... or create a new one!</span>
-
-    <p-button 
-        id="createNewArticleButton"
-        icon="pi pi-arrow-right" 
-        [rounded]="true"
-        [severity]="'primary'" 
-        [routerLink]="['/new-article']"/>
-</div>
-<app-footer></app-footer>
