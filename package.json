@@ -21,6 +21,7 @@
     "@angular/router": "^18.0.6",
     "@fortawesome/fontawesome-free": "^6.5.2",
     "ngx-simple-text-editor": "^5.0.0",
+    "primeicons": "^7.0.0",
     "primeng": "^17.18.3",
     "quill": "^2.0.2",
     "rxjs": "~7.8.0",

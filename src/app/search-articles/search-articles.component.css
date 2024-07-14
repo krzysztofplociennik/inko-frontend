@@ -1,5 +1,21 @@
-div {
-    margin: 111px 111px 111px 111px;
+
+#searchForArticlesDiv {
+    margin: 220px 20px 20px 20px;
     display: flex;
     justify-content: center;
+}
+
+#createNewArticleDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#createNewArticleButton {
+    margin-left: 20px;
+}
+
+#searchInputText {
+    margin-right: 20px;
+    width: 600px;
 }

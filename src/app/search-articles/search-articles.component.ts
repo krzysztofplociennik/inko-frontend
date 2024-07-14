@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class SearchArticlesComponent {
 
+  searchPhrase: string | undefined;
+
+  searchForArticles(arg0: string | undefined) {
+    throw new Error('Method not implemented.');
+  }
+
 }
