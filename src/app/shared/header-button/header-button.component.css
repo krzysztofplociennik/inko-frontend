@@ -3,12 +3,12 @@ div {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 20px 1px 40px 1px;
+    margin: 10px 1px 10px 1px;
 }
 
 .label {
     border-style: groove;
     border-radius: 40%;
     border-width: 2cap;
-    margin: 20px 111px 4px 111px;   
+    margin: 10px 111px 10px 111px;   
 }
