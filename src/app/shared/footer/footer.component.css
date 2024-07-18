@@ -8,3 +8,22 @@ div {
 a {
     margin: 20px 11px 20px 11px;
 }
+
+#linkedIn-button {
+    border-radius: 80%;
+    border: 0cap;
+    background-color: rgb(141, 141, 141);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+}
+
+#linkedIn-button .pi {
+    margin: 0px;
+    font-size: 44px;
+
+}
