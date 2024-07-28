@@ -22,6 +22,8 @@ import { EditorModule } from 'primeng/editor';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { ChipsModule } from 'primeng/chips';
+import { ResultItemComponent } from "./search-articles/search-result-item/search-result-item.component";
+import { CardModule } from 'primeng/card';
 
 @NgModule({
     declarations: [
@@ -34,6 +36,7 @@ import { ChipsModule } from 'primeng/chips';
         NewArticleComponent,
         HeaderComponent,
         FooterComponent,
+        ResultItemComponent,
     ],
     exports: [
         HeaderComponent, 
@@ -42,20 +45,21 @@ import { ChipsModule } from 'primeng/chips';
     providers: [],
     bootstrap: [AppComponent],
     imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        HomeModule,
-        BrowserAnimationsModule,
-        HeaderModule,
-        NgxSimpleTextEditorModule,
-        FloatLabelModule,
-        DropdownModule,
-        EditorModule,
-        InputTextModule,
-        ButtonModule,
-        ChipsModule,
-    ]
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    HomeModule,
+    BrowserAnimationsModule,
+    HeaderModule,
+    NgxSimpleTextEditorModule,
+    FloatLabelModule,
+    DropdownModule,
+    EditorModule,
+    InputTextModule,
+    ButtonModule,
+    ChipsModule,
+    CardModule,
+]
 })
 export class AppModule { }
