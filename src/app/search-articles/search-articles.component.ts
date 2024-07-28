@@ -16,7 +16,7 @@ export class SearchArticlesComponent {
   constructor(public searchService: SearchService) {}
 
   searchForArticles() {
-    this.searchService.search(1, 1).subscribe(
+    this.searchService.search(0, 10).subscribe(
       (response: ArticleSearch[]) => {
         this.articlesResults = response;
       });
