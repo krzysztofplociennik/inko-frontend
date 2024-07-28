@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ArticleSearch } from './search-result-item/article-result';
+import { SearchService } from './search-service/search.service';
 
 @Component({
   selector: 'app-search-articles',
@@ -9,8 +11,18 @@ export class SearchArticlesComponent {
 
   searchPhrase: string | undefined;
 
-  searchForArticles(arg0: string | undefined) {
-    throw new Error('Method not implemented.');
+  articlesResults: ArticleSearch[] = [];
+
+  constructor(public searchService: SearchService) {}
+
+  searchForArticles() {
+    this.searchService.search(1, 1).subscribe(
+      (response: ArticleSearch[]) => {
+        this.articlesResults = response;
+      });
+
+    console.log(this.articlesResults);
+    
   }
 
 }
