@@ -9,7 +9,20 @@ import { ArticleSearch } from './article-result';
 export class ResultItemComponent {
 
   @Input() article: ArticleSearch | undefined;
+  @Input() isHovered: boolean = false;
 
-  currentStyle: { [klass: string]: any; }|null|undefined;
+  currentStyle: { [klass: string]: any; } | undefined;
+
+  getCurrentStyle(): { [klass: string]: any; } {
+    
+    if(this.isHovered) {
+      return {
+        'background':'#e6eef5'
+      };
+    }
+    return {
+      'background':'white'
+    };
+  }
 
 }

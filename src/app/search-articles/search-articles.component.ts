@@ -9,6 +9,8 @@ import { SearchService } from './search-service/search.service';
 })
 export class SearchArticlesComponent {
 
+  isHovered: boolean = false;
+
   searchPhrase: string | undefined;
 
   articlesResults: ArticleSearch[] = [];
@@ -25,12 +27,12 @@ export class SearchArticlesComponent {
     
   }
 
-  mouseEnter(){
-    console.log("mouse enter : ");
+  mouseEnter() {
+    this.isHovered = true;
   }  
 
-  mouseLeave(){
-    console.log('mouse leave :');
+  mouseLeave() {
+    this.isHovered = false;
   }
 
 }

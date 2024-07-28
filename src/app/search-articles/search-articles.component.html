@@ -20,7 +20,7 @@
         <div id="searchArticlesContent">
             <ul *ngFor="let item of articlesResults">
                 <div (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
-                    <app-result-item [routerLink]="['/about']" [article]="item"></app-result-item>
+                    <app-result-item [routerLink]="['/about']" [article]="item" [isHovered]="isHovered"></app-result-item>
                 </div>
             </ul>
         </div>
