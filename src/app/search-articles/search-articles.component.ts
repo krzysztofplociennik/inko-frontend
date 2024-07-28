@@ -25,4 +25,12 @@ export class SearchArticlesComponent {
     
   }
 
+  mouseEnter(){
+    console.log("mouse enter : ");
+  }  
+
+  mouseLeave(){
+    console.log('mouse leave :');
+  }
+
 }

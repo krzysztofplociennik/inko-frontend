@@ -16,6 +16,14 @@
             <p-button id="createNewArticleButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'"
                 [routerLink]="['/new-article']" />
         </div>
+
+        <div id="searchArticlesContent">
+            <ul *ngFor="let item of articlesResults">
+                <div (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
+                    <app-result-item [routerLink]="['/about']" [article]="item"></app-result-item>
+                </div>
+            </ul>
+        </div>
     </div>
     <app-footer class="footer" id="footer"></app-footer>
 </div>
