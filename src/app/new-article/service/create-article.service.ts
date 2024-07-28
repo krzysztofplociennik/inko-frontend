@@ -19,7 +19,7 @@ export class CreateArticleService {
     tags: string[],
     content: string
   ): Observable<string> {
-    const url: string = baseUrl + '/articles/add';
+    const url: string = baseUrl + '/article/add';
 
     const articleToSend: ArticleCreate = {
       title: title, 
