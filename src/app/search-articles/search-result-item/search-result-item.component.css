@@ -1,2 +1,4 @@
-#card {
+#innerCard {
+    display: flex;
+    flex-direction: column;
 }
