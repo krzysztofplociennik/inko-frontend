@@ -10,6 +10,7 @@ import { SearchService } from './search-service/search.service';
 export class SearchArticlesComponent {
 
   isHovered: boolean = false;
+  hoveredIndex: number|null = null;
 
   searchPhrase: string | undefined;
 
@@ -27,12 +28,12 @@ export class SearchArticlesComponent {
     
   }
 
-  mouseEnter() {
-    this.isHovered = true;
+  mouseEnter(index: number) {
+    this.hoveredIndex = index;
   }  
 
-  mouseLeave() {
-    this.isHovered = false;
+  mouseLeave(index: number) {
+    this.hoveredIndex = null;
   }
 
 }

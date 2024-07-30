@@ -18,9 +18,9 @@
         </div>
 
         <div id="searchArticlesContent">
-            <ul *ngFor="let item of articlesResults">
-                <div (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
-                    <app-result-item [routerLink]="['/about']" [article]="item" [isHovered]="isHovered"></app-result-item>
+            <ul *ngFor="let item of articlesResults; let i = index">
+                <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave(i)">
+                    <app-result-item [routerLink]="['/about']" [article]="item" [isHovered]="hoveredIndex === i"></app-result-item>
                 </div>
             </ul>
         </div>
