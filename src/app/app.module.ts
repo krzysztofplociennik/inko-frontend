@@ -22,6 +22,7 @@ import { ButtonModule } from 'primeng/button';
 import { ChipsModule } from 'primeng/chips';
 import { ResultItemComponent } from "./search-articles/search-result-item/search-result-item.component";
 import { CardModule } from 'primeng/card';
+import { ArticleDetailsComponent } from './articles/article-details/article-details.component';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { CardModule } from 'primeng/card';
         HeaderComponent,
         FooterComponent,
         ResultItemComponent,
+        ArticleDetailsComponent,
     ],
     exports: [
         HeaderComponent, 
