@@ -4,8 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { HomeComponent } from './home/home.component';
-import { HomeModule } from "./home/home.module";
 import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,7 +26,6 @@ import { CardModule } from 'primeng/card';
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent,
         AboutComponent,
         PageNotFoundComponent,
         ArticlesComponent,
@@ -49,7 +46,6 @@ import { CardModule } from 'primeng/card';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    HomeModule,
     BrowserAnimationsModule,
     HeaderModule,
     NgxSimpleTextEditorModule,
