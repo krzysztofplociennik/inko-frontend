@@ -23,9 +23,6 @@ export class SearchArticlesComponent {
       (response: ArticleSearch[]) => {
         this.articlesResults = response;
       });
-
-    console.log(this.articlesResults);
-    
   }
 
   mouseEnter(index: number) {
