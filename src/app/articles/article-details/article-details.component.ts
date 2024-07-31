@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ArticlesService } from '../articles-service/articles.service';
+import { ArticleDetails } from './article-details';
 
 @Component({
   selector: 'app-article-details',
@@ -8,13 +10,23 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ArticleDetailsComponent {
 
-  articleID: string | null = null;
+  articleID: string = '';
+  article: ArticleDetails | null = null;
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private articleService: ArticlesService
+  ) {
       this.articleID = activatedRoute.snapshot.url[1].path;
+      this.getArticleDetails(this.articleID)
   }
 
+  getArticleDetails(id: string) {
+    this.articleService.getArticleDetails(this.articleID).subscribe(
+      (response: ArticleDetails) => {
+        this.article = response;
+      });
+  }
 
 }
