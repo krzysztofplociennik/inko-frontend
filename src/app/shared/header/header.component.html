@@ -1,5 +1,10 @@
 <div>
-    <app-header-button [routerLink]="['/search-articles']" label={{search_articles}}></app-header-button> 
-    <app-header-button [routerLink]="['/articles']" label={{articles}}></app-header-button>
-    <app-header-button [routerLink]="['/about']" label={{about}}></app-header-button>
+    <!-- <app-header-button [routerLink]="['/search-articles']" label={{search_articles}}></app-header-button>  -->
+    <!-- <app-header-button [routerLink]="['/articles']" label={{articles}}></app-header-button> -->
+    <!-- <app-header-button [routerLink]="['/about']" label={{about}}></app-header-button> -->
+
+    <button [routerLink]="['/search-articles']" class="btn" style="" id="customBtn">Search</button>
+    <button [routerLink]="['/articles']" class="btn" style="" id="customBtn">Articles</button>
+    <button [routerLink]="['/about']" class="btn" style="" id="customBtn">About</button>
+
 </div>
