@@ -1,4 +1,4 @@
-
+/* header/footer wapper */
 #bodyDiv {
     display: flex;
     flex-direction: column;
@@ -26,3 +26,4 @@
     width: 100%;
     margin-top: 300px;
 }
+/* header/footer wapper */
