@@ -13,10 +13,11 @@
 
 #contentWrapper {
     display: flex;
+    border: 2px;
+    border-style: dashed;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 90%;
+    width: 60%;
     flex: 1;
 }
 
@@ -25,4 +26,14 @@
     bottom: 0;  
     width: 100%;
     margin-top: 300px;
+}
+
+#titleDiv {
+    width: 90%;
+    align-items: left;
+    justify-content: left;
+    font-size:xx-large;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-style: dashed;
 }
