@@ -1,36 +1,28 @@
-div {
-    margin: 111px 111px 111px 111px;
+/* header/footer wapper */
+#bodyDiv {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.header {
+    width: 100%;
+}
+
+#contentWrapper {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    /* align-items: center; */
+    align-items: center;
+    width: 90%;
+    flex: 1;
 }
 
-#article-title-input {
-    margin-bottom: 20px;
-    width: 800px;
-    height: 30px;
+.footer {
+    position: relative;
+    bottom: 0;  
+    width: 100%;
 }
+/* header/footer wapper */
 
-#article-type-dropdown {
-    margin-bottom: 20px;
-    width: 100px;
-}
-
-.article1 {
-    margin-bottom: 20px;
-    width: 100px;
-}
-
-#createArticleButton {
-    margin-top: 20px;
-}
-
-#articleTitle {
-    width: 800px;
-}
-
-#tagsInput {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
