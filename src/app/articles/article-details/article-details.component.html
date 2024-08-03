@@ -4,8 +4,8 @@
 
         <div id="titleDiv">{{article?.title}}</div>
 
-        <div id="contentDiv">{{article?.content}}</div>
-        
+        <div id="contentDiv" [innerHTML]="article?.content"></div>
+
     </div>
     <app-footer class="footer" id="footer"></app-footer>
 </div>

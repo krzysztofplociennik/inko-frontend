@@ -13,8 +13,6 @@
 
 #contentWrapper {
     display: flex;
-    border: 2px;
-    border-style: dashed;
     flex-direction: column;
     align-items: center;
     width: 60%;
@@ -32,8 +30,12 @@
     width: 90%;
     align-items: left;
     justify-content: left;
-    font-size:xx-large;
+    font-size:300%;
     margin-top: 20px;
     margin-bottom: 20px;
-    border-style: dashed;
+}
+
+#contentDiv {
+    width: 100%;
+    word-break: break-all;
 }
