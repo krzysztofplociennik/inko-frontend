@@ -8,8 +8,8 @@ div {
 .btn {
     cursor: pointer; 
     border: 1px solid rgb(167, 224, 255); 
-    font-family: "Bebas Neue";
     font-size: 34px; 
+    font-family: 'Raleway';
     color: rgb(255, 255, 255); 
     padding: 10px 30px; 
     margin: 10px 10px 10px 10px;
