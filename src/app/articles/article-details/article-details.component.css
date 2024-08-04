@@ -12,7 +12,6 @@
 }
 
 #contentWrapper {
-    border-style: dashed;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +35,6 @@
 }
 
 #contentDiv {
-    border-style: dashed;
     width: 60%;
     word-break: break-all;
 }
