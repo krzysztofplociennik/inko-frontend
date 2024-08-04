@@ -13,8 +13,8 @@
 #contentWrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items:center;
     width: 60%;
     flex: 1;
 }
@@ -26,3 +26,27 @@
 }
 /* header/footer wapper */
 
+#articleTitle {
+    width: 70%;
+    margin: 30px 10px 10px 0px;
+}
+
+#tagsInput {
+    width: 70%;
+    margin: 10px 10px 10px 0px;
+}
+
+#articleTypesDropdown {
+    width: 70%;
+    margin: 10px 10px 10px 0px;
+}
+
+#editor {
+    width: 70%;
+    margin: 10px 10px 10px 0px;
+}
+
+#createArticleButton {
+    margin: 10px 10px 10px 0px;
+    align-items: center;
+}
