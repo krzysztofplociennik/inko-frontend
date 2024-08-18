@@ -36,3 +36,8 @@
     width: 50%;
     word-break: break-all;
 }
+
+#deleteButtonDiv {
+    margin: 5px 5px 5px 5px;
+    width: 50%; 
+}

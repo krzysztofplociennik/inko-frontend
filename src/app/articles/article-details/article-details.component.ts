@@ -16,17 +16,24 @@ export class ArticleDetailsComponent {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private articleService: ArticlesService
+    public articleService: ArticlesService
   ) {
       this.articleID = activatedRoute.snapshot.url[1].path;
-      this.getArticleDetails(this.articleID)
+      this.getArticleDetails(this.articleID);
   }
 
-  getArticleDetails(id: string) {
+  getArticleDetails(id: string): void {
     this.articleService.getArticleDetails(this.articleID).subscribe(
       (response: ArticleDetails) => {
         this.article = response;
       });
+  }
+
+  deleteArticle(): void {
+    this.articleService.deleteArticle(this.articleID).subscribe({
+      next: () => this.router.navigate(['/articles']),
+      error: (e) => console.error('Error deleting article', e)
+    });
   }
 
 }
