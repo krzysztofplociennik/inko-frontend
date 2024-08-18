@@ -4,7 +4,7 @@
 
         <div id="allArticlesDiv">
             <ul *ngFor="let item of articlesResults; let i = index">
-                <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave(i)">
+                <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
                     <app-all-articles-item [routerLink]="['/article-details', item.id]" [article]="item" [isHovered]="hoveredIndex === i"></app-all-articles-item>
                 </div>
             </ul>
