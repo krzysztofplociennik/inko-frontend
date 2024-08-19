@@ -29,7 +29,7 @@ export class SearchArticlesComponent {
     this.hoveredIndex = index;
   }  
 
-  mouseLeave(index: number) {
+  mouseLeave() {
     this.hoveredIndex = null;
   }
 
