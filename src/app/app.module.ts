@@ -24,6 +24,7 @@ import { ResultItemComponent } from "./search-articles/search-result-item/search
 import { CardModule } from 'primeng/card';
 import { ArticleDetailsComponent } from './articles/article-details/article-details.component';
 import { AllArticlesItemComponent } from './articles/all-articles-item/all-articles-item.component';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
     declarations: [
@@ -40,26 +41,27 @@ import { AllArticlesItemComponent } from './articles/all-articles-item/all-artic
         AllArticlesItemComponent,
     ],
     exports: [
-        HeaderComponent, 
+        HeaderComponent,
         FooterComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
     imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    HeaderModule,
-    NgxSimpleTextEditorModule,
-    FloatLabelModule,
-    DropdownModule,
-    EditorModule,
-    InputTextModule,
-    ButtonModule,
-    ChipsModule,
-    CardModule,
-]
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        HeaderModule,
+        NgxSimpleTextEditorModule,
+        FloatLabelModule,
+        DropdownModule,
+        EditorModule,
+        InputTextModule,
+        ButtonModule,
+        ChipsModule,
+        CardModule,
+        MessagesModule,
+    ]
 })
 export class AppModule { }

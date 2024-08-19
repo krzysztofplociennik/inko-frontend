@@ -14,16 +14,17 @@
     display: flex;
     flex-direction: column;
     justify-content: left;
-    align-items:center;
+    align-items: center;
     width: 60%;
     flex: 1;
 }
 
 .footer {
     position: relative;
-    bottom: 0;  
+    bottom: 0;
     width: 100%;
 }
+
 /* header/footer wapper */
 
 #articleTitle {
@@ -50,3 +51,8 @@
     margin: 10px 10px 10px 0px;
     align-items: center;
 }
+
+:host ::ng-deep .custom-messages {
+    height: 5%;
+    width: 35rem;
+  }

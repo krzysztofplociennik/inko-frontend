@@ -2,6 +2,15 @@
     <app-header class="header"></app-header>
     <div id="contentWrapper">
 
+        <div class="card">
+            <p-messages 
+              styleClass="custom-messages"
+              [(value)]="messages" 
+              [enableService]="false" 
+              [closable]="true"
+            />
+        </div>
+
         <input id="articleTitle" type="text" placeholder="Write your title here!" pInputText [(ngModel)]="articleTitle" />
 
         <p-dropdown 
