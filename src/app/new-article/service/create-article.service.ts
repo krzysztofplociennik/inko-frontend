@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { baseUrl } from 'src/app/shared/urlUtils';
-import { HttpClient } from '@angular/common/http';
-import { ArticleCreate, ArticleType } from '../article';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ArticleCreate } from '../article';
 
 @Injectable({
   providedIn: 'root'
@@ -20,18 +20,20 @@ export class CreateArticleService {
     content: string
   ): Observable<string> {
     const url: string = baseUrl + '/article/add';
-
     const articleToSend: ArticleCreate = {
       title: title, 
       content: content,
       type: type,
       tags: tags
-    };
+    };  
     
-    return this.http.post<string>(url, articleToSend).pipe(
-      map((response: string) => {        
-        return response;
-      })
+    const headers = new HttpHeaders().set('Accept', 'text/plain');
+    
+    return this.http.post(url, articleToSend, { 
+      headers: headers, 
+      responseType: 'text' 
+    }).pipe(
+      map(response => response.trim())
     );
   }
 }
