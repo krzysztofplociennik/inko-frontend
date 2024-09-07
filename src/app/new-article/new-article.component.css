@@ -53,6 +53,6 @@
 }
 
 :host ::ng-deep .custom-messages {
-    height: 5%;
-    width: 35rem;
+    height: 10%;
+    width: 55rem;
   }

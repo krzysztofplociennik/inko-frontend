@@ -25,6 +25,7 @@ import { CardModule } from 'primeng/card';
 import { ArticleDetailsComponent } from './articles/article-details/article-details.component';
 import { AllArticlesItemComponent } from './articles/all-articles-item/all-articles-item.component';
 import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     declarations: [
@@ -62,6 +63,7 @@ import { MessagesModule } from 'primeng/messages';
         ChipsModule,
         CardModule,
         MessagesModule,
+        ToastModule, 
     ]
 })
 export class AppModule { }

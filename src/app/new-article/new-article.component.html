@@ -3,12 +3,13 @@
     <div id="contentWrapper">
 
         <div class="card">
-            <p-messages 
+            <!-- <p-messages 
               styleClass="custom-messages"
               [(value)]="messages" 
-              [enableService]="false" 
               [closable]="true"
-            />
+            /> -->
+
+            <p-toast></p-toast>
         </div>
 
         <input id="articleTitle" type="text" placeholder="Write your title here!" pInputText [(ngModel)]="articleTitle" />
@@ -22,7 +23,7 @@
     
         <p-chips id="tagsInput" placeholder="Add your tags!" [(ngModel)]="tags" />
     
-        <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="content" [style]="{ height: '420px' }" />
+        <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="content" [style]="{ height: '320px' }" />
     
         <p-button id="createArticleButton" label="Create!" (onClick)="createArticle()" />
 
