@@ -33,11 +33,16 @@
 }
 
 #contentDiv {
-    width: 50%;
-    word-break: break-all;
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    align-items: start;
 }
 
 #deleteButtonDiv {
+    display: flex;
+    justify-content: end;
     margin: 5px 5px 5px 5px;
     width: 50%; 
+    justify-content: end;
 }
