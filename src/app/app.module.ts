@@ -27,6 +27,7 @@ import { AllArticlesItemComponent } from './articles/all-articles-item/all-artic
 import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
         HeaderComponent,
         FooterComponent
     ],
-    providers: [],
+    providers: [MessageService],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,

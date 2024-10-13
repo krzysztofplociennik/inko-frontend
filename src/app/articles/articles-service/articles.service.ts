@@ -10,7 +10,9 @@ import { AllArticlesItem } from './all-articles-item';
 })
 export class ArticlesService {
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+  ) {}
 
   getArticleDetails(id: string): Observable<ArticleDetails> {
     const url: string = baseUrl + '/article';
@@ -36,7 +38,6 @@ export class ArticlesService {
 
   deleteArticle(id: string): Observable<string> {
     const url: string = `${baseUrl}/article`;
-    const params = new HttpParams().set('id', id);
   
     return this.http.delete(url, { 
       params: { id: id },
@@ -45,7 +46,7 @@ export class ArticlesService {
       map((response: string) => {
         return response;
       }),
-      catchError(error => {
+      catchError(error => {navigator
         return throwError(() => error);
       })
     );

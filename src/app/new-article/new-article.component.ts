@@ -7,7 +7,7 @@ import { MessageService } from 'primeng/api';
   selector: 'app-new-article',
   templateUrl: './new-article.component.html',
   styleUrls: ['./new-article.component.css'],
-  providers: [MessageService]
+  // providers: [MessageService]
 })
 export class NewArticleComponent implements OnInit {
   articleTypes: ArticleType[] | undefined;

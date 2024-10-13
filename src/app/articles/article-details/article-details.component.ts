@@ -8,7 +8,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   selector: 'app-article-details',
   templateUrl: './article-details.component.html',
   styleUrl: './article-details.component.css',
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService]
 })
 export class ArticleDetailsComponent {
 
@@ -45,6 +45,7 @@ export class ArticleDetailsComponent {
       accept: () => {
         this.articleService.deleteArticle(this.articleID).subscribe({
           next: () => {
+            this.messageService.add({ severity: 'success', summary: 'Accepted', detail: 'The article has been deleted!', life: 3000 });
             this.router.navigate(['/articles']);
           },
           error: (e) => {
