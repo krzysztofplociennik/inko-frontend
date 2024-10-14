@@ -4,7 +4,12 @@
 
         <div id="deleteButtonDiv">
             <p-confirmDialog />
-            <p-button id="deleteArticleButton" label="delete article" severity="danger" size="small" (onClick)="deleteArticle()" />
+            <p-button
+                icon="pi pi-trash"
+                size="small"
+                severity="secondary"
+                (onClick)="deleteArticle()"
+                styleClass="p-button-rounded"/>
         </div>
 
         <div id="titleDiv">{{article?.title}}</div>
