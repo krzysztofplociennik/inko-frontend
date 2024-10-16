@@ -8,11 +8,13 @@
         <input id="articleTitle" type="text" placeholder="Write your title here!" pInputText [(ngModel)]="articleTitle" />
 
         <p-dropdown 
+            *ngIf="areArticleTypesPopulated()"
             id="articleTypesDropdown"
             [options]="articleTypes" 
             [(ngModel)]="selectedType" 
             optionLabel="name"
             placeholder="Select a type" />
+
     
         <p-chips id="tagsInput" placeholder="Add your tags!" [(ngModel)]="tags" />
     

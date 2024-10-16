@@ -2,36 +2,41 @@ import { Component, OnInit } from '@angular/core';
 import { CreateArticleService } from './service/create-article.service';
 import { ArticleType } from './article';
 import { MessageService } from 'primeng/api';
+import { ArticleService } from '../shared/services/article.service';
 
 @Component({
   selector: 'app-new-article',
   templateUrl: './new-article.component.html',
   styleUrls: ['./new-article.component.css'],
-  // providers: [MessageService]
 })
 export class NewArticleComponent implements OnInit {
-  articleTypes: ArticleType[] | undefined;
+  articleTypes: ArticleType[] = [];
+  selectedType: ArticleType = { name: '' };
   articleTitle: string = '';
-  selectedType!: ArticleType;
   tags: string[] = [];
   content = '';
 
   constructor(
-    public service: CreateArticleService,
+    public createArticleService: CreateArticleService,
+    private articleService: ArticleService,
     private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
-    this.articleTypes = [
-      { code: '1', name: 'Programming' },
-      { code: '2', name: 'Tools' },
-      { code: '3', name: 'OS' },
-    ];
+    this.articleService.fetchAllArticleTypes().subscribe(
+      (response: string[]) => {
+        response.forEach(element => {
+          this.articleTypes.push(
+            { name: element }
+          )
+        });
+    });
   }
 
   createArticle() {
-    const type: string = this.selectedType?.name;
-    this.service.create(this.articleTitle, type, this.tags, this.content).subscribe({
+    const type: string = this.selectedType.name;
+
+    this.createArticleService.create(this.articleTitle, type, this.tags, this.content).subscribe({
       next: () => {
         this.messageService.add({severity:'success', summary:'Success', detail:'The article has been successfully saved!'});
         this.clearInputs();
@@ -55,5 +60,9 @@ export class NewArticleComponent implements OnInit {
     setTimeout(() => {
       this.messageService.clear();
     }, 5000);
+  }
+
+  public areArticleTypesPopulated(): boolean {
+      return this.articleTypes.length > 0;
   }
 }

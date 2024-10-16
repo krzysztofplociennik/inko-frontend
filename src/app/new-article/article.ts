@@ -6,7 +6,7 @@ export interface ArticleCreate {
 }
 
 export interface ArticleType {
-    code: string;
     name: string;
 }
+  
   
