@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ArticleSearch } from '../search-result-item/article-result';
 import { Observable, map } from 'rxjs';
-import { baseUrl } from 'src/app/shared/urlUtils';
+import { baseUrl } from 'src/app/shared/utils/urlUtils';
 
 @Injectable({
   providedIn: 'root'

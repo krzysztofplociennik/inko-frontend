@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { baseUrl } from '../urlUtils';
+import { baseUrl } from '../utils/urlUtils';
 import { Observable, tap } from 'rxjs';
 
 @Injectable({

@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ArticleDetails } from '../article-details/article-details';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { baseUrl } from 'src/app/shared/urlUtils';
+import { baseUrl } from 'src/app/shared/utils/urlUtils';
 import { AllArticlesItem } from './all-articles-item';
 
 @Injectable({
