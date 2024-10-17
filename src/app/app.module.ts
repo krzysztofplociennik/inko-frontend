@@ -28,6 +28,7 @@ import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageService } from 'primeng/api';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
     declarations: [
@@ -66,7 +67,8 @@ import { MessageService } from 'primeng/api';
         CardModule,
         MessagesModule,
         ToastModule, 
-        ConfirmDialogModule
+        ConfirmDialogModule,
+        ChipModule,
     ]
 })
 export class AppModule { }

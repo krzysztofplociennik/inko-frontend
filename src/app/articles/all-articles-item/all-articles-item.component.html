@@ -1,8 +1,17 @@
 <div id="resultItem" [class.hovered]="isHovered">
     <p-card id="card" [style]="getCurrentStyle()" header="{{article?.title}}">
         <div id="innerCard">
-            <a>Type: {{ getFormattedType() }}</a>
-            <a>Created: {{ getFormattedDate() }}</a>
+            
+            <a id="type">Type: {{ getFormattedType() }}</a>
+
+            <div id="tags">
+                Tags: 
+                <div *ngFor="let tag of article?.tags" style="display: inline-block; margin-left: 5px;">
+                    <p-chip [style]="{'height': '30px','width': 'auto'}">{{ tag }}</p-chip>
+                </div>
+            </div>
+
+            <a id="created">Created: {{ getFormattedDate() }}</a>
         </div>
     </p-card>
 </div>
