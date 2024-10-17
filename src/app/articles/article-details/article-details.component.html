@@ -14,6 +14,17 @@
 
         <div id="titleDiv">{{article?.title}}</div>
 
+        <div id="tags">
+            <div *ngFor="let tag of article?.tags" style="display: inline-block; margin-left: 5px;">
+                <p-chip [style]="{
+                    'height': '30px',
+                    'width': 'auto',
+                    'background-color': '#515457',
+                    'color': '#ffffff'
+                    }">{{ tag }}</p-chip>
+            </div>
+        </div>
+
         <div id="contentDiv" [innerHTML]="article?.content"></div>
 
     </div>

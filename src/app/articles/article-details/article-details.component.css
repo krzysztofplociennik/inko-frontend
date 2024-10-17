@@ -46,3 +46,15 @@
     width: 50%; 
     justify-content: end;
 }
+
+#tags {
+    margin-top: 20px;
+    margin-bottom   : 20px;
+    width: 35%;
+}
+
+::ng-deep .p-chip-text {
+    font-size: 14px; /* Change font size */
+    font-weight: bold; /* Make the text bold */
+    color: #ff6347; /* Change text color */
+}
