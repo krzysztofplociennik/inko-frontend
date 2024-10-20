@@ -11,11 +11,12 @@ export class SearchService {
 
   constructor(private http: HttpClient) {}
 
-  search(page: number, itemsPerPage: number): Observable<ArticleSearch[]> {
+  search(page: number, itemsPerPage: number, searchPhrase: string): Observable<ArticleSearch[]> {
     const url: string = baseUrl + '/search-articles';
     const params = new HttpParams()
       .set('page', page)
-      .set('size', itemsPerPage);
+      .set('size', itemsPerPage)
+      .set('searchPhrase', searchPhrase);
     
     return this.http.get<ArticleSearch[]>(url, { params }).pipe(
       map((response: ArticleSearch[]) => {

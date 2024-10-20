@@ -19,7 +19,13 @@ export class SearchArticlesComponent {
   constructor(public searchService: SearchService) {}
 
   searchForArticles() {
-    this.searchService.search(0, 10).subscribe(
+    console.log(this.searchPhrase);
+
+    if(!this.searchPhrase) {
+      this.searchPhrase = '';
+    }
+    
+    this.searchService.search(0, 10, this.searchPhrase).subscribe(
       (response: ArticleSearch[]) => {
         this.articlesResults = response;
       });
