@@ -4,7 +4,7 @@
         <div id="searchForArticlesDiv">
 
             <input id="searchInputText" type="text" placeholder="Search for articles here!" pInputText
-                [(ngModel)]="searchPhrase" />
+                (keydown.enter)="searchForArticles()" [(ngModel)]="searchPhrase" />
 
             <p-button id="searchArticlesButton" icon="pi pi-search" [rounded]="true" [severity]="'secondary'"
                 (onClick)="searchForArticles()" />
@@ -20,7 +20,8 @@
         <div id="searchArticlesContent">
             <ul *ngFor="let item of articlesResults; let i = index">
                 <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
-                    <app-result-item [routerLink]="['/article-details', item.id]" [article]="item" [isHovered]="hoveredIndex === i"></app-result-item>
+                    <app-result-item [routerLink]="['/article-details', item.id]" [article]="item"
+                        [isHovered]="hoveredIndex === i"></app-result-item>
                 </div>
             </ul>
         </div>

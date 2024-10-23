@@ -10,21 +10,15 @@ import { SearchService } from './search-service/search.service';
 export class SearchArticlesComponent {
 
   isHovered: boolean = false;
-  hoveredIndex: number|null = null;
+  hoveredIndex: number | null = null;
 
-  searchPhrase: string | undefined;
+  searchPhrase: string = '';
 
   articlesResults: ArticleSearch[] = [];
 
   constructor(public searchService: SearchService) {}
 
   searchForArticles() {
-    console.log(this.searchPhrase);
-
-    if(!this.searchPhrase) {
-      this.searchPhrase = '';
-    }
-    
     this.searchService.search(0, 10, this.searchPhrase).subscribe(
       (response: ArticleSearch[]) => {
         this.articlesResults = response;
