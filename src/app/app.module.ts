@@ -29,6 +29,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageService } from 'primeng/api';
 import { ChipModule } from 'primeng/chip';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
     declarations: [
@@ -69,6 +70,7 @@ import { ChipModule } from 'primeng/chip';
         ToastModule, 
         ConfirmDialogModule,
         ChipModule,
+        AutoCompleteModule,
     ]
 })
 export class AppModule { }

@@ -24,4 +24,18 @@ export class SearchService {
       })
     );
   }
+
+  getAutocompletes(searchPhrase: string): Observable<string[]> {
+    const url: string = baseUrl + '/autocomplete';
+    const params = new HttpParams()
+      // .set('page', page)
+      // .set('size', itemsPerPage)
+      .set('searchPhrase', searchPhrase);
+    
+    return this.http.get<string[]>(url, { params }).pipe(
+      map((response: string[]) => {
+        return response;
+      })
+    );
+  }
 }

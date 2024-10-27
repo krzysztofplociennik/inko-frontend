@@ -3,8 +3,15 @@
     <div id="contentWrapper">
         <div id="searchForArticlesDiv">
 
-            <input id="searchInputText" type="text" placeholder="Search for articles here!" pInputText
-                (keydown.enter)="searchForArticles()" [(ngModel)]="searchPhrase" />
+            <p-autoComplete 
+                id="searchInputText"
+                placeholder="Search for articles here!"
+                [size]="30"
+                [(ngModel)]="searchPhrase" 
+                [suggestions]="suggestions" 
+                (completeMethod)="searchForAutocompletes($event)"
+                (keydown.enter)="searchForArticles()"
+                 />
 
             <p-button id="searchArticlesButton" icon="pi pi-search" [rounded]="true" [severity]="'secondary'"
                 (onClick)="searchForArticles()" />
