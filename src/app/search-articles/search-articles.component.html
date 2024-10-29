@@ -8,7 +8,7 @@
                 placeholder="Search for articles here!"
                 [size]="30"
                 [(ngModel)]="searchPhrase" 
-                [suggestions]="suggestions" 
+                [suggestions]="searchSuggestions" 
                 (completeMethod)="searchForAutocompletes($event)"
                 (keydown.enter)="searchForArticles()"
                  />
@@ -25,9 +25,9 @@
         </div>
 
         <div id="searchArticlesContent">
-            <ul *ngFor="let item of articlesResults; let i = index">
+            <ul *ngFor="let articleItem of articlesResults; let i = index">
                 <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
-                    <app-result-item [routerLink]="['/article-details', item.id]" [article]="item"
+                    <app-result-item [routerLink]="['/article-details', articleItem.id]" [article]="articleItem"
                         [isHovered]="hoveredIndex === i"></app-result-item>
                 </div>
             </ul>

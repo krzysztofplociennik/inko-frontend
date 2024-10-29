@@ -14,28 +14,23 @@ interface AutoCompleteEvent {
 })
 export class SearchArticlesComponent {
 
-  // todo: big refactor - it's a big mess here
-
-  items: any[] | undefined;
-
-  searchPhrase: string = '';
-
-  suggestions: string[] = [];
-
   isHovered: boolean = false;
   hoveredIndex: number | null = null;
 
+  searchPhrase: string = '';
+  searchSuggestions: string[] = [];
+
   articlesResults: ArticleSearch[] = [];
 
-  constructor(public searchService: SearchService) {}
+  constructor(public searchService: SearchService) { }
 
   searchForAutocompletes(event: AutoCompleteEvent) {
     this.searchService.getAutocompletes(event.query).subscribe(
       (response: string[]) => {
-        this.suggestions = response;
+        this.searchSuggestions = response;
       }
-    )      
-}
+    )
+  }
 
   searchForArticles() {
     this.searchService.search(0, 10, this.searchPhrase).subscribe(
@@ -46,7 +41,7 @@ export class SearchArticlesComponent {
 
   mouseEnter(index: number) {
     this.hoveredIndex = index;
-  }  
+  }
 
   mouseLeave() {
     this.hoveredIndex = null;

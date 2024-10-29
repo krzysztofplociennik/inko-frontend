@@ -15,7 +15,7 @@ export class ResultItemComponent {
 
   getCurrentStyle(): { [klass: string]: any; } {
     
-    if(this.isHovered) {
+    if (this.isHovered) {
       return {
         'background':'#e6eef5'
       };
