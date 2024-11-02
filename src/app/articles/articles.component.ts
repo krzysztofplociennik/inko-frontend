@@ -9,10 +9,11 @@ import { ArticlesService } from './articles-service/articles.service';
 })
 export class ArticlesComponent {
 
-  articlesResults: AllArticlesItem[] = [];
-
+  @Input() 
+  isHovered: boolean = false;
   hoveredIndex: number|null = null;
-  @Input() isHovered: boolean = false;
+
+  articlesResults: AllArticlesItem[] = [];
 
   constructor(public articlesService: ArticlesService) {
     this.getAllArticles();
