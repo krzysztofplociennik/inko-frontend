@@ -11,9 +11,18 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   providers: [ConfirmationService]
 })
 export class ArticleDetailsComponent {
-
   articleID: string = '';
   article: ArticleDetails | null = null;
+  isEditMode: boolean = false;
+  editedArticle: ArticleDetails = {
+    title: '',
+    content: '',
+    tags: [],
+    id: '',
+    type: '',
+    creationDate: new Date(),
+    modificationDate: new Date()
+  };
 
   constructor(
     private router: Router,
@@ -30,7 +39,62 @@ export class ArticleDetailsComponent {
     this.articleService.getArticleDetails(this.articleID).subscribe(
       (response: ArticleDetails) => {
         this.article = response;
+        this.editedArticle = { ...response };
       });
+  }
+
+  enableEditMode(): void {
+    this.isEditMode = true;
+    this.editedArticle = { ...this.article! };
+  }
+
+  cancelEdit(): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to cancel? All changes will be lost.',
+      header: 'Cancel Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon: "none",
+      rejectIcon: "none",
+      rejectButtonStyleClass: "p-button-text",
+      accept: () => {
+        this.isEditMode = false;
+        this.editedArticle = { ...this.article! };
+      }
+    });
+  }
+
+  saveArticle(): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to save these changes?',
+      header: 'Save Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon: "none",
+      rejectIcon: "none",
+      rejectButtonStyleClass: "p-button-text",
+      accept: () => {
+        this.articleService.updateArticle(this.articleID, this.editedArticle).subscribe({
+          next: (response) => {
+            this.article = response;
+            this.isEditMode = false;
+            this.messageService.add({ 
+              severity: 'success', 
+              summary: 'Success', 
+              detail: 'Article updated successfully!',
+              life: 3000 
+            });
+          },
+          error: (error) => {
+            console.error('Error updating article', error);
+            this.messageService.add({ 
+              severity: 'error', 
+              summary: 'Error', 
+              detail: 'Failed to update article.',
+              life: 3000 
+            });
+          }
+        });
+      }
+    });
   }
 
   deleteArticle(): void {

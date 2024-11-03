@@ -1,9 +1,32 @@
 <div id="bodyDiv">
     <app-header class="header"></app-header>
     <div id="contentWrapper">
-
-        <div id="deleteButtonDiv">
+        <div id="actionButtonsDiv">
             <p-confirmDialog />
+            <p-button
+                *ngIf="!isEditMode"
+                icon="pi pi-pencil"
+                size="small"
+                severity="secondary"
+                (onClick)="enableEditMode()"
+                styleClass="p-button-rounded p-button-outlined"
+                class="mr-2"/>
+            <p-button
+                *ngIf="isEditMode"
+                icon="pi pi-check"
+                size="small"
+                severity="success"
+                (onClick)="saveArticle()"
+                styleClass="p-button-rounded p-button-outlined"
+                class="mr-2"/>
+            <p-button
+                *ngIf="isEditMode"
+                icon="pi pi-times"
+                size="small"
+                severity="danger"
+                (onClick)="cancelEdit()"
+                styleClass="p-button-rounded p-button-outlined"
+                class="mr-2"/>
             <p-button
                 icon="pi pi-trash"
                 size="small"
@@ -11,10 +34,13 @@
                 (onClick)="deleteArticle()"
                 styleClass="p-button-rounded"/>
         </div>
+        
+        <div id="titleDiv" *ngIf="!isEditMode">{{article?.title}}</div>
+        <div id="titleDiv" *ngIf="isEditMode">
+            <input pInputText [(ngModel)]="editedArticle.title" class="w-full"/>
+        </div>
 
-        <div id="titleDiv">{{article?.title}}</div>
-
-        <div id="tags">
+        <div id="tags" *ngIf="!isEditMode">
             <div *ngFor="let tag of article?.tags" style="display: inline-block; margin-left: 5px;">
                 <p-chip [style]="{
                     'height': '30px',
@@ -24,9 +50,22 @@
                     }">{{ tag }}</p-chip>
             </div>
         </div>
+        <div id="tags" *ngIf="isEditMode">
+            <p-chips [(ngModel)]="editedArticle.tags" [separator]="','" placeholder="Add tags"></p-chips>
+        </div>
 
-        <div id="contentDiv" [innerHTML]="article?.content"></div>
-
+        <div id="contentDiv" *ngIf="!isEditMode" [innerHTML]="article?.content"></div>
+        <div id="contentDiv" *ngIf="isEditMode">
+            <p-editor [(ngModel)]="editedArticle.content" [style]="{ height: '320px' }">
+                <ng-template pTemplate="header">
+                    <span class="ql-formats">
+                        <button type="button" class="ql-bold" aria-label="Bold"></button>
+                        <button type="button" class="ql-italic" aria-label="Italic"></button>
+                        <button type="button" class="ql-underline" aria-label="Underline"></button>
+                    </span>
+                </ng-template>
+            </p-editor>
+        </div>
     </div>
     <app-footer class="footer" id="footer"></app-footer>
 </div>

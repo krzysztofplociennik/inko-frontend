@@ -14,6 +14,8 @@ export class ArticlesService {
     private http: HttpClient,
   ) {}
 
+  // todo: separate method onto different services?
+
   getArticleDetails(id: string): Observable<ArticleDetails> {
     const url: string = baseUrl + '/article';
     const params = new HttpParams()
@@ -50,5 +52,10 @@ export class ArticlesService {
         return throwError(() => error);
       })
     );
+  }
+
+  updateArticle(id: string, article: ArticleDetails): Observable<ArticleDetails> {
+    const url: string = `${baseUrl}/article`;
+    return this.http.put<ArticleDetails>(url, article);
   }
 }

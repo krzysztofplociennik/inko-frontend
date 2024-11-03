@@ -10,8 +10,11 @@ import { StringUtils } from 'src/app/shared/utils/stringUtils';
 })
 export class AllArticlesItemComponent {
 
-  @Input() article: AllArticlesItem | undefined;
-  @Input() isHovered: boolean = false;
+  @Input() 
+  article: AllArticlesItem | undefined;
+  
+  @Input() 
+  isHovered: boolean = false;
 
   getCurrentStyle(): { [klass: string]: any; } {
     return {
