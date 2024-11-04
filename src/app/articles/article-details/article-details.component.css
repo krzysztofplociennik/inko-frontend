@@ -28,15 +28,20 @@
 /* header/footer wapper */
 
 #titleDiv {
-    font-size:300%;
+    font-size: 300%;
     margin: 40px 40px 40px 40px;
+}
+
+#titleDiv2 {
+    width: 35%;
+    height: auto;
 }
 
 #contentDiv {
     display: flex;
     flex-direction: column;
     width: 35%;
-    align-items: start;
+    align-items: flex-start ;
 }
 
 #deleteButtonDiv {
