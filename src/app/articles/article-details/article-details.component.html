@@ -1,38 +1,39 @@
 <div id="bodyDiv">
     <app-header class="header"></app-header>
     <div id="contentWrapper">
+
         <div id="actionButtonsDiv">
             <p-confirmDialog />
-            <p-button
+            <p-button 
                 *ngIf="!isEditMode"
+                label="Edit" 
+                severity="secondary"    
                 icon="pi pi-pencil"
-                size="small"
-                severity="secondary"
-                (onClick)="enableEditMode()"
-                styleClass="p-button-rounded p-button-outlined"
-                class="mr-2"/>
+                [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
+                (onClick)="enableEditMode()" />
+            <p-button 
+                *ngIf="!isEditMode"
+                label="Delete" 
+                severity="danger"    
+                icon="pi pi-trash"
+                [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
+                (onClick)="deleteArticle()" />
             <p-button
                 *ngIf="isEditMode"
                 icon="pi pi-check"
-                size="small"
+                label="Update" 
                 severity="success"
+                [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
                 (onClick)="saveArticle()"
-                styleClass="p-button-rounded p-button-outlined"
-                class="mr-2"/>
+                />
             <p-button
                 *ngIf="isEditMode"
                 icon="pi pi-times"
-                size="small"
-                severity="danger"
-                (onClick)="cancelEdit()"
-                styleClass="p-button-rounded p-button-outlined"
-                class="mr-2"/>
-            <p-button
-                icon="pi pi-trash"
-                size="small"
+                label="Cancel" 
                 severity="secondary"
-                (onClick)="deleteArticle()"
-                styleClass="p-button-rounded"/>
+                [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"  
+                (onClick)="cancelEdit()"
+                />
         </div>
         
         <div id="titleDiv" *ngIf="!isEditMode">{{article?.title}}</div>
@@ -66,6 +67,7 @@
                 </ng-template>
             </p-editor>
         </div>
+        
     </div>
     <app-footer class="footer" id="footer"></app-footer>
 </div>
