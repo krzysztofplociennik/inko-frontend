@@ -63,7 +63,7 @@ export class ArticleDetailsComponent {
     });
   }
 
-  saveArticle(): void {
+  updateArticle(): void {
     this.confirmationService.confirm({
       message: 'Are you sure you want to save these changes?',
       header: 'Save Confirmation',
