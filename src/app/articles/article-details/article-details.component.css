@@ -40,8 +40,15 @@
 #contentDiv {
     display: flex;
     flex-direction: column;
-    width: 35%;
-    align-items: flex-start ;
+    width: 90%;
+    align-items: center;
+    margin: 45px;   
+}
+
+#contentOutline {
+    width: 40%;
+    background-color: #E8ECF0;
+    border-radius: 4%;
 }
 
 #deleteButtonDiv {

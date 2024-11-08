@@ -57,9 +57,12 @@
             <p-chips [(ngModel)]="editedArticle.tags" [separator]="','" placeholder="Add tags"></p-chips>
         </div>
 
-        <div id="contentDiv" *ngIf="!isEditMode" [innerHTML]="article?.content"></div>
-        <div id="contentDiv" *ngIf="isEditMode">    
-            <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="editedArticle.content" [style]="{ height: 'auto', width: '960px' }" />
+        <div id="contentOutline">
+
+            <div id="contentDiv" *ngIf="!isEditMode" [innerHTML]="article?.content"></div>
+            <div id="contentDiv" *ngIf="isEditMode">    
+                <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="editedArticle.content" [style]="{ height: 'auto', width: '960px' }" />
+            </div>
         </div>
 
     </div>
