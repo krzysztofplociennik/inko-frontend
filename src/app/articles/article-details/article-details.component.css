@@ -51,14 +51,6 @@
     border-radius: 4%;
 }
 
-#deleteButtonDiv {
-    display: flex;
-    justify-content: end;
-    margin: 5px 5px 5px 5px;
-    width: 50%; 
-    justify-content: end;
-}
-
 #tags {
     margin-top: 20px;
     margin-bottom: 20px;
