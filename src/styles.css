@@ -3,6 +3,8 @@
 @import "../node_modules/quill/dist/quill.snow.css";
 @import "primeicons/primeicons.css";
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import 'highlight.js/styles/dark.css';
+
 
 @font-face {
   font-family: 'jersey';
@@ -28,4 +30,14 @@ body {
   background-color: rgb(235, 232, 230);
   margin: 0;
   font-family: "Inter var", sans-serif;
+}
+
+.ql-align-center {
+  text-align: center;
+}
+.ql-align-right {
+  text-align: right;
+}
+.ql-align-justify {
+  text-align: justify;
 }
