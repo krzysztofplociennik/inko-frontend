@@ -19,7 +19,7 @@ div::content:last-of-type {
     color: rgb(255, 255, 255); 
     padding: 10px 30px; 
     margin: 10px 10px 10px 10px;
-    transition: 2487ms;
+    transition: 40ms;
     width: 266px;
     height: 60px; 
     box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset; 
@@ -45,5 +45,28 @@ div::content:last-of-type {
 }
 
 #aboutButton {
+    font-family: 'Raleway';
+    color: rgb(0, 0, 0); 
+    padding: 10px 30px; 
+    margin: 10px 10px 10px 10px;
+    width: 96px;
+    height: 40px; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: row-reverse; 
+    border: 1px solid rgb(167, 224, 255); 
+    border-radius: 13px; 
+    transition: 40ms;
+    box-shadow: rgba(248, 3, 3, 0.2) 0px 12px 28px 0px, rgba(40, 255, 2, 0.1) 0px 2px 4px 0px, rgba(5, 16, 233, 0.05) 0px 0px 0px 1px inset; 
+    background: linear-gradient(90deg, rgb(116, 154, 243) 18%, rgb(31, 75, 250) 100%); 
+    --hover-borderc: #7bb6f0; 
+    --hover-color: #7bb6f0;
+}
 
+#aboutButton:hover {
+    color: rgb(123, 182, 240);
+    background: rgb(0, 102, 204) none repeat scroll 0% 0% / auto padding-box border-box;
+    border-color: rgb(123, 182, 240);
+    border-width: 3px;
+    border-style: solid;
 }
