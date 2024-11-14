@@ -3,9 +3,16 @@ div {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+div::content:last-of-type {
+    position: absolute;
+    right: 30px;
 }
                         
-.btn {
+#navigationButton {
+    margin-left: 200px;
     cursor: pointer; 
     border: 1px solid rgb(167, 224, 255); 
     font-size: 34px; 
@@ -30,12 +37,10 @@ div {
     --hover-color: #7bb6f0;
 }
 
-
-.btn:hover{
+#navigationButton:hover {
     color: rgb(123, 182, 240);
     background: rgb(0, 102, 204) none repeat scroll 0% 0% / auto padding-box border-box;
     border-color: rgb(123, 182, 240);
     border-width: 3px;
     border-style: solid;
 }
-
