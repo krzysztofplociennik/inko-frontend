@@ -12,7 +12,6 @@ div::content:last-of-type {
 }
                         
 #navigationButton {
-    margin-left: 200px;
     cursor: pointer; 
     border: 1px solid rgb(167, 224, 255); 
     font-size: 34px; 
@@ -43,4 +42,8 @@ div::content:last-of-type {
     border-color: rgb(123, 182, 240);
     border-width: 3px;
     border-style: solid;
+}
+
+#aboutButton {
+
 }
