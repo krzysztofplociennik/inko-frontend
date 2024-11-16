@@ -14,6 +14,8 @@ interface AutoCompleteEvent {
 })
 export class SearchArticlesComponent {
 
+  resultsMessage: string = '';
+
   isHovered: boolean = false;
   hoveredIndex: number | null = null;
 
@@ -36,6 +38,7 @@ export class SearchArticlesComponent {
     this.searchService.search(0, 10, this.searchPhrase).subscribe(
       (response: ArticleSearch[]) => {
         this.articlesResults = response;
+        this.handleResultsMessage(response);
       });
   }
 
@@ -46,5 +49,13 @@ export class SearchArticlesComponent {
   mouseLeave() {
     this.hoveredIndex = null;
   }
+
+  handleResultsMessage(response: ArticleSearch[]) {
+    if(response.length === 0) {
+      this.resultsMessage = 'There were no articles with that searchphrase!';
+    } else {
+      this.resultsMessage = '';
+    }
+  } 
 
 }

@@ -20,8 +20,7 @@
         <div id="createNewArticleDiv">
             <span>... or create a new one!</span>
 
-            <p-button id="createNewArticleButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'"
-                [routerLink]="['/new-article']" />
+            <p-button id="createNewArticleButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'" [routerLink]="['/new-article']" />
         </div>
 
         <div id="searchArticlesContent">
@@ -31,7 +30,8 @@
                         [isHovered]="hoveredIndex === i"></app-result-item>
                 </div>
             </ul>
-        </div>
+            <div id="resultsMessageDiv" *ngIf="articlesResults.length === 0">{{ resultsMessage }}</div>
+        </div>  
     </div>
     <app-footer class="footer" id="footer"></app-footer>
 </div>
