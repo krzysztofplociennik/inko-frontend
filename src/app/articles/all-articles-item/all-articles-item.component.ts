@@ -39,4 +39,12 @@ export class AllArticlesItemComponent {
     return 'Unknown Date';
   }
 
+  getFormattedMofificationDate(): string {
+    if (this.article?.modificationDate) {
+      const date = new Date(this.article.modificationDate);
+      return isNaN(date.getTime()) ? 'Invalid Date' : DateUtils.formatDate(date);
+    }
+    return 'Unknown Date';
+  }
+
 }

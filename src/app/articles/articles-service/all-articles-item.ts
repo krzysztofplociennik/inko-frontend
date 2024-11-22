@@ -4,4 +4,5 @@ export interface AllArticlesItem {
     type: string;
     tags: string[];
     creationDate: Date; 
+    modificationDate: Date;
 }
