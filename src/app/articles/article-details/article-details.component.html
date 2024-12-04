@@ -38,6 +38,7 @@
         
         <div id="titleDiv" *ngIf="!isEditMode">{{article?.title}}</div>
         <div id="titleDiv2" *ngIf="isEditMode">
+            <label> Title: </label>
             <input pInputText [(ngModel)]="editedArticle.title" 
             [style]="{'width': '960px'}" 
             class="w-full"/>
@@ -53,8 +54,11 @@
                     }">{{ tag }}</p-chip>
             </div>
         </div>
-        <div id="tags" *ngIf="isEditMode">
-            <p-chips [(ngModel)]="editedArticle.tags" [separator]="','" placeholder="Add tags"></p-chips>
+        <div id="tagsContainer" *ngIf="isEditMode">
+            <label> Tags: </label>
+            <div id="tags">
+                <p-chips [(ngModel)]="editedArticle.tags" [separator]="','" placeholder="Add tags"></p-chips>
+            </div>
         </div>
 
         <div id="contentOutline">

@@ -32,8 +32,10 @@
 }
 
 #titleDiv2 {
-    width: 35%;
+    width: 40%;
     height: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 #contentDiv {
@@ -49,13 +51,26 @@
     border-radius: 4%;
 }
 
+#tagsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 40%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 #tags {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 35%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: auto;
 }
 
 #actionButtonsDiv {
     width: 35%;
     margin: 20px 0px 20px 0px;
 }
+
+label {
+    margin-right: 21px;
+}   
