@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ArticleSearch } from './article-result';
+import { DateUtils } from 'src/app/shared/utils/dateUtils';
 
 @Component({
   selector: 'app-result-item',
@@ -22,6 +23,22 @@ export class ResultItemComponent {
 
   getBackgroundColor(): string { 
     return this.isHovered? '#e6eef5' : 'white';
+  }
+
+  getFormattedDate(): string {
+    if (this.article?.creationDate) {
+      const date = new Date(this.article.creationDate);
+      return isNaN(date.getTime()) ? 'Invalid Date' : DateUtils.formatDate(date);
+    }
+    return 'Unknown Date';
+  }
+
+  getFormattedMofificationDate(): string {
+    if (this.article?.modificationDate) {
+      const date = new Date(this.article.modificationDate);
+      return isNaN(date.getTime()) ? 'Invalid Date' : DateUtils.formatDate(date);
+    }
+    return 'Unknown Date';
   }
 
 }
