@@ -18,7 +18,7 @@ export class AllArticlesItemComponent {
 
   getCurrentStyle(): { [klass: string]: any; } {
     return {
-      'height': '200px',
+      'height': '130px',
       'background': this.getBackgroundColor(),
     };
   }
