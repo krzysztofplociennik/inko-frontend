@@ -14,15 +14,14 @@ export class ResultItemComponent {
   currentStyle: { [klass: string]: any; } | undefined;
 
   getCurrentStyle(): { [klass: string]: any; } {
-    
-    if (this.isHovered) {
-      return {
-        'background':'#e6eef5'
-      };
-    }
     return {
-      'background':'white'
+      'height': '120px',
+      'background': this.getBackgroundColor(),
     };
+  }
+
+  getBackgroundColor(): string { 
+    return this.isHovered? '#e6eef5' : 'white';
   }
 
 }
