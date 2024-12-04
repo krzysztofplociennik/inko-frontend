@@ -16,6 +16,8 @@ a {
 
 div {
     font-size: 12px;
+    margin-bottom: 1px;
+    margin-top: 1px;
 }
 
 ::ng-deep .p-card .p-card-title {

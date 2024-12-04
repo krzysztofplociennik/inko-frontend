@@ -16,7 +16,7 @@ export class ResultItemComponent {
 
   getCurrentStyle(): { [klass: string]: any; } {
     return {
-      'height': '120px',
+      'height': '125px',
       'background': this.getBackgroundColor(),
     };
   }
