@@ -25,3 +25,24 @@
     width: 100%;
     margin-top: 300px;
 }
+
+.container {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+h1 {
+    color: #FF6B6B;
+}
+.joke {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #333;
+}
+.emoji {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
