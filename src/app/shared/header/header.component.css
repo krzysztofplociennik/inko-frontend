@@ -10,29 +10,29 @@ div::content:last-of-type {
     position: absolute;
     right: 30px;
 }
-                        
+
 #navigationButton {
-    cursor: pointer; 
-    border: 1px solid rgb(167, 224, 255); 
-    font-size: 34px; 
+    cursor: pointer;
+    border: 1px solid rgb(167, 224, 255);
+    font-size: 34px;
     font-family: 'Raleway';
-    color: rgb(255, 255, 255); 
-    padding: 10px 30px; 
+    color: rgb(255, 255, 255);
+    padding: 10px 30px;
     margin: 10px 10px 10px 10px;
     transition: 40ms;
     width: 266px;
-    height: 60px; 
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset; 
-    border-radius: 23px; 
-    background: linear-gradient(90deg, rgb(0, 102, 204) 18%, rgb(23, 37, 60) 100%); 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    flex-direction: row-reverse; 
-    --hover-borderSize: 4px; 
-    --hover-width: 337px; 
-    font-weight: 400; 
-    --hover-borderc: #7bb6f0; 
+    height: 60px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    border-radius: 23px;
+    background: linear-gradient(90deg, rgb(0, 102, 204) 18%, rgb(23, 37, 60) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    --hover-borderSize: 4px;
+    --hover-width: 337px;
+    font-weight: 400;
+    --hover-borderc: #7bb6f0;
     --hover-color: #7bb6f0;
 }
 
@@ -46,20 +46,20 @@ div::content:last-of-type {
 
 #aboutButton {
     font-family: 'Raleway';
-    color: rgb(0, 0, 0); 
-    padding: 10px 30px; 
+    color: rgb(0, 0, 0);
+    padding: 10px 30px;
     margin: 10px 10px 10px 10px;
     width: 96px;
-    height: 40px; 
-    justify-content: center; 
-    align-items: center; 
-    flex-direction: row-reverse; 
-    border: 1px solid rgb(167, 224, 255); 
-    border-radius: 13px; 
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    border: 1px solid rgb(167, 224, 255);
+    border-radius: 13px;
     transition: 40ms;
-    box-shadow: rgba(248, 3, 3, 0.2) 0px 12px 28px 0px, rgba(40, 255, 2, 0.1) 0px 2px 4px 0px, rgba(5, 16, 233, 0.05) 0px 0px 0px 1px inset; 
-    background: linear-gradient(90deg, rgb(116, 154, 243) 18%, rgb(31, 75, 250) 100%); 
-    --hover-borderc: #7bb6f0; 
+    box-shadow: rgba(248, 3, 3, 0.2) 0px 12px 28px 0px, rgba(40, 255, 2, 0.1) 0px 2px 4px 0px, rgba(5, 16, 233, 0.05) 0px 0px 0px 1px inset;
+    background: linear-gradient(90deg, rgb(116, 154, 243) 18%, rgb(31, 75, 250) 100%);
+    --hover-borderc: #7bb6f0;
     --hover-color: #7bb6f0;
 }
 
@@ -69,4 +69,41 @@ div::content:last-of-type {
     border-color: rgb(123, 182, 240);
     border-width: 3px;
     border-style: solid;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0;
+    padding: 0;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    width: 2rem;
+    height: 2rem;
+}
+
+.theme-toggle i {
+    font-size: 1.8rem;
+    line-height: 1;
+    position: relative;
+    left: 0.0rem;
+    top: 0.1rem;
+}
+
+.theme-toggle:active {
+    transform: scale(0.9);
+}
+
+.theme-toggle i {
+    transition: opacity 0.3s ease;
+}
+
+.theme-toggle .fa-sun {
+    color: #ffffff;
+    transition: color 0.3s ease;
 }
