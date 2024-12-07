@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -11,4 +12,11 @@ export class HeaderComponent {
   home: string|any[]|null|undefined = 'home';
   articles: string|any[]|null|undefined = 'articles';
   about: string|any[]|null|undefined = 'about';
+
+  constructor(private themeService: ThemeService) {}
+
+
+  toggleTheme(): void {
+    this.themeService.toggleDarkMode();
+  }
 }

@@ -27,7 +27,7 @@ body {
 }
 
 body {
-  background-color: rgb(235, 232, 230);
+  /* background-color: rgb(235, 232, 230); */
   margin: 0;
   font-family: "Inter var", sans-serif;
 }
@@ -40,4 +40,26 @@ body {
 }
 .ql-align-justify {
   text-align: justify;
+}
+
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --co-color: #e2dede;
+}
+
+.dark-mode {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --co-color: #1f1f1f;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+#contentOutline {
+  background-color: var(--co-color);
 }
