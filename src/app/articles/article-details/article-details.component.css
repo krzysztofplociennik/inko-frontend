@@ -47,7 +47,7 @@
 
 #contentOutline {
     width: 40%;
-    border-radius: 3%;
+    border-radius: 20px;
 }
 
 #tagsContainer {
@@ -73,3 +73,12 @@
 label {
     margin-right: 21px;
 }   
+
+#typeLabel {
+    margin-right: 13px;
+}
+
+#typeContainer {
+    width: 40%;
+    margin-top: 4px;
+}

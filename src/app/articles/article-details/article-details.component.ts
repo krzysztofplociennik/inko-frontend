@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ArticlesService } from '../articles-service/articles.service';
 import { ArticleDetails } from './article-details';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { ArticleType } from 'src/app/new-article/article';
+import { ArticleReadService } from 'src/app/shared/services/article-read.service';
 
 @Component({
   selector: 'app-article-details',
@@ -24,15 +26,30 @@ export class ArticleDetailsComponent {
     modificationDate: new Date()
   };
 
+  articleTypes: ArticleType[] = [];
+  selectedType: ArticleType = { name: this.editedArticle.type };
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    public articleService: ArticlesService,
+    private articleService: ArticlesService,
+    private articleReadService: ArticleReadService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
   ) {
     this.articleID = this.activatedRoute.snapshot.url[1].path;
     this.getArticleDetails();
+  }
+
+  ngOnInit(): void {
+    this.articleReadService.fetchAllArticleTypes().subscribe(
+      (response: string[]) => {
+        response.forEach(element => {
+          this.articleTypes.push(
+            { name: element }
+          )
+        });
+    });
   }
 
   getArticleDetails(): void {
@@ -120,5 +137,9 @@ export class ArticleDetailsComponent {
       },
     });
   }
+
+  public areArticleTypesPopulated(): boolean {
+    return this.articleTypes.length > 0;
+}
 
 }

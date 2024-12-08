@@ -44,6 +44,19 @@
             class="w-full"/>
         </div>
 
+        <div id="typeContainer" *ngIf="isEditMode">
+            <label id="typeLabel"> Type: </label>
+            <p-dropdown 
+                *ngIf="areArticleTypesPopulated()"
+                id="articleTypesDropdown"
+                [options]="articleTypes" 
+                [(ngModel)]="editedArticle.type" 
+                optionLabel="name"
+                placeholder="Select the new type"
+            />
+        </div>
+
+
         <div id="tags" *ngIf="!isEditMode">
             <div *ngFor="let tag of article?.tags" style="display: inline-block; margin-left: 5px;">
                 <p-chip [style]="{
