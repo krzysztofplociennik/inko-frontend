@@ -44,7 +44,7 @@ export class AllArticlesItemComponent {
       const date = new Date(this.article.modificationDate);
       return isNaN(date.getTime()) ? 'Invalid Date' : DateUtils.formatDate(date);
     }
-    return 'Not yet edited';
+    return 'Not yet modified';
   }
 
 }
