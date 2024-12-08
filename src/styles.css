@@ -44,9 +44,9 @@ body {
 
 
 :root {
-  --bg-color: #ffffff;
+  --bg-color: #E8F0FE;
   --text-color: #000000;
-  --co-color: #e2dede;
+  --co-color: #F5F5F5;
 }
 
 .dark-mode {
