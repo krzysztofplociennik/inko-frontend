@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CreateArticleService } from './service/create-article.service';
 import { ArticleType } from './article';
 import { MessageService } from 'primeng/api';
-import { ArticleService } from '../shared/services/article.service';
+import { ArticleReadService } from '../shared/services/article-read.service';
 
 @Component({
   selector: 'app-new-article',
@@ -18,7 +18,7 @@ export class NewArticleComponent implements OnInit {
 
   constructor(
     public createArticleService: CreateArticleService,
-    private articleService: ArticleService,
+    private articleService: ArticleReadService,
     private messageService: MessageService
   ) { }
 
