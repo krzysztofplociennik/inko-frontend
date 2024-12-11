@@ -11,6 +11,11 @@ div::content:last-of-type {
     right: 30px;
 }
 
+div::content:first-of-type {
+    position: absolute;
+    left: 30px;
+}
+
 #navigationButton {
     cursor: pointer;
     border: 1px solid rgb(167, 224, 255);

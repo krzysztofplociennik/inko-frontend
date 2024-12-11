@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; // Import here
 import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,6 +30,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageService } from 'primeng/api';
 import { ChipModule } from 'primeng/chip';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { AuthInterceptor } from './shared/auth/auth.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './shared/login/login.component';
 
 @NgModule({
     declarations: [
@@ -44,12 +47,16 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
         ResultItemComponent,
         ArticleDetailsComponent,
         AllArticlesItemComponent,
+        LoginComponent,
     ],
     exports: [
         HeaderComponent,
         FooterComponent
     ],
-    providers: [MessageService],
+    providers: [
+        MessageService, 
+        AuthInterceptor
+    ],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
@@ -71,6 +78,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
         ConfirmDialogModule,
         ChipModule,
         AutoCompleteModule,
+        ReactiveFormsModule,
     ]
 })
 export class AppModule { }
