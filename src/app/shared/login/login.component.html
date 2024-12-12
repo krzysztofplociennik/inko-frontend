@@ -1,11 +1,20 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div>
-        <label for="username">Username</label>
-        <input id="username" formControlName="username" type="text" />
+
+<div id="bodyDiv">
+    <app-header class="header"></app-header>
+    <div id="contentWrapper">
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div>
+                <label for="username">Username</label>
+                <input id="username" formControlName="username" type="text" />
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input id="password" formControlName="password" type="password" />
+            </div>
+            <button type="submit" [disabled]="loginForm.invalid">Login</button>
+        </form>
+
     </div>
-    <div>
-        <label for="password">Password</label>
-        <input id="password" formControlName="password" type="password" />
-    </div>
-    <button type="submit" [disabled]="loginForm.invalid">Login</button>
-</form>
+    <app-footer class="footer" id="footer"></app-footer>
+</div>
