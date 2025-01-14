@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthResponse, AuthService, ErrorResponse } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -24,11 +24,12 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
+    this.errorMessage = '';
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
-        next: (response) => {
+        next: (response: AuthResponse) => {
           this.authService.setToken(response.token);
-          this.router.navigate(['/']); // Navigate to the main page after login
+          this.router.navigate(['/']);
         },
         error: (err) => {
           this.errorMessage = 'Login failed: ' + err.error;
