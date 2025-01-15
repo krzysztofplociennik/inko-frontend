@@ -27,3 +27,33 @@
     margin-top: 300px;
 }
 /* header/footer wapper */
+
+#login {
+    width: 20%;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+
+}
+
+#usernameLabel {
+    margin-right: 20px;
+}
+
+#usernameInput {
+    margin-bottom: 5px;
+}
+
+#passwordLabel {
+    margin-right: 20px;
+    margin-left: 3px;
+}
+
+#passwordInput {
+    margin-bottom: 10px;
+}
+
+#loginButton {
+
+}
