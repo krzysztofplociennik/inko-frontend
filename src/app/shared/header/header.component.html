@@ -1,11 +1,14 @@
-<div>
-
-    <button id="navigationButton" [routerLink]="['/login']" class="btn">login</button>
-    <button id="navigationButton" [routerLink]="['/search-articles']" class="btn">search</button>
-    <button id="navigationButton" [routerLink]="['/articles']" class="btn">articles</button>
-
+<div id="headerDiv">
     <button (click)="toggleTheme()" class="theme-toggle">
-        <i *ngIf="!isDarkMode()" class="fa-solid fa-sun"></i>
-        <i *ngIf="isDarkMode()" class="fa-solid fa-moon"></i>
+      <i *ngIf="!isDarkMode()" class="fa-solid fa-sun"></i>
+      <i *ngIf="isDarkMode()" class="fa-solid fa-moon"></i>
     </button>
-</div>
+    
+    <div class="center-buttons">
+      <button id="navigationButton" [routerLink]="['/search-articles']" class="btn">search</button>
+      <button id="navigationButton" [routerLink]="['/articles']" class="btn">articles</button>
+    </div>
+    
+    <p-button id="loginButton" [routerLink]="['/login']" icon="pi pi-sign-in" label="log in" 
+      [severity]="'secondary'" class="btn" [style]="{'height': '35px', 'margin': '5px 5px 5px 5px'}" />
+  </div>
