@@ -37,8 +37,13 @@ export class LoginComponent {
         error: (err) => {
           this.messageService.add({severity:'error', summary:'Error', detail:'Wrong credentials, try again.'});
           this.errorMessage = 'Login failed: ' + err.error;
+          this.clearFormInputs();
         },
       });
     }
+  }
+
+  clearFormInputs() {
+    this.loginForm.reset();
   }
 }
