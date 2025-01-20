@@ -12,7 +12,8 @@
     justify-content: center;
     gap: 20px;
     flex-grow: 1;
-  }
+    margin-left: 60px;
+  }s
   
   .theme-toggle {
     background: none;
