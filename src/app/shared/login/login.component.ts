@@ -17,7 +17,7 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],

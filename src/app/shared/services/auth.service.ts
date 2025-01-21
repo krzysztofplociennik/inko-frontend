@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/auth';
+
+  private loginStateSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
+
+  loginState$ = this.loginStateSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -28,6 +32,7 @@ export class AuthService {
 
   setToken(token: string): void {
     localStorage.setItem('token', token);
+    this.updateLoginState(true);
   }
 
   getToken(): string | null {
@@ -36,17 +41,15 @@ export class AuthService {
 
   clearToken(): void {
     localStorage.removeItem('token');
+    this.updateLoginState(false);
   }
 
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }
 
-  getSecureData(): Observable<any> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.getToken()}`,
-    });
-    return this.http.get('http://localhost:61934/api/secure-data', { headers });
+  private updateLoginState(isLoggedIn: boolean): void {
+    this.loginStateSubject.next(isLoggedIn);
   }
 }
 
