@@ -14,9 +14,9 @@ const routes: Routes = [
   { path: 'article-details/:id', component: ArticleDetailsComponent },
   { path: 'new-article', component: NewArticleComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'login', component: LoginComponent }, // Move this above the wildcard route
+  { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/search-articles', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }, // Keep this last
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

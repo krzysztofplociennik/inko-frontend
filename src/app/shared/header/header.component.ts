@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ThemeService } from '../services/theme.service';
 import { AuthService } from '../services/auth.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
     private themeService: ThemeService,
     private authService: AuthService,
     private messageService: MessageService,
+    private router: Router,
   ) {
     this.isLoggedIn = false;
   }
@@ -47,5 +49,6 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.clearToken();
     this.messageService.add({severity:'success', summary:'Success', detail:'You have been successfully logged out!'});
+    this.router.navigate(['/']);
   }
 }
