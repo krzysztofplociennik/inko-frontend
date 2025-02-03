@@ -17,7 +17,7 @@
                 (onClick)="searchForArticles()" />
         </div>
 
-        <div id="createNewArticleDiv">
+        <div *ngIf="isLoggedIn" id="createNewArticleDiv">
             <span>... or create a new one!</span>
 
             <p-button id="createNewArticleButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'" [routerLink]="['/new-article']" />

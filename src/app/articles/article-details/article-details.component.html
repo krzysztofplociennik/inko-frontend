@@ -2,7 +2,7 @@
     <app-header class="header"></app-header>
     <div id="contentWrapper">
 
-        <div id="actionButtonsDiv">
+        <div *ngIf="isLoggedIn" id="actionButtonsDiv">
             <p-confirmDialog />
             <p-button 
                 *ngIf="!isEditMode"

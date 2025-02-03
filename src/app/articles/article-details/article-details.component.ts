@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ArticlesService } from '../articles-service/articles.service';
 import { ArticleDetails } from './article-details';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ArticleType } from 'src/app/new-article/article';
 import { ArticleReadService } from 'src/app/shared/services/article-read.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-article-details',
@@ -12,7 +13,7 @@ import { ArticleReadService } from 'src/app/shared/services/article-read.service
   styleUrl: './article-details.component.css',
   providers: [ConfirmationService]
 })
-export class ArticleDetailsComponent {
+export class ArticleDetailsComponent implements OnInit {
   articleID: string = '';
   article: ArticleDetails | null = null;
   isEditMode: boolean = false;
@@ -29,6 +30,8 @@ export class ArticleDetailsComponent {
   articleTypes: ArticleType[] = [];
   selectedType: ArticleType = { name: this.editedArticle.type };
 
+  isLoggedIn: boolean;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -36,9 +39,11 @@ export class ArticleDetailsComponent {
     private articleReadService: ArticleReadService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
+    private authService: AuthService,
   ) {
     this.articleID = this.activatedRoute.snapshot.url[1].path;
     this.getArticleDetails();
+    this.isLoggedIn = false;
   }
 
   ngOnInit(): void {
@@ -49,6 +54,9 @@ export class ArticleDetailsComponent {
             { name: element }
           )
         });
+    });
+    this.authService.loginState$.subscribe((state) => {
+      this.isLoggedIn = state;
     });
   }
 

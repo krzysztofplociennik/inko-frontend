@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ArticleSearch } from './search-result-item/article-result';
 import { SearchService } from './search-service/search.service';
+import { AuthService } from '../shared/services/auth.service';
 
 interface AutoCompleteEvent {
   originalEvent: Event;
@@ -12,7 +13,7 @@ interface AutoCompleteEvent {
   templateUrl: './search-articles.component.html',
   styleUrls: ['./search-articles.component.css']
 })
-export class SearchArticlesComponent {
+export class SearchArticlesComponent implements OnInit {
 
   resultsMessage: string = '';
 
@@ -24,7 +25,20 @@ export class SearchArticlesComponent {
 
   articlesResults: ArticleSearch[] = [];
 
-  constructor(public searchService: SearchService) { }
+  isLoggedIn: boolean;
+
+  constructor(
+    public searchService: SearchService,
+    private authService: AuthService,
+  ) {
+    this.isLoggedIn = false;
+   }
+
+  ngOnInit(): void {
+    this.authService.loginState$.subscribe((state) => {
+      this.isLoggedIn = state;
+    });
+  }
 
   searchForAutocompletes(event: AutoCompleteEvent) {
     this.searchService.getAutocompletes(event.query).subscribe(
