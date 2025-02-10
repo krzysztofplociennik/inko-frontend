@@ -51,6 +51,6 @@ export class ArticlesComponent {
 
   doBackup() {
     console.log('do backup');
-    this.backupService.doBackup().subscribe();
+    this.backupService.doBackup();
   }
 }
