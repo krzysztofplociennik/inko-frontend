@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { AllArticlesItem } from './articles-service/all-articles-item';
 import { ArticlesService } from './articles-service/articles.service';
+import { AuthService } from '../shared/services/auth.service';
+import { BackupService } from '../shared/services/backup.service';
 
 @Component({
   selector: 'app-articles',
@@ -15,8 +17,21 @@ export class ArticlesComponent {
 
   articlesResults: AllArticlesItem[] = [];
 
-  constructor(public articlesService: ArticlesService) {
+  isLoggedIn: boolean;
+
+  constructor(
+    public articlesService: ArticlesService,
+    private authService: AuthService,
+    private backupService: BackupService
+  ) {
     this.getAllArticles();
+    this.isLoggedIn = false;
+  }
+
+  ngOnInit(): void {
+    this.authService.loginState$.subscribe((state) => {
+      this.isLoggedIn = state;
+    });
   }
 
   getAllArticles() {
@@ -32,5 +47,10 @@ export class ArticlesComponent {
 
   mouseLeave() {
     this.hoveredIndex = null;
+  }
+
+  doBackup() {
+    console.log('do backup');
+    this.backupService.doBackup().subscribe();
   }
 }

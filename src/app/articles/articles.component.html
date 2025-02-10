@@ -2,6 +2,16 @@
     <app-header class="header"></app-header>
     <div id="contentWrapper">
 
+        <div>
+            <p-button 
+            *ngIf="isLoggedIn"
+            label="do backup" 
+            severity="secondary"    
+            icon="pi pi-cloud-download"
+            [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
+            (onClick)="doBackup()" />
+        </div>
+
         <div id="allArticlesDiv">
             <ul *ngFor="let item of articlesResults; let i = index">
                 <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
