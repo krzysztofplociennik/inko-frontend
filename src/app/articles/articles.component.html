@@ -5,11 +5,19 @@
         <div>
             <p-button 
             *ngIf="isLoggedIn"
-            label="do backup" 
+            label="export with HTML" 
             severity="secondary"    
             icon="pi pi-cloud-download"
             [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
-            (onClick)="doBackup()" />
+            (onClick)="exportWithHTML()" />
+
+            <p-button 
+            *ngIf="isLoggedIn"
+            label="export without HTML" 
+            severity="secondary"    
+            icon="pi pi-cloud-download"
+            [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
+            (onClick)="exportWithoutHTML()" />
         </div>
 
         <div id="allArticlesDiv">

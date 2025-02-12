@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { AllArticlesItem } from './articles-service/all-articles-item';
 import { ArticlesService } from './articles-service/articles.service';
 import { AuthService } from '../shared/services/auth.service';
-import { BackupService } from '../shared/services/backup.service';
+import { ExportService } from '../shared/services/export.service';
 
 @Component({
   selector: 'app-articles',
@@ -22,7 +22,7 @@ export class ArticlesComponent {
   constructor(
     public articlesService: ArticlesService,
     private authService: AuthService,
-    private backupService: BackupService
+    private exportService: ExportService
   ) {
     this.getAllArticles();
     this.isLoggedIn = false;
@@ -49,8 +49,11 @@ export class ArticlesComponent {
     this.hoveredIndex = null;
   }
 
-  doBackup() {
-    console.log('do backup');
-    this.backupService.doBackup();
+  exportWithHTML() {
+    this.exportService.exportWithHTML();
+  }
+
+  exportWithoutHTML() {
+    this.exportService.exportWithoutHTML();
   }
 }
