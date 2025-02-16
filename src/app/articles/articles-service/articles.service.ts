@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ArticleDetails } from '../article-details/article-details';
 import { Observable, catchError, map, throwError } from 'rxjs';
@@ -12,7 +12,7 @@ export class ArticlesService {
 
   constructor(
     private http: HttpClient,
-  ) {}
+  ) { }
 
   // todo: separate method onto different services?
 
@@ -20,7 +20,7 @@ export class ArticlesService {
     const url: string = baseUrl + '/article/getDetails';
     const params = new HttpParams()
       .set('id', id);
-    
+
     return this.http.get<ArticleDetails>(url, { params }).pipe(
       map((response: ArticleDetails) => {
         return response;
@@ -30,7 +30,7 @@ export class ArticlesService {
 
   getAllArticles(): Observable<AllArticlesItem[]> {
     const url: string = baseUrl + '/article/getAll';
-    
+
     return this.http.get<AllArticlesItem[]>(url).pipe(
       map((response: AllArticlesItem[]) => {
         return response;
@@ -40,22 +40,36 @@ export class ArticlesService {
 
   deleteArticle(id: string): Observable<string> {
     const url: string = `${baseUrl}/article/delete`;
-  
-    return this.http.delete(url, { 
+
+    const token = localStorage.getItem('jwt');
+
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${token}`);
+
+    return this.http.delete(url, {
       params: { id: id },
+      headers: headers,
       responseType: 'text'
     }).pipe(
       map((response: string) => {
         return response;
       }),
-      catchError(error => {navigator
+      catchError(error => {
+        navigator
         return throwError(() => error);
       })
     );
   }
 
-  updateArticle(id: string, article: ArticleDetails): Observable<ArticleDetails> {
+  updateArticle(article: ArticleDetails): Observable<ArticleDetails> {
+    const token = localStorage.getItem('jwt');
+
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${token}`);
+
     const url: string = `${baseUrl}/article/update`;
-    return this.http.put<ArticleDetails>(url, article);
+    return this.http.put<ArticleDetails>(url, article, {
+      headers: headers,
+    });
   }
 }

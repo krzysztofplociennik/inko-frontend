@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { baseUrl } from '../utils/urlUtils';
@@ -13,18 +13,34 @@ export class ExportService {
   ) { }
 
   exportWithHTML() {
-    const url: string = baseUrl + '/backup/withHTML';
+    const url: string = baseUrl + '/export/withHTML';
 
-    this.http.get(url, { responseType: 'blob' })
+    const token = localStorage.getItem('jwt');
+
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${token}`);
+
+    this.http.get(url, {
+      headers: headers,
+      responseType: 'blob'
+    })
       .subscribe(blob => {
         this.downloadFile(blob, true);
       });
   }
 
   exportWithoutHTML() {
-    const url: string = baseUrl + '/backup/withoutHTML';
+    const url: string = baseUrl + '/export/withoutHTML';
 
-    this.http.get(url, { responseType: 'blob' })
+    const token = localStorage.getItem('jwt');
+
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${token}`);
+
+    this.http.get(url, {
+      headers: headers,
+      responseType: 'blob'
+    })
       .subscribe(blob => {
         this.downloadFile(blob, false);
       });
@@ -32,9 +48,9 @@ export class ExportService {
 
   private downloadFile(blob: Blob, withHTML: boolean) {
 
-    const filename = withHTML ? 
-      'inko_backup_HTML_' + new Date() + '.zip' 
-    : 
+    const filename = withHTML ?
+      'inko_backup_HTML_' + new Date() + '.zip'
+      :
       'inko_backup_NO_HTML_' + new Date() + '.zip';
 
     const a = document.createElement('a');

@@ -26,8 +26,12 @@ export class CreateArticleService {
       type: type,
       tags: tags
     };  
+
+    const token = localStorage.getItem('jwt');    
     
-    const headers = new HttpHeaders().set('Accept', 'text/plain');
+    const headers = new HttpHeaders()
+    .set('Accept', 'text/plain')
+    .set('Authorization', `Bearer ${token}`);
     
     return this.http.post(url, articleToSend, { 
       headers: headers, 

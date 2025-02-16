@@ -97,7 +97,7 @@ export class ArticleDetailsComponent implements OnInit {
       rejectIcon: "none",
       rejectButtonStyleClass: "p-button-text",
       accept: () => {
-        this.articleService.updateArticle(this.articleID, this.editedArticle).subscribe({
+        this.articleService.updateArticle(this.editedArticle).subscribe({
           next: (response) => {
             this.article = response;
             this.isEditMode = false;

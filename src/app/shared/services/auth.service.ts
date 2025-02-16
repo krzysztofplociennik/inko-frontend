@@ -17,6 +17,7 @@ export class AuthService {
   login(credentials: { username: string; password: string }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
+        localStorage.setItem('jwt', response.token);
         return response;
       }),
       catchError(error => {
