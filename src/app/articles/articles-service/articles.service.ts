@@ -17,7 +17,7 @@ export class ArticlesService {
   // todo: separate method onto different services?
 
   getArticleDetails(id: string): Observable<ArticleDetails> {
-    const url: string = baseUrl + '/article';
+    const url: string = baseUrl + '/article/getDetails';
     const params = new HttpParams()
       .set('id', id);
     
@@ -39,7 +39,7 @@ export class ArticlesService {
   }
 
   deleteArticle(id: string): Observable<string> {
-    const url: string = `${baseUrl}/article`;
+    const url: string = `${baseUrl}/article/delete`;
   
     return this.http.delete(url, { 
       params: { id: id },
@@ -55,7 +55,7 @@ export class ArticlesService {
   }
 
   updateArticle(id: string, article: ArticleDetails): Observable<ArticleDetails> {
-    const url: string = `${baseUrl}/article`;
+    const url: string = `${baseUrl}/article/update`;
     return this.http.put<ArticleDetails>(url, article);
   }
 }
