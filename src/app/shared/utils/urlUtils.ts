@@ -1,5 +1,4 @@
-import { environment } from "src/environment/environment";
-
 export function getBaseUrl(): string {
-    return environment.baseUrl;
+    const config = (window as any).config;
+    return config.apiUrl;
 }

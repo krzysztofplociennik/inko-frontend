@@ -34,6 +34,15 @@ import { AuthInterceptor } from './shared/auth/auth.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './shared/login/login.component';
 
+import { HttpClient } from '@angular/common/http';
+import { APP_INITIALIZER } from '@angular/core';
+
+export function loadConfig(http: HttpClient) {
+  return () => http.get('/assets/config.json').toPromise().then((config: any) => {
+    (window as any).config = config;
+  });
+}
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -55,7 +64,13 @@ import { LoginComponent } from './shared/login/login.component';
     ],
     providers: [
         MessageService, 
-        AuthInterceptor
+        AuthInterceptor,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: loadConfig,
+            deps: [HttpClient],
+            multi: true
+        }
     ],
     bootstrap: [AppComponent],
     imports: [
