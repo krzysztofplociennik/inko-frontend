@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { baseUrl } from 'src/app/shared/utils/urlUtils';
+import { getBaseUrl } from 'src/app/shared/utils/urlUtils';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ArticleCreate } from '../article';
 
@@ -9,9 +9,13 @@ import { ArticleCreate } from '../article';
 })
 export class CreateArticleService {
 
+  baseBackendUrl: string = '';
+
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+    this.baseBackendUrl = getBaseUrl();
+  }
 
   create(
     title: string,
@@ -19,7 +23,7 @@ export class CreateArticleService {
     tags: string[],
     content: string
   ): Observable<string> {
-    const url: string = baseUrl + '/article/add';
+    const url: string = this.baseBackendUrl + '/article/add';
     const articleToSend: ArticleCreate = {
       title: title, 
       content: content,

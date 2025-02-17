@@ -1,1 +1,5 @@
-export const baseUrl: string = 'http://localhost:8080';
+import { environment } from "src/environment/environment";
+
+export function getBaseUrl(): string {
+    return environment.baseUrl;
+}

@@ -43,4 +43,5 @@ Thumbs.db
 
 # Something
 .editorconfig
+/src/environment
 

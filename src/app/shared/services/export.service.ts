@@ -1,19 +1,22 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { baseUrl } from '../utils/urlUtils';
+import { getBaseUrl } from '../utils/urlUtils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExportService {
 
+  baseUrl: string;
+
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    this.baseUrl = getBaseUrl();
+   }
 
   exportWithHTML() {
-    const url: string = baseUrl + '/export/withHTML';
+    const url: string = this.baseUrl + '/export/withHTML';
 
     const token = localStorage.getItem('jwt');
 
@@ -30,7 +33,7 @@ export class ExportService {
   }
 
   exportWithoutHTML() {
-    const url: string = baseUrl + '/export/withoutHTML';
+    const url: string = this.baseUrl + '/export/withoutHTML';
 
     const token = localStorage.getItem('jwt');
 

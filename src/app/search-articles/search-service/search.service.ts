@@ -2,17 +2,21 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ArticleSearch } from '../search-result-item/article-result';
 import { Observable, map } from 'rxjs';
-import { baseUrl } from 'src/app/shared/utils/urlUtils';
+import { getBaseUrl } from 'src/app/shared/utils/urlUtils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
 
-  constructor(private http: HttpClient) {}
+  baseBackendUrl: string = '';
+
+  constructor(private http: HttpClient) {
+    this.baseBackendUrl = getBaseUrl();
+  }
 
   search(page: number, itemsPerPage: number, searchPhrase: string): Observable<ArticleSearch[]> {
-    const url: string = baseUrl + '/search-articles';
+    const url: string = this.baseBackendUrl + '/search-articles';
     const params = new HttpParams()
       .set('page', page)
       .set('size', itemsPerPage)
@@ -26,7 +30,7 @@ export class SearchService {
   }
 
   getAutocompletes(searchPhrase: string): Observable<string[]> {
-    const url: string = baseUrl + '/autocomplete';
+    const url: string = this.baseBackendUrl + '/autocomplete';
     const params = new HttpParams()
       .set('searchPhrase', searchPhrase);
 

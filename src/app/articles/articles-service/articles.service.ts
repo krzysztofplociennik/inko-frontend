@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ArticleDetails } from '../article-details/article-details';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { baseUrl } from 'src/app/shared/utils/urlUtils';
+import { getBaseUrl } from 'src/app/shared/utils/urlUtils';
 import { AllArticlesItem } from './all-articles-item';
 
 @Injectable({
@@ -10,14 +10,18 @@ import { AllArticlesItem } from './all-articles-item';
 })
 export class ArticlesService {
 
+  baseBackendUrl: string = '';
+
   constructor(
     private http: HttpClient,
-  ) { }
+  ) {
+    this.baseBackendUrl = getBaseUrl();
+   }
 
   // todo: separate method onto different services?
 
   getArticleDetails(id: string): Observable<ArticleDetails> {
-    const url: string = baseUrl + '/article/getDetails';
+    const url: string = this.baseBackendUrl + '/article/getDetails';
     const params = new HttpParams()
       .set('id', id);
 
@@ -29,7 +33,7 @@ export class ArticlesService {
   }
 
   getAllArticles(): Observable<AllArticlesItem[]> {
-    const url: string = baseUrl + '/article/getAll';
+    const url: string = this.baseBackendUrl + '/article/getAll';
 
     return this.http.get<AllArticlesItem[]>(url).pipe(
       map((response: AllArticlesItem[]) => {
@@ -39,7 +43,7 @@ export class ArticlesService {
   }
 
   deleteArticle(id: string): Observable<string> {
-    const url: string = `${baseUrl}/article/delete`;
+    const url: string = `${this.baseBackendUrl}/article/delete`;
 
     const token = localStorage.getItem('jwt');
 
@@ -67,7 +71,7 @@ export class ArticlesService {
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`);
 
-    const url: string = `${baseUrl}/article/update`;
+    const url: string = `${this.baseBackendUrl}/article/update`;
     return this.http.put<ArticleDetails>(url, article, {
       headers: headers,
     });

@@ -1,20 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { getBaseUrl } from '../utils/urlUtils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api/auth';
+  // private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = '';
 
   private loginStateSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
 
   loginState$ = this.loginStateSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.apiUrl = getBaseUrl();
+  }
 
   login(credentials: { username: string; password: string }): Observable<AuthResponse> {
+
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
         localStorage.setItem('jwt', response.token);

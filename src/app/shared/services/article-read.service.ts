@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { baseUrl } from '../utils/urlUtils';
+import { getBaseUrl } from '../utils/urlUtils';
 import { Observable, tap } from 'rxjs';
 
 @Injectable({
@@ -8,10 +8,14 @@ import { Observable, tap } from 'rxjs';
 })
 export class ArticleReadService {
 
-  constructor(private http: HttpClient) {}
+  baseBackendUrl: string = '';
+
+  constructor(private http: HttpClient) {
+    this.baseBackendUrl = getBaseUrl();
+  }
 
   fetchAllArticleTypes(): Observable<string[]> {
-    const url: string = baseUrl + '/article/getTypes';
+    const url: string = this.baseBackendUrl + '/article/getTypes';
 
     return this.http.get<string[]>(url).pipe(
       tap((response: string[]) => { return response })
