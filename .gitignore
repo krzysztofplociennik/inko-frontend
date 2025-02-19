@@ -43,5 +43,6 @@ Thumbs.db
 
 # Something
 .editorconfig
-/src/environment
+.env
+.env.production
 
