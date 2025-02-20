@@ -7,7 +7,6 @@ import { getBaseUrl } from '../utils/urlUtils';
   providedIn: 'root',
 })
 export class AuthService {
-  // private apiUrl = 'http://localhost:8080/api/auth';
   private apiUrl = '';
 
   private loginStateSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
@@ -20,7 +19,7 @@ export class AuthService {
 
   login(credentials: { username: string; password: string }): Observable<AuthResponse> {
 
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
+    return this.http.post<AuthResponse>(`${this.apiUrl}/api/auth/login`, credentials).pipe(
       tap(response => {
         localStorage.setItem('jwt', response.token);
         return response;
