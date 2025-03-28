@@ -1,4 +1,4 @@
-/* header/footer wapper */
+/* header/footer wrapper */
 #bodyDiv {
     display: flex;
     flex-direction: column;
@@ -24,7 +24,7 @@
     width: 100%;
     margin-top: 30px;
 }
-/* header/footer wapper */
+/* header/footer wrapper */
 
 #titleDiv {
     font-size: 300%;
