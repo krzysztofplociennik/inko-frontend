@@ -36,6 +36,7 @@ import { LoginComponent } from './shared/login/login.component';
 
 import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER } from '@angular/core';
+import { SettingsComponent } from './settings/settings.component';
 
 export function loadConfig(http: HttpClient) {
   return () => http.get('/assets/config.json').toPromise().then((config: any) => {
@@ -57,6 +58,7 @@ export function loadConfig(http: HttpClient) {
         ArticleDetailsComponent,
         AllArticlesItemComponent,
         LoginComponent,
+        SettingsComponent,
     ],
     exports: [
         HeaderComponent,

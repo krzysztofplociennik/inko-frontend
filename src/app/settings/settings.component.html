@@ -1,0 +1,36 @@
+<div id="bodyDiv">
+    <app-header class="header"></app-header>
+    <div id="contentWrapper">
+
+        <span>Exporting</span>
+
+        <div>
+            <p-button 
+            label="export with HTML" 
+            severity="secondary"    
+            icon="pi pi-file-export"
+            [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
+            (onClick)="exportWithHTML()" />
+
+            <p-button 
+            label="export without HTML" 
+            severity="secondary"    
+            icon="pi pi-file-export"
+            [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
+            (onClick)="exportWithoutHTML()" />
+        </div>
+
+        <span>Importing</span>
+
+        <div>
+            <p-button 
+            label="import files" 
+            severity="secondary"    
+            icon="pi pi-file-import"
+            [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
+            (onClick)="importFiles()" />
+        </div>
+
+    </div>
+    <app-footer class="footer" id="footer"></app-footer>
+</div>
