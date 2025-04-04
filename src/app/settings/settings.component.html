@@ -22,14 +22,16 @@
 
         <span>Importing</span>
 
-        <div>
-            <p-button 
-            label="import files" 
-            severity="secondary"    
-            icon="pi pi-file-import"
-            [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
-            (onClick)="importFiles()" />
-        </div>
+        <p-fileUpload name="upload" customUpload="true" (uploadHandler)="onUpload($event)" [multiple]="true" accept=".txt" maxFileSize="1000000" mode="advanced">
+            <ng-template #empty>
+                <div>Drag and drop files to here to upload.</div>
+            </ng-template>
+            <ng-template #content>
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                </ul>
+            </ng-template>
+        </p-fileUpload>
 
     </div>
     <app-footer class="footer" id="footer"></app-footer>

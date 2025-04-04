@@ -9,9 +9,11 @@ import { ImportService } from '../shared/services/import.service';
 })
 export class SettingsComponent {
 
+  uploadedFiles: any[] = [];
+
   constructor(
     private exportService: ExportService,
-    private importService: ImportService
+    private importService: ImportService,
   ) {}
 
   exportWithHTML() {
@@ -22,7 +24,16 @@ export class SettingsComponent {
     this.exportService.exportWithoutHTML();
   }
 
-  importFiles() {
-    this.importService.importFiles();
+  onUpload(event: any) {
+    const formData = new FormData();
+
+    event.files.forEach((file: File) => {
+        formData.append('files', file);
+    });
+    this.importFiles(formData);
+  }
+
+  importFiles(formData: FormData) {
+    this.importService.importFiles(formData);
   }
 }

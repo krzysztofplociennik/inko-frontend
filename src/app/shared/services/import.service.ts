@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { getBaseUrl } from '../utils/urlUtils';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -10,25 +11,30 @@ export class ImportService {
   baseUrl: string;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private messageService: MessageService,
   ) {
     this.baseUrl = getBaseUrl();
    }
 
-  importFiles() {
+  importFiles(formData: FormData) {
+    const token = localStorage.getItem('token')
+
     const url: string = this.baseUrl + '/import/multiple';
 
-    const token = localStorage.getItem('jwt');
-
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${token}`);
-
-    this.http.get(url, {
-      headers: headers,
-      responseType: 'text' as const
-    })
-      .subscribe(text => {
-        console.log('response: ' + text);
-      });
+      this.http.post(url, formData, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }).subscribe(
+        response => {
+            console.log('Upload successful:', response);
+            this.messageService.add({ severity: 'success', summary: 'File Uploaded', detail: '' });
+        },
+        error => {
+            console.error('Upload error:', error);
+            this.messageService.add({ severity: 'error', summary: 'Upload Failed', detail: 'Check authentication' });
+        }
+    );
   }
 }

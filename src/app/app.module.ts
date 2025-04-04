@@ -33,6 +33,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { AuthInterceptor } from './shared/auth/auth.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './shared/login/login.component';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER } from '@angular/core';
@@ -96,6 +97,7 @@ export function loadConfig(http: HttpClient) {
         ChipModule,
         AutoCompleteModule,
         ReactiveFormsModule,
+        FileUploadModule,
     ]
 })
 export class AppModule { }
