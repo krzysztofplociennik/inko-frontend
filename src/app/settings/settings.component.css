@@ -27,3 +27,13 @@
 }
 
 /* header/footer wrapper */
+
+#exportDiv {
+    width: 50%;
+    margin-top: 3rem;
+}
+
+#importDiv {
+    width: 50%;
+    margin-top: 3rem;
+}

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { getBaseUrl } from '../utils/urlUtils';
 import { MessageService } from 'primeng/api';
@@ -18,23 +18,42 @@ export class ImportService {
    }
 
   importFiles(formData: FormData) {
-    const token = localStorage.getItem('token')
-
+    const token = localStorage.getItem('token');
+  
     const url: string = this.baseUrl + '/import/multiple';
-
-      this.http.post(url, formData, {
+  
+    this.http.post(
+      url,
+      formData,
+      {
         headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }).subscribe(
-        response => {
-            console.log('Upload successful:', response);
-            this.messageService.add({ severity: 'success', summary: 'File Uploaded', detail: '' });
+          Authorization: `Bearer ${token}`
         },
-        error => {
-            console.error('Upload error:', error);
-            this.messageService.add({ severity: 'error', summary: 'Upload Failed', detail: 'Check authentication' });
-        }
-    );
+        responseType: 'text' as const
+      }
+    ).subscribe({
+      next: (response: string) => {
+        console.log('response: ' + response);
+        this.messageService.add({ severity: 'success', summary: response });
+      },
+      error: (error: HttpErrorResponse) => {
+        this.handleError(error)
+      },
+      complete: () => console.log('Importing is complete')
+    });
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    const errorMessage = typeof error.error === 'string' ? error.error : 'Importing files failed';
+  
+    const userFriendlyMessage = errorMessage.includes('[InkoValidationException]')
+      ? errorMessage.replace('[InkoValidationException] ', '')
+      : errorMessage;
+  
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Importing files failed',
+      detail: userFriendlyMessage
+    });
   }
 }
