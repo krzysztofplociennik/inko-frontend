@@ -1,4 +1,4 @@
-/* header/footer wrapper */
+/* header/footer wapper */
 #bodyDiv {
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@
 #contentWrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     width: 90%;
     flex: 1;
@@ -24,6 +24,16 @@
     position: relative;
     bottom: 0;  
     width: 100%;
-    margin-top: 300px;
 }
+
 /* header/footer wrapper */
+
+#exportDiv {
+    width: 50%;
+    margin-top: 3rem;
+}
+
+#importDiv {
+    width: 50%;
+    margin-top: 3rem;
+}

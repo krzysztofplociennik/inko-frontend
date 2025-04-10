@@ -2,24 +2,6 @@
     <app-header class="header"></app-header>
     <div id="contentWrapper">
 
-        <div>
-            <p-button 
-            *ngIf="isLoggedIn"
-            label="export with HTML" 
-            severity="secondary"    
-            icon="pi pi-cloud-download"
-            [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
-            (onClick)="exportWithHTML()" />
-
-            <p-button 
-            *ngIf="isLoggedIn"
-            label="export without HTML" 
-            severity="secondary"    
-            icon="pi pi-cloud-download"
-            [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
-            (onClick)="exportWithoutHTML()" />
-        </div>
-
         <div id="allArticlesDiv">
             <ul *ngFor="let item of articlesResults; let i = index">
                 <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">

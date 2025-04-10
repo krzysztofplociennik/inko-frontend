@@ -33,9 +33,11 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { AuthInterceptor } from './shared/auth/auth.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './shared/login/login.component';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER } from '@angular/core';
+import { SettingsComponent } from './settings/settings.component';
 
 export function loadConfig(http: HttpClient) {
   return () => http.get('/assets/config.json').toPromise().then((config: any) => {
@@ -57,6 +59,7 @@ export function loadConfig(http: HttpClient) {
         ArticleDetailsComponent,
         AllArticlesItemComponent,
         LoginComponent,
+        SettingsComponent,
     ],
     exports: [
         HeaderComponent,
@@ -94,6 +97,7 @@ export function loadConfig(http: HttpClient) {
         ChipModule,
         AutoCompleteModule,
         ReactiveFormsModule,
+        FileUploadModule,
     ]
 })
 export class AppModule { }

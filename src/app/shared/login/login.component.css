@@ -1,4 +1,4 @@
-/* header/footer wapper */
+/* header/footer wrapper */
 #bodyDiv {
     display: flex;
     flex-direction: column;
@@ -26,7 +26,7 @@
     width: 100%;
     margin-top: 300px;
 }
-/* header/footer wapper */
+/* header/footer wrapper */
 
 #login {
     width: 20%;
