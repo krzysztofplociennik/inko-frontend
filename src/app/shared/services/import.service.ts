@@ -46,9 +46,9 @@ export class ImportService {
   private handleError(error: HttpErrorResponse) {
     const errorMessage = typeof error.error === 'string' ? error.error : 'Importing files failed';
   
-    const userFriendlyMessage = errorMessage.includes('[InkoValidationException]')
-      ? errorMessage.replace('[InkoValidationException] ', '')
-      : errorMessage;
+    const userFriendlyMessage = errorMessage
+      .replace('[InkoValidationException] ', '')
+      .replace('[InkoImportException] ', '')
   
     this.messageService.add({
       severity: 'error',
