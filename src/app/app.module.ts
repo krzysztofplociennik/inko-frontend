@@ -34,6 +34,7 @@ import { AuthInterceptor } from './shared/auth/auth.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './shared/login/login.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER } from '@angular/core';
@@ -98,6 +99,7 @@ export function loadConfig(http: HttpClient) {
         AutoCompleteModule,
         ReactiveFormsModule,
         FileUploadModule,
+        ProgressSpinnerModule,
     ]
 })
 export class AppModule { }
