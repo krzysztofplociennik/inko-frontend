@@ -5,7 +5,7 @@ import { ArticleDetails } from './article-details';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ArticleType } from 'src/app/new-article/article';
 import { ArticleReadService } from 'src/app/shared/services/article-read.service';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from 'src/app/shared/auth/auth.service';
 
 @Component({
   selector: 'app-article-details',

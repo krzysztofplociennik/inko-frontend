@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { AllArticlesItem } from './articles-service/all-articles-item';
 import { ArticlesService } from './articles-service/articles.service';
-import { AuthService } from '../shared/services/auth.service';
+import { AuthService } from '../shared/auth/auth.service';
 import { ExportService } from '../shared/services/export.service';
 import { firstValueFrom } from 'rxjs';
 import { LoadingNotifierService } from '../shared/services/loading-notifier-service';

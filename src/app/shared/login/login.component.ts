@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthResponse, AuthService } from '../services/auth.service';
+import { AuthResponse, AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleSearch } from './search-result-item/article-result';
 import { SearchService } from './search-service/search.service';
-import { AuthService } from '../shared/services/auth.service';
+import { AuthService } from '../shared/auth/auth.service';
 import { firstValueFrom } from 'rxjs';
 import { LoadingNotifierService } from '../shared/services/loading-notifier-service';
 
