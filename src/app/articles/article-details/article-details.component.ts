@@ -30,7 +30,9 @@ export class ArticleDetailsComponent implements OnInit {
   articleTypes: ArticleType[] = [];
   selectedType: ArticleType = { name: this.editedArticle.type };
 
-  isLoggedIn: boolean;
+  isLoggedIn: boolean = false;
+
+  shouldSpinnerWork: boolean = false;
 
   constructor(
     private router: Router,
@@ -40,33 +42,54 @@ export class ArticleDetailsComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private authService: AuthService,
-  ) {
-    this.articleID = this.activatedRoute.snapshot.url[1].path;
-    this.getArticleDetails();
-    this.isLoggedIn = false;
+  ) {}
+
+  async ngOnInit(): Promise<void> {
+    this.shouldSpinnerWork = true;
+  
+    try {
+      this.articleID = this.activatedRoute.snapshot.url[1].path;
+  
+      this.loadLoginState();
+  
+      await Promise.all([
+        this.loadTypes(),
+        this.loadArticleDetails()
+      ]);
+    } catch (error) {
+      console.log('Error while loading the article\'s details');
+    } finally {
+      this.shouldSpinnerWork = false;
+    }
   }
 
-  ngOnInit(): void {
-    this.articleReadService.fetchAllArticleTypes().subscribe(
-      (response: string[]) => {
+  private async loadTypes(): Promise<void> {
+    return new Promise((resolve) => {
+      this.articleReadService.fetchAllArticleTypes().subscribe(response => {
         response.forEach(element => {
-          this.articleTypes.push(
-            { name: element }
-          )
+          this.articleTypes.push({ name: element });
         });
+        resolve();
+      });
     });
+  }
+  
+  private loadLoginState() {
     this.authService.loginState$.subscribe((state) => {
       this.isLoggedIn = state;
     });
   }
 
-  getArticleDetails(): void {
-    this.articleService.getArticleDetails(this.articleID).subscribe(
-      (response: ArticleDetails) => {
+  private async loadArticleDetails(): Promise<void> {
+    return new Promise((resolve) => {
+      this.articleService.getArticleDetails(this.articleID).subscribe(response => {
         this.article = response;
         this.editedArticle = { ...response };
+        resolve();
       });
+    });
   }
+
 
   enableEditMode(): void {
     this.isEditMode = true;
@@ -96,7 +119,9 @@ export class ArticleDetailsComponent implements OnInit {
       acceptIcon: "none",
       rejectIcon: "none",
       rejectButtonStyleClass: "p-button-text",
-      accept: () => {
+      accept: async () => {
+        this.shouldSpinnerWork = true;
+  
         this.articleService.updateArticle(this.editedArticle).subscribe({
           next: (response) => {
             this.article = response;
@@ -107,6 +132,7 @@ export class ArticleDetailsComponent implements OnInit {
               detail: 'Article updated successfully!',
               life: 3000 
             });
+            this.shouldSpinnerWork = false;
           },
           error: (error) => {
             console.error('Error updating article', error);
@@ -116,11 +142,12 @@ export class ArticleDetailsComponent implements OnInit {
               detail: 'Failed to update article.',
               life: 3000 
             });
+            this.shouldSpinnerWork = false;
           }
         });
       }
     });
-  }
+  }  
 
   deleteArticle(): void {
 
@@ -146,8 +173,8 @@ export class ArticleDetailsComponent implements OnInit {
     });
   }
 
-  public areArticleTypesPopulated(): boolean {
+  areArticleTypesPopulated(): boolean {
     return this.articleTypes.length > 0;
-}
+  }
 
 }

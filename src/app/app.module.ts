@@ -28,6 +28,7 @@ import { MessagesModule } from 'primeng/messages';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageService } from 'primeng/api';
+import { MessageModule } from 'primeng/message';
 import { ChipModule } from 'primeng/chip';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { AuthInterceptor } from './shared/auth/auth.interceptor';
@@ -100,6 +101,7 @@ export function loadConfig(http: HttpClient) {
         ReactiveFormsModule,
         FileUploadModule,
         ProgressSpinnerModule,
+        MessageModule,
     ]
 })
 export class AppModule { }

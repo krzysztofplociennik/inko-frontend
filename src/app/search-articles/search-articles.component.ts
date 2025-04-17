@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ArticleSearch } from './search-result-item/article-result';
 import { SearchService } from './search-service/search.service';
 import { AuthService } from '../shared/services/auth.service';
+import { firstValueFrom } from 'rxjs';
+import { LoadingNotifierService } from '../shared/services/loading-notifier-service';
 
 interface AutoCompleteEvent {
   originalEvent: Event;
@@ -27,9 +29,12 @@ export class SearchArticlesComponent implements OnInit {
 
   isLoggedIn: boolean;
 
+  shouldSpinnerWork: boolean = false;
+
   constructor(
     public searchService: SearchService,
     private authService: AuthService,
+    private loadingNotifierService: LoadingNotifierService
   ) {
     this.isLoggedIn = false;
    }
@@ -48,12 +53,19 @@ export class SearchArticlesComponent implements OnInit {
     )
   }
 
-  searchForArticles() {
-    this.searchService.search(0, 10, this.searchPhrase).subscribe(
-      (response: ArticleSearch[]) => {
-        this.articlesResults = response;
-        this.handleResultsMessage(response);
-      });
+  async searchForArticles() {
+    this.shouldSpinnerWork = true;
+    this.loadingNotifierService.showDelayedMessage();
+    try {
+      const articles = await firstValueFrom(this.searchService.search(0, 10, this.searchPhrase));
+      this.articlesResults = articles;
+      this.handleResultsMessage(articles);
+    } catch (error) {
+      console.log('Error while searching for articles');
+    } finally {
+      this.loadingNotifierService.clearMessage();
+      this.shouldSpinnerWork = false;
+    }
   }
 
   mouseEnter(index: number) {

@@ -3,6 +3,8 @@ import { AllArticlesItem } from './articles-service/all-articles-item';
 import { ArticlesService } from './articles-service/articles.service';
 import { AuthService } from '../shared/services/auth.service';
 import { ExportService } from '../shared/services/export.service';
+import { firstValueFrom } from 'rxjs';
+import { LoadingNotifierService } from '../shared/services/loading-notifier-service';
 
 @Component({
   selector: 'app-articles',
@@ -10,6 +12,8 @@ import { ExportService } from '../shared/services/export.service';
   styleUrls: ['./articles.component.css']
 })
 export class ArticlesComponent {
+
+  shouldSpinnerWork: boolean = false;
 
   @Input() 
   isHovered: boolean = false;
@@ -22,23 +26,32 @@ export class ArticlesComponent {
   constructor(
     public articlesService: ArticlesService,
     private authService: AuthService,
-    private exportService: ExportService
+    private exportService: ExportService,
+    private loadingNotifier: LoadingNotifierService
   ) {
-    this.getAllArticles();
     this.isLoggedIn = false;
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.authService.loginState$.subscribe((state) => {
       this.isLoggedIn = state;
     });
+    await this.getAllArticles();
   }
 
-  getAllArticles() {
-    this.articlesService.getAllArticles().subscribe(
-      (response: AllArticlesItem[]) => {
-        this.articlesResults = response;
-      });
+  async getAllArticles() {
+    this.shouldSpinnerWork = true;
+    this.loadingNotifier.showDelayedMessage();
+  
+    try {
+      const response: AllArticlesItem[] = await firstValueFrom(this.articlesService.getAllArticles());
+      this.articlesResults = response;
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+    } finally {
+      this.loadingNotifier.clearMessage();
+      this.shouldSpinnerWork = false;
+    }
   }
 
   mouseEnter(index: number) {
