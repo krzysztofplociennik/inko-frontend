@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ThemeService } from '../services/theme.service';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 

@@ -34,4 +34,8 @@
         </div>  
     </div>
     <app-footer class="footer" id="footer"></app-footer>
+
+    <div *ngIf="shouldSpinnerWork" class="overlay">
+        <p-progressSpinner styleClass="overlay-spinner"></p-progressSpinner>
+    </div>
 </div>

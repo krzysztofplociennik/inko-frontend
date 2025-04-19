@@ -2,6 +2,11 @@
     <app-header class="header"></app-header>
     <div id="contentWrapper">
 
+        <div *ngIf="shouldSpinnerWork" class="overlay">
+            <p-progressSpinner styleClass="overlay-spinner"></p-progressSpinner>
+            
+        </div>
+
         <div id="allArticlesDiv">
             <ul *ngFor="let item of articlesResults; let i = index">
                 <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
