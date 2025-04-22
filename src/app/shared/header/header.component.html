@@ -4,7 +4,9 @@
     <i *ngIf="isDarkMode()" class="fa-solid fa-moon"></i>
   </button>
 
-  <img id="banner" src="../../../assets/graphics/banner/dev.png" alt="banner">
+  <div *ngIf="bannerImagePath">
+    <img id="banner" [src]="bannerImagePath" alt="banner" />
+  </div>
 
   <div class="center-buttons">
     <button id="navigationButton" [routerLink]="['/search-articles']" class="btn">search</button>

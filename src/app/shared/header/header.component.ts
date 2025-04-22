@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from '@angular/core';
 import { ThemeService } from '../services/theme.service';
 import { AuthService } from '../auth/auth.service';
 import { MessageService } from 'primeng/api';
@@ -11,15 +11,14 @@ import { getBaseUrl } from '../utils/urlUtils';
   styleUrls: ['./header.component.css'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class HeaderComponent implements OnInit, AfterViewInit {
+export class HeaderComponent implements OnInit {
   search_articles: string | any[] | null | undefined = 'search';
-  home: string | any[] | null | undefined = 'home';
   articles: string | any[] | null | undefined = 'articles';
-  about: string | any[] | null | undefined = 'about';
 
   isLoggedIn: boolean;
 
   @ViewChild('banner') bannerImg!: ElementRef<HTMLImageElement>;
+  bannerImagePath: string | null = null;
 
   constructor(
     private themeService: ThemeService,
@@ -34,10 +33,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.authService.loginState$.subscribe((state) => {
       this.isLoggedIn = state;
     });
-  }
 
-  ngAfterViewInit(): void {
-    this.loadBannerImage();
+    this.resolveBannerPath();
   }
 
   toggleTheme(): void {
@@ -59,19 +56,21 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/']);
   }
 
-  loadBannerImage() {
-    const bannerElement = this.bannerImg.nativeElement;
-    let imagePath = '';
-
-    switch (getBaseUrl()) {
-      case 'http://localhost:8080': 
-        imagePath = '../../../assets/graphics/banner/dev.png';
-        break;
-      case 'demo': 
-        imagePath = '../../../assets/graphics/banner/demo.png';
-        break;
-      default: imagePath = '';
+  resolveBannerPath() {
+    const path = this.getBannerPath();
+    if (path) {
+      this.bannerImagePath = path;
     }
-    bannerElement.src = imagePath;
+  }
+
+  getBannerPath() {
+    switch (getBaseUrl()) {
+      case 'http://localhost:8080':
+        return '../../../assets/graphics/banner/dev.png';
+      case 'demo':
+        return '../../../assets/graphics/banner/demo.png';
+      default:
+        return null;
+    }
   }
 }
