@@ -13,9 +13,7 @@ import { getBaseUrl } from '../utils/urlUtils';
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
   search_articles: string | any[] | null | undefined = 'search';
-  home: string | any[] | null | undefined = 'home';
   articles: string | any[] | null | undefined = 'articles';
-  about: string | any[] | null | undefined = 'about';
 
   isLoggedIn: boolean;
 
