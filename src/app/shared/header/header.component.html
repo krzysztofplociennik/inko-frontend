@@ -14,12 +14,17 @@
   </div>
 
   <div *ngIf="isLoggedIn">
-    <p-button id="loginButton" [routerLink]="['/settings']" icon="pi pi-sliders-h" label="" [severity]="'secondary'"
+    <p-button id="settingsButton" [routerLink]="['/settings']" icon="pi pi-sliders-h" label="" [severity]="'secondary'"
       class="btn" [style]="{'height': '35px', 'margin': '5px 5px 5px 5px'}" />
   </div>
 
   <div *ngIf="!isLoggedIn">
-    <p-button id="loginButton" [routerLink]="['/login']" icon="pi pi-sign-in" label="log in" [severity]="'secondary'"
+    <p-button 
+      id="loginButton" 
+      [routerLink]="['/login']" 
+      icon="pi pi-sign-in" 
+      label="log in" 
+      [severity]="'secondary'"
       class="btn" [style]="{'height': '35px', 'margin': '5px 5px 5px 5px'}" />
   </div>
 

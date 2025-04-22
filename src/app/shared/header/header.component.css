@@ -93,3 +93,7 @@
     margin-left: 3rem;
     margin-right: -12rem;
   }
+
+  #settingsButton {
+    margin-left: auto;
+  }
