@@ -12,6 +12,7 @@ import { getBaseUrl } from '../shared/utils/urlUtils';
 export class SettingsComponent {
 
   isUploading = false;
+  shouldSpinnerWork: boolean = false;
 
   uploadedFiles: any[] = [];
 
@@ -38,16 +39,32 @@ export class SettingsComponent {
     }
   }
 
-  exportWithHTML() {
-    this.exportService.exportWithHTML();
+  async exportWithHTML() {
+    this.shouldSpinnerWork = true;
+
+    try {
+      await this.exportService.exportWithHTML();
+    } catch (error) {
+      console.log('Error while exporting with HTML: ' + error);
+    } finally {
+      this.shouldSpinnerWork = false;
+    }
   }
 
-  exportWithoutHTML() {
-    this.exportService.exportWithoutHTML();
+  async exportWithoutHTML() {
+    this.shouldSpinnerWork = true;
+    try {
+      await this.exportService.exportWithoutHTML();
+    } catch (error) {
+      console.log('Error while exporting without HTML: ' + error);
+    } finally {
+      this.shouldSpinnerWork = false;
+    }
   }
   
   async onUpload(event: any) {
     this.isUploading = true;
+    this.shouldSpinnerWork = true;
 
     const token: string | null = localStorage.getItem('token');
     const url: string = getBaseUrl() + '/import/single';
@@ -64,6 +81,7 @@ export class SettingsComponent {
       this.messageService.add({ severity: 'success', summary: 'The files have been uploaded successfully!' });
     } finally {
       this.isUploading = false;
+      this.shouldSpinnerWork = false;
     }
   }
 }
