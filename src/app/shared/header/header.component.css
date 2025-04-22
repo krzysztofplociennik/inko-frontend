@@ -88,3 +88,8 @@
   #logoutButton {
     margin-left: auto;
   }
+
+  #banner {
+    margin-left: 3rem;
+    margin-right: -12rem;
+  }
