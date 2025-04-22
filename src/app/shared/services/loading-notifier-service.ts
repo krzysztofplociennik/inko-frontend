@@ -17,7 +17,7 @@ export class LoadingNotifierService {
         severity: 'info',
         summary: 'Still loading...',
         detail: message ?? 'Fetching the data may take longer than usual. Hang on tight!',
-        life: 10000
+        life: 6000
       });
     }, delayMs);
   }
