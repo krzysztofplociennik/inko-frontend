@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { ThemeService } from '../services/theme.service';
 import { AuthService } from '../auth/auth.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { getBaseUrl } from '../utils/urlUtils';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +11,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
   search_articles: string | any[] | null | undefined = 'search';
   home: string | any[] | null | undefined = 'home';
   articles: string | any[] | null | undefined = 'articles';
   about: string | any[] | null | undefined = 'about';
 
   isLoggedIn: boolean;
+
+  @ViewChild('banner') bannerImg!: ElementRef<HTMLImageElement>;
 
   constructor(
     private themeService: ThemeService,
@@ -31,6 +34,10 @@ export class HeaderComponent implements OnInit {
     this.authService.loginState$.subscribe((state) => {
       this.isLoggedIn = state;
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.loadBannerImage();
   }
 
   toggleTheme(): void {
@@ -48,7 +55,23 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.clearToken();
-    this.messageService.add({severity:'success', summary:'Success', detail:'You have been successfully logged out!'});
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You have been successfully logged out!' });
     this.router.navigate(['/']);
+  }
+
+  loadBannerImage() {
+    const bannerElement = this.bannerImg.nativeElement;
+    let imagePath = '';
+
+    switch (getBaseUrl()) {
+      case 'http://localhost:8080': 
+        imagePath = '../../../assets/graphics/banner/dev.png';
+        break;
+      case 'demo': 
+        imagePath = '../../../assets/graphics/banner/demo.png';
+        break;
+      default: imagePath = '';
+    }
+    bannerElement.src = imagePath;
   }
 }
