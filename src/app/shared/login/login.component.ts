@@ -13,6 +13,8 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
 
+  shouldSpinnerWork: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -25,22 +27,34 @@ export class LoginComponent {
     });
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     this.errorMessage = '';
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (response: AuthResponse) => {
-          this.messageService.add({severity:'success', summary:'Success', detail:'You are logged in!'});
-          this.authService.setToken(response.token);
-          this.router.navigate(['/']);
-        },
-        error: (err) => {
-          this.messageService.add({severity:'error', summary:'Error', detail:'Wrong credentials, try again.'});
-          this.errorMessage = 'Login failed: ' + err.error;
-          this.clearFormInputs();
-        },
-      });
+
+      this.shouldSpinnerWork = true;      
+      try {
+        await this.login();
+      } catch (error) {
+        console.error('Error fetching articles:', error);
+      } finally {
+        this.shouldSpinnerWork = false;
+      }
     }
+  }
+
+  private async login() {
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (response: AuthResponse) => {
+        this.messageService.add({severity:'success', summary:'Success', detail:'You are logged in!'});
+        this.authService.setToken(response.token);
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        this.messageService.add({severity:'error', summary:'Error', detail:'Wrong credentials, try again.'});
+        this.errorMessage = 'Login failed: ' + err.error;
+        this.clearFormInputs();
+      },
+    });
   }
 
   clearFormInputs() {

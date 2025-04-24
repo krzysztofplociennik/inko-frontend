@@ -2,6 +2,10 @@
     <app-header class="header"></app-header>
     <div id="contentWrapper">
 
+        <div *ngIf="shouldSpinnerWork" class="overlay">
+            <p-progressSpinner styleClass="overlay-spinner"></p-progressSpinner>
+        </div>
+
         <div class="card">
         </div>
 
@@ -14,8 +18,6 @@
             [(ngModel)]="selectedType" 
             optionLabel="name"
             placeholder="Select a type" />
-            
-
     
         <p-chips id="tagsInput" placeholder="Add your tags!" [(ngModel)]="tags" />
     
