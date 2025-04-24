@@ -13,9 +13,9 @@ export class ExportService {
     private http: HttpClient
   ) {
     this.baseUrl = getBaseUrl();
-   }
+  }
 
-  exportWithHTML() {
+  async exportWithHTML() {
     const url: string = this.baseUrl + '/export/withHTML';
 
     const token = localStorage.getItem('jwt');
@@ -32,7 +32,7 @@ export class ExportService {
       });
   }
 
-  exportWithoutHTML() {
+  async exportWithoutHTML() {
     const url: string = this.baseUrl + '/export/withoutHTML';
 
     const token = localStorage.getItem('jwt');

@@ -16,6 +16,8 @@ export class NewArticleComponent implements OnInit {
   tags: string[] = [];
   content = '';
 
+  shouldSpinnerWork = false;
+
   constructor(
     public createArticleService: CreateArticleService,
     private articleService: ArticleReadService,
@@ -33,7 +35,18 @@ export class NewArticleComponent implements OnInit {
     });
   }
 
-  createArticle() {
+  async createArticle() {
+    this.shouldSpinnerWork = true;
+    try {
+      await this.callCreateArticle();
+    } catch (error) {
+      console.log('Error while creating the article: ' + error);
+    } finally {
+      this.shouldSpinnerWork = false;
+    }
+  }
+
+  async callCreateArticle() {
     const type: string = this.selectedType.name;
 
     this.createArticleService.create(this.articleTitle, type, this.tags, this.content).subscribe({

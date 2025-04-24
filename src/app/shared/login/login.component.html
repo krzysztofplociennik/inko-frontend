@@ -3,6 +3,10 @@
     <app-header class="header"></app-header>
     <div id="contentWrapper">
 
+        <div *ngIf="shouldSpinnerWork" class="overlay">
+            <p-progressSpinner styleClass="overlay-spinner"></p-progressSpinner>
+        </div>
+
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="login">
             <div>
                 <label id="usernameLabel" for="username">Username</label>

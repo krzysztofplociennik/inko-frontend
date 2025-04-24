@@ -45,11 +45,6 @@ export class HeaderComponent implements OnInit {
     return this.themeService.isDarkMode();
   }
 
-  login() {
-    this.isLoggedIn = true;
-    console.log('isLoggedIn: ' + this.isLoggedIn);
-  }
-
   logout() {
     this.authService.clearToken();
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You have been successfully logged out!' });
