@@ -4,7 +4,7 @@ This is a side project that serves as a personal collection of handy tips, artic
 
 The link to the **live demo** is below.
 
-This is the frontend repository. Here is the [backend](https://github.com/krzysztofplociennik/inko-backend) side.
+This is the frontend repository. Here is the [backend](https://github.com/krzysztofplociennik/inko-backend) repo.
 
 ## Purpose
 
