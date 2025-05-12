@@ -7,6 +7,6 @@ export class DevelopmentContextUtils {
     }
 
     static isDemo() {
-        return getBaseUrl() == 'https://inko-demo.onrender.com';
+        return getBaseUrl() == 'https://inko-backend.fly.dev';
     }
 }
