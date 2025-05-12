@@ -62,7 +62,7 @@ export class HeaderComponent implements OnInit {
     switch (getBaseUrl()) {
       case 'http://localhost:8080':
         return '../../../assets/graphics/banner/dev.png';
-      case 'https://inko-demo.onrender.com':
+      case 'https://inko-backend.fly.dev':
         return '../../../assets/graphics/banner/demo.png';
       default:
         return null;
