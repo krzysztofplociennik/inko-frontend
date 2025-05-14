@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { getBaseUrl } from '../utils/urlUtils';
+import { JwtUtils } from '../utils/jwtUtils';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class ExportService {
   async exportWithHTML() {
     const url: string = this.baseUrl + '/export/withHTML';
 
-    const token = localStorage.getItem('jwt');
+    const token = JwtUtils.getToken();
 
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`);
@@ -35,7 +36,7 @@ export class ExportService {
   async exportWithoutHTML() {
     const url: string = this.baseUrl + '/export/withoutHTML';
 
-    const token = localStorage.getItem('jwt');
+    const token = JwtUtils.getToken();
 
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`);

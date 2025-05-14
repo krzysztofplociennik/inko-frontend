@@ -3,6 +3,7 @@ import { ExportService } from '../shared/services/export.service';
 import { ImportService } from '../shared/services/import.service';
 import { MessageService } from 'primeng/api';
 import { getBaseUrl } from '../shared/utils/urlUtils';
+import { JwtUtils } from '../shared/utils/jwtUtils';
 
 @Component({
   selector: 'app-settings',
@@ -66,7 +67,7 @@ export class SettingsComponent {
     this.isUploading = true;
     this.shouldSpinnerWork = true;
 
-    const token: string | null = localStorage.getItem('token');
+    const token: string | null = JwtUtils.getToken();
     const url: string = getBaseUrl() + '/import/single';
 
     try {

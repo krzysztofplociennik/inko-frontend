@@ -4,6 +4,7 @@ import { ArticleDetails } from '../article-details/article-details';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { getBaseUrl } from 'src/app/shared/utils/urlUtils';
 import { AllArticlesItem } from './all-articles-item';
+import { JwtUtils } from 'src/app/shared/utils/jwtUtils';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,7 @@ export class ArticlesService {
   deleteArticle(id: string): Observable<string> {
     const url: string = `${this.baseBackendUrl}/article/delete`;
 
-    const token = localStorage.getItem('jwt');
+    const token = JwtUtils.getToken();
 
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`);
@@ -66,7 +67,7 @@ export class ArticlesService {
   }
 
   updateArticle(article: ArticleDetails): Observable<ArticleDetails> {
-    const token = localStorage.getItem('jwt');
+    const token = JwtUtils.getToken();
 
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${token}`);
