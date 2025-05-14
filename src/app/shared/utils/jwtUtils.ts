@@ -39,4 +39,8 @@ export class JwtUtils {
         }
         return false;
     }
+
+    static getToken(): string | null {
+        return localStorage.getItem('token');
+    }
 }

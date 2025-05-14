@@ -3,6 +3,7 @@ import { map, Observable } from 'rxjs';
 import { getBaseUrl } from 'src/app/shared/utils/urlUtils';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ArticleCreate } from '../article';
+import { JwtUtils } from 'src/app/shared/utils/jwtUtils';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class CreateArticleService {
       tags: tags
     };  
 
-    const token = localStorage.getItem('jwt');    
+    const token = JwtUtils.getToken();   
     
     const headers = new HttpHeaders()
     .set('Accept', 'text/plain')
