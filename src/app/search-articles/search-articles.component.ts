@@ -31,13 +31,29 @@ export class SearchArticlesComponent implements OnInit {
 
   shouldSpinnerWork: boolean = false;
 
+  showFilters: boolean = false;
+    articleTypes = [
+    { label: 'All Types', value: null },
+    { label: 'Tutorial', value: 'TUTORIAL' },
+    { label: 'Guide', value: 'GUIDE' },
+    { label: 'Reference', value: 'REFERENCE' },
+    { label: 'Troubleshooting', value: 'TROUBLESHOOTING' },
+    { label: 'Best Practices', value: 'BEST_PRACTICES' },
+    { label: 'Code Example', value: 'CODE_EXAMPLE' },
+    { label: 'Configuration', value: 'CONFIGURATION' },
+    { label: 'Tool Review', value: 'TOOL_REVIEW' }
+  ];
+  selectedType: any;
+  selectedDateFrom: Date = new Date();
+  selectedDateTo: Date = new Date();
+
   constructor(
     public searchService: SearchService,
     private authService: AuthService,
     private loadingNotifierService: LoadingNotifierService
   ) {
     this.isLoggedIn = false;
-   }
+  }
 
   ngOnInit(): void {
     this.authService.loginState$.subscribe((state) => {
@@ -77,11 +93,15 @@ export class SearchArticlesComponent implements OnInit {
   }
 
   handleResultsMessage(response: ArticleSearch[]) {
-    if(response.length === 0) {
+    if (response.length === 0) {
       this.resultsMessage = 'There were no articles with that searchphrase!';
     } else {
       this.resultsMessage = '';
     }
-  } 
+  }
+
+  toggleFilters() {
+    this.showFilters = !this.showFilters;
+  }
 
 }
