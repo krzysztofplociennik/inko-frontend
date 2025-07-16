@@ -28,7 +28,29 @@
 }
 
 #filtersPanel {
+    display: flex;
+    flex-direction: row;
     margin-bottom: .5rem;
+}
+
+#typeFilterDropdown {
+    margin-right: 1rem;
+}
+
+#dateFromFilterCalendar {
+    width: 2rem;
+}
+
+::ng-deep .p-dropdown {
+    width: 10rem;
+}
+
+::ng-deep .p-calendar {
+    width: 7rem;
+}
+
+#dateToFilterCalendar {
+    margin-right: 1rem;
 }
 
 #searchInputArea {

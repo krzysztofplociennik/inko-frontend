@@ -44,8 +44,9 @@ export class SearchArticlesComponent implements OnInit {
     { label: 'Tool Review', value: 'TOOL_REVIEW' }
   ];
   selectedType: any;
-  selectedDateFrom: Date = new Date();
-  selectedDateTo: Date = new Date();
+  selectedDateFrom: Date | undefined;
+  selectedDateTo: Date | undefined;
+  selectedTags: String[] | undefined;
 
   constructor(
     public searchService: SearchService,
