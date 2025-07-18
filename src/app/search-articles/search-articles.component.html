@@ -19,10 +19,10 @@
             <div id="searchInputArea">
                 <p-autoComplete id="searchInputText" placeholder="Search for articles here!" [size]="30"
                     [(ngModel)]="searchPhrase" [suggestions]="searchSuggestions"
-                    (completeMethod)="searchForAutocompletes($event)" (keydown.enter)="searchForArticles()" />
+                    (completeMethod)="searchForAutocompletes($event)" (keydown.enter)="searchForArticlesWithFilter()" />
 
                 <p-button id="searchArticlesButton" icon="pi pi-search" [rounded]="true" [severity]="'secondary'"
-                    (onClick)="searchForArticles()" />
+                    (onClick)="searchForArticlesWithFilter()" />
 
                 <span id="showFiltersLabel"> filters </span>
                 <p-inputSwitch id="showFiltersSwitch" [(ngModel)]="showFilters" />
