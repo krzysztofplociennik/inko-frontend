@@ -18,11 +18,11 @@
 
             <div id="searchInputArea">
                 <p-autoComplete id="searchInputText" placeholder="Search for articles here!" [size]="30"
-                    [(ngModel)]="searchPhrase" [suggestions]="searchSuggestions"
-                    (completeMethod)="searchForAutocompletes($event)" (keydown.enter)="searchForArticlesWithFilter()" />
+                    [(ngModel)]="selectedPhrase" [suggestions]="autocompleteSuggestions"
+                    (completeMethod)="searchForAutocompletes($event)" (keydown.enter)="searchForArticles()" />
 
                 <p-button id="searchArticlesButton" icon="pi pi-search" [rounded]="true" [severity]="'secondary'"
-                    (onClick)="searchForArticlesWithFilter()" />
+                    (onClick)="searchForArticles()" />
 
                 <span id="showFiltersLabel"> filters </span>
                 <p-inputSwitch id="showFiltersSwitch" [(ngModel)]="showFilters" />
@@ -30,7 +30,7 @@
 
         </div>
 
-        <div *ngIf="isLoggedIn" id="createNewArticleDiv">
+        <div *ngIf="isUserLoggedIn" id="createNewArticleDiv">
             <span>... or create a new one!</span>
 
             <p-button id="createNewArticleButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'"

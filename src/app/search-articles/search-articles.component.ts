@@ -19,54 +19,49 @@ interface AutoCompleteEvent {
 export class SearchArticlesComponent implements OnInit {
 
   resultsMessage: string = '';
-
-  isHovered: boolean = false;
-  hoveredIndex: number | null = null;
-
-  searchPhrase: string = '';
-  searchSuggestions: string[] = [];
-
   articlesResults: ArticleSearch[] = [];
 
-  isLoggedIn: boolean;
-
+  isArticleResultBeingHovered: boolean = false;
+  isUserLoggedIn: boolean;
   shouldSpinnerWork: boolean = false;
-
   showFilters: boolean = false;
-    articleTypes = [
+
+  hoveredIndex: number | null = null;
+
+  autocompleteSuggestions: string[] = [];
+
+  articleTypes = [
     { label: 'All Types', value: null },
-    { label: 'Tutorial', value: 'TUTORIAL' },
-    { label: 'Guide', value: 'GUIDE' },
-    { label: 'Reference', value: 'REFERENCE' },
-    { label: 'Troubleshooting', value: 'TROUBLESHOOTING' },
-    { label: 'Best Practices', value: 'BEST_PRACTICES' },
-    { label: 'Code Example', value: 'CODE_EXAMPLE' },
-    { label: 'Configuration', value: 'CONFIGURATION' },
-    { label: 'Tool Review', value: 'TOOL_REVIEW' }
+    { label: 'Programming', value: 'PROGRAMMING' },
+    { label: 'Tools', value: 'TOOLS' },
+    { label: 'Database', value: 'DATABASE' },
+    { label: 'OS', value: 'OS' },
   ];
-  selectedType: string = '';
-  selectedDateFrom: Date = new Date();
-  selectedDateTo: Date = new Date();
-  selectedTags: String[] = [];
+
+  selectedPhrase: string | undefined;
+  selectedType: string | undefined;
+  selectedDateFrom: Date | undefined;
+  selectedDateTo: Date | undefined;
+  selectedTags: string[] = [];
 
   constructor(
     public searchService: SearchService,
     private authService: AuthService,
     private loadingNotifierService: LoadingNotifierService
   ) {
-    this.isLoggedIn = false;
+    this.isUserLoggedIn = false;
   }
 
   ngOnInit(): void {
     this.authService.loginState$.subscribe((state) => {
-      this.isLoggedIn = state;
+      this.isUserLoggedIn = state;
     });
   }
 
   searchForAutocompletes(event: AutoCompleteEvent) {
     this.searchService.getAutocompletes(event.query).subscribe(
       (response: string[]) => {
-        this.searchSuggestions = response;
+        this.autocompleteSuggestions = response;
       }
     )
   }
@@ -75,33 +70,16 @@ export class SearchArticlesComponent implements OnInit {
     this.shouldSpinnerWork = true;
     this.loadingNotifierService.showDelayedMessage();
     try {
-      const articles = await firstValueFrom(this.searchService.search(0, 10, this.searchPhrase));
-      this.articlesResults = articles;
-      this.handleResultsMessage(articles);
-    } catch (error) {
-      console.log('Error while searching for articles');
-    } finally {
-      this.loadingNotifierService.clearMessage();
-      this.shouldSpinnerWork = false;
-    }
-  }
-
-  async searchForArticlesWithFilter() {
-    this.shouldSpinnerWork = true;
-    this.loadingNotifierService.showDelayedMessage();
-    try {
 
       const filter: SearchFilter = {
-        page: 0,
-        size: 10,
-        searchPhrase: this.searchPhrase,
+        searchPhrase: this.selectedPhrase,
         type: this.selectedType,
-        tags: undefined,
+        tags: this.selectedTags,
         creationDateFrom: this.selectedDateFrom,
         creationDateTo: this.selectedDateTo
       };
 
-      const articles = await firstValueFrom(this.searchService.searchWithFilters(0, 10, this.searchPhrase, filter));
+      const articles = await firstValueFrom(this.searchService.searchWithFilters(0, 10, filter));
       this.articlesResults = articles;
       this.handleResultsMessage(articles);
     } catch (error) {
