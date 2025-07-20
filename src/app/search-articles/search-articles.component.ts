@@ -110,4 +110,12 @@ export class SearchArticlesComponent implements OnInit {
     this.showFilters = !this.showFilters;
   }
 
+  clearFilters() {
+    this.selectedType = undefined;
+    this.selectedPhrase = '';
+    this.selectedDateFrom = undefined;
+    this.selectedDateTo = undefined;
+    this.selectedTags = [];
+  }
+
 }

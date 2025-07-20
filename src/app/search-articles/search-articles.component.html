@@ -4,18 +4,6 @@
 
         <div id="searchForArticlesDiv">
 
-            <div id="filtersPanel" [class.expanded]="showFilters">
-                <div *ngIf="showFilters" class="filter-controls">
-                    <p-dropdown id="typeFilterDropdown" [options]="articleTypes" [(ngModel)]="selectedType"
-                        placeholder="type" />
-                    <p-calendar id="dateFromFilterCalendar" [(ngModel)]="selectedDateFrom" placeholder="created from" />
-                    -
-                    <p-calendar id="dateToFilterCalendar" [(ngModel)]="selectedDateTo" placeholder="created to" />
-                    <p-chips id="tagsInput" placeholder="add tags (max 5)" [(ngModel)]="selectedTags" [max]="5" />
-                </div>
-                <p-divider type="dashed" />
-            </div>
-
             <div id="searchInputArea">
                 <p-autoComplete id="searchInputText" placeholder="Search for articles here!" [size]="30"
                     [(ngModel)]="selectedPhrase" [suggestions]="autocompleteSuggestions"
@@ -26,6 +14,18 @@
 
                 <span id="showFiltersLabel"> filters </span>
                 <p-inputSwitch id="showFiltersSwitch" [(ngModel)]="showFilters" />
+            </div>
+
+            <div id="filtersPanel" [class.expanded]="showFilters">
+                <div *ngIf="showFilters" class="filter-controls">
+                    <p-button id="clearFiltersButton" label="clear" icon="pi pi-times" (onClick)="clearFilters()" />
+                    <p-dropdown id="typeFilterDropdown" [options]="articleTypes" [(ngModel)]="selectedType"
+                        placeholder="type" />
+                    <p-calendar id="dateFromFilterCalendar" [(ngModel)]="selectedDateFrom" placeholder="created from" />
+                    -
+                    <p-calendar id="dateToFilterCalendar" [(ngModel)]="selectedDateTo" placeholder="created to" />
+                    <p-chips id="tagsInput" placeholder="add tags (max 5)" [(ngModel)]="selectedTags" [max]="5" />
+                </div>
             </div>
 
         </div>
