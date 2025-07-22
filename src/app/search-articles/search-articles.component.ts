@@ -100,7 +100,7 @@ export class SearchArticlesComponent implements OnInit {
 
   handleResultsMessage(response: ArticleSearch[]) {
     if (response.length === 0) {
-      this.resultsMessage = 'There were no articles with that searchphrase!';
+      this.resultsMessage = 'There were no articles found!';
     } else {
       this.resultsMessage = '';
     }
