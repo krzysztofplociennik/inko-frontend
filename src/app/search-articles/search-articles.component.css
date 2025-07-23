@@ -20,9 +20,59 @@
 }
 
 #searchForArticlesDiv {
-    margin: 40px 20px 20px 20px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    margin: 40px 20px 20px 20px;
+    align-items: center;
+    padding: .5rem;
+}
+
+#filtersPanel {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: .8rem;
+    align-items: center;
+}
+
+#typeFilterDropdown {
+    margin-right: 1rem;
+}
+
+#dateFromFilterCalendar {
+    width: 2rem;
+}
+
+::ng-deep .p-dropdown {
+    width: 10rem;
+}
+
+::ng-deep .p-calendar {
+    width: 8rem;
+}
+
+#dateToFilterCalendar {
+    margin-right: 1rem;
+}
+
+#tagsInput {
+    margin-right: 1rem;
+}
+
+#clearFiltersButton {
+    margin-right: 1rem;
+}
+
+#searchInputArea {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    margin-bottom: .7rem;
+}
+
+#showFiltersLabel {
+    margin-left: 2rem;
+    margin-right: .8rem;
 }
 
 #createNewArticleDiv {

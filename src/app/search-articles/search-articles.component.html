@@ -1,26 +1,40 @@
 <div id="bodyDiv">
     <app-header class="header"></app-header>
     <div id="contentWrapper">
+
         <div id="searchForArticlesDiv">
 
-            <p-autoComplete 
-                id="searchInputText"
-                placeholder="Search for articles here!"
-                [size]="30"
-                [(ngModel)]="searchPhrase" 
-                [suggestions]="searchSuggestions" 
-                (completeMethod)="searchForAutocompletes($event)"
-                (keydown.enter)="searchForArticles()"
-                 />
+            <div id="searchInputArea">
+                <p-autoComplete id="searchInputText" placeholder="Search for articles here!" [size]="30"
+                    [(ngModel)]="selectedPhrase" [suggestions]="autocompleteSuggestions"
+                    (completeMethod)="searchForAutocompletes($event)" (keydown.enter)="searchForArticles()" />
 
-            <p-button id="searchArticlesButton" icon="pi pi-search" [rounded]="true" [severity]="'secondary'"
-                (onClick)="searchForArticles()" />
+                <p-button id="searchArticlesButton" icon="pi pi-search" [rounded]="true" [severity]="'secondary'"
+                    (onClick)="searchForArticles()" />
+
+                <span id="showFiltersLabel"> filters </span>
+                <p-inputSwitch id="showFiltersSwitch" [(ngModel)]="showFilters" />
+            </div>
+
+            <div id="filtersPanel" [class.expanded]="showFilters">
+                <div *ngIf="showFilters" class="filter-controls">
+                    <p-button id="clearFiltersButton" label="clear" icon="pi pi-times" (onClick)="clearFilters()" />
+                    <p-dropdown id="typeFilterDropdown" [options]="articleTypes" [(ngModel)]="selectedType"
+                        placeholder="type" />
+                    <p-calendar id="dateFromFilterCalendar" [(ngModel)]="selectedDateFrom" placeholder="created from" />
+                    -
+                    <p-calendar id="dateToFilterCalendar" [(ngModel)]="selectedDateTo" placeholder="created to" />
+                    <p-chips id="tagsInput" placeholder="add tags (max 5)" [(ngModel)]="selectedTags" [max]="5" />
+                </div>
+            </div>
+
         </div>
 
-        <div *ngIf="isLoggedIn" id="createNewArticleDiv">
+        <div *ngIf="isUserLoggedIn" id="createNewArticleDiv">
             <span>... or create a new one!</span>
 
-            <p-button id="createNewArticleButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'" [routerLink]="['/new-article']" />
+            <p-button id="createNewArticleButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'"
+                [routerLink]="['/new-article']" />
         </div>
 
         <div id="searchArticlesContent">
@@ -31,7 +45,7 @@
                 </div>
             </ul>
             <div id="resultsMessageDiv" *ngIf="articlesResults.length === 0">{{ resultsMessage }}</div>
-        </div>  
+        </div>
     </div>
     <app-footer class="footer" id="footer"></app-footer>
 

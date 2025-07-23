@@ -4,6 +4,7 @@ import { SearchService } from './search-service/search.service';
 import { AuthService } from '../shared/auth/auth.service';
 import { firstValueFrom } from 'rxjs';
 import { LoadingNotifierService } from '../shared/services/loading-notifier-service';
+import { SearchFilter } from './search-service/search-filter.api';
 
 interface AutoCompleteEvent {
   originalEvent: Event;
@@ -18,37 +19,49 @@ interface AutoCompleteEvent {
 export class SearchArticlesComponent implements OnInit {
 
   resultsMessage: string = '';
-
-  isHovered: boolean = false;
-  hoveredIndex: number | null = null;
-
-  searchPhrase: string = '';
-  searchSuggestions: string[] = [];
-
   articlesResults: ArticleSearch[] = [];
 
-  isLoggedIn: boolean;
-
+  isArticleResultBeingHovered: boolean = false;
+  isUserLoggedIn: boolean;
   shouldSpinnerWork: boolean = false;
+  showFilters: boolean = false;
+
+  hoveredIndex: number | null = null;
+
+  autocompleteSuggestions: string[] = [];
+
+  articleTypes = [
+    { label: 'All Types', value: null },
+    { label: 'Programming', value: 'PROGRAMMING' },
+    { label: 'Tools', value: 'TOOLS' },
+    { label: 'Database', value: 'DATABASE' },
+    { label: 'OS', value: 'OS' },
+  ];
+
+  selectedPhrase: string | undefined;
+  selectedType: string | undefined;
+  selectedDateFrom: Date | undefined;
+  selectedDateTo: Date | undefined;
+  selectedTags: string[] | undefined;
 
   constructor(
     public searchService: SearchService,
     private authService: AuthService,
     private loadingNotifierService: LoadingNotifierService
   ) {
-    this.isLoggedIn = false;
-   }
+    this.isUserLoggedIn = false;
+  }
 
   ngOnInit(): void {
     this.authService.loginState$.subscribe((state) => {
-      this.isLoggedIn = state;
+      this.isUserLoggedIn = state;
     });
   }
 
   searchForAutocompletes(event: AutoCompleteEvent) {
     this.searchService.getAutocompletes(event.query).subscribe(
       (response: string[]) => {
-        this.searchSuggestions = response;
+        this.autocompleteSuggestions = response;
       }
     )
   }
@@ -57,7 +70,16 @@ export class SearchArticlesComponent implements OnInit {
     this.shouldSpinnerWork = true;
     this.loadingNotifierService.showDelayedMessage();
     try {
-      const articles = await firstValueFrom(this.searchService.search(0, 10, this.searchPhrase));
+
+      const filter: SearchFilter = {
+        searchPhrase: this.selectedPhrase,
+        type: this.selectedType,
+        tags: this.selectedTags,
+        creationDateFrom: this.selectedDateFrom,
+        creationDateTo: this.selectedDateTo
+      };
+
+      const articles = await firstValueFrom(this.searchService.searchWithFilters(0, 10, filter));
       this.articlesResults = articles;
       this.handleResultsMessage(articles);
     } catch (error) {
@@ -77,11 +99,23 @@ export class SearchArticlesComponent implements OnInit {
   }
 
   handleResultsMessage(response: ArticleSearch[]) {
-    if(response.length === 0) {
-      this.resultsMessage = 'There were no articles with that searchphrase!';
+    if (response.length === 0) {
+      this.resultsMessage = 'There were no articles found!';
     } else {
       this.resultsMessage = '';
     }
-  } 
+  }
+
+  toggleFilters() {
+    this.showFilters = !this.showFilters;
+  }
+
+  clearFilters() {
+    this.selectedType = undefined;
+    this.selectedPhrase = undefined;
+    this.selectedDateFrom = undefined;
+    this.selectedDateTo = undefined;
+    this.selectedTags = undefined;
+  }
 
 }
