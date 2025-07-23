@@ -36,6 +36,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './shared/login/login.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CalendarModule } from 'primeng/calendar';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { DividerModule } from 'primeng/divider';
 
 import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER } from '@angular/core';
@@ -102,6 +105,9 @@ export function loadConfig(http: HttpClient) {
         FileUploadModule,
         ProgressSpinnerModule,
         MessageModule,
+        CalendarModule,
+        InputSwitchModule,
+        DividerModule,
     ]
 })
 export class AppModule { }
