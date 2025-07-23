@@ -42,7 +42,7 @@ export class SearchArticlesComponent implements OnInit {
   selectedType: string | undefined;
   selectedDateFrom: Date | undefined;
   selectedDateTo: Date | undefined;
-  selectedTags: string[] = [];
+  selectedTags: string[] | undefined;
 
   constructor(
     public searchService: SearchService,
@@ -112,10 +112,10 @@ export class SearchArticlesComponent implements OnInit {
 
   clearFilters() {
     this.selectedType = undefined;
-    this.selectedPhrase = '';
+    this.selectedPhrase = undefined;
     this.selectedDateFrom = undefined;
     this.selectedDateTo = undefined;
-    this.selectedTags = [];
+    this.selectedTags = undefined;
   }
 
 }
