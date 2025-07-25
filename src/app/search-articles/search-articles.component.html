@@ -7,10 +7,10 @@
             <div id="searchInputArea">
                 <p-autoComplete id="searchInputText" placeholder="Search for articles here!" [size]="30"
                     [(ngModel)]="selectedPhrase" [suggestions]="autocompleteSuggestions"
-                    (completeMethod)="searchForAutocompletes($event)" (keydown.enter)="searchForArticles()" />
+                    (completeMethod)="searchForAutocompletes($event)" (keydown.enter)="searchForArticles(this.pageNumber, this.pageSize)" />
 
                 <p-button id="searchArticlesButton" icon="pi pi-search" [rounded]="true" [severity]="'secondary'"
-                    (onClick)="searchForArticles()" />
+                    (onClick)="searchForArticles(this.pageNumber, this.pageSize)" />
 
                 <span id="showFiltersLabel"> filters </span>
                 <p-inputSwitch id="showFiltersSwitch" [(ngModel)]="showFilters" />
@@ -38,15 +38,19 @@
         </div>
 
         <div id="searchArticlesContent">
-            <ul *ngFor="let articleItem of articlesResults; let i = index">
+            <ul *ngFor="let articleItem of articles; let i = index">
                 <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
                     <app-result-item [routerLink]="['/article-details', articleItem.id]" [article]="articleItem"
                         [isHovered]="hoveredIndex === i"></app-result-item>
                 </div>
             </ul>
-            <div id="resultsMessageDiv" *ngIf="articlesResults.length === 0">{{ resultsMessage }}</div>
+            <div id="resultsMessageDiv" *ngIf="articles.length === 0">{{ resultsMessage }}</div>
         </div>
     </div>
+
+    <p-paginator [hidden]="totalSearchRecords === 0" (onPageChange)="onPageChange($event)" [first]="first" [rows]="pageSize" [totalRecords]="totalSearchRecords"
+        [rowsPerPageOptions]="[5, 10, 20, 30, 50, 100]" />
+
     <app-footer class="footer" id="footer"></app-footer>
 
     <div *ngIf="shouldSpinnerWork" class="overlay">

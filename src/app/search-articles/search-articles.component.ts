@@ -5,10 +5,18 @@ import { AuthService } from '../shared/auth/auth.service';
 import { firstValueFrom } from 'rxjs';
 import { LoadingNotifierService } from '../shared/services/loading-notifier-service';
 import { SearchFilter } from './search-service/search-filter.api';
+import { SearchResult } from './search-result-item/search-result.api';
 
 interface AutoCompleteEvent {
   originalEvent: Event;
   query: string;
+}
+
+interface PageEvent {
+  first?: number;
+  rows?: number;
+  page?: number;
+  pageCount?: number;
 }
 
 @Component({
@@ -19,7 +27,7 @@ interface AutoCompleteEvent {
 export class SearchArticlesComponent implements OnInit {
 
   resultsMessage: string = '';
-  articlesResults: ArticleSearch[] = [];
+  articles: ArticleSearch[] = [];
 
   isArticleResultBeingHovered: boolean = false;
   isUserLoggedIn: boolean;
@@ -44,6 +52,11 @@ export class SearchArticlesComponent implements OnInit {
   selectedDateTo: Date | undefined;
   selectedTags: string[] | undefined;
 
+  first: number = 0;
+  pageNumber: number = 0;
+  pageSize: number = 5;
+  totalSearchRecords: number = 0;
+
   constructor(
     public searchService: SearchService,
     private authService: AuthService,
@@ -56,6 +69,8 @@ export class SearchArticlesComponent implements OnInit {
     this.authService.loginState$.subscribe((state) => {
       this.isUserLoggedIn = state;
     });
+    this.first = 0;
+    this.pageNumber = 0;
   }
 
   searchForAutocompletes(event: AutoCompleteEvent) {
@@ -66,7 +81,7 @@ export class SearchArticlesComponent implements OnInit {
     )
   }
 
-  async searchForArticles() {
+  async searchForArticles(pageNumber: number, pageSize: number) {
     this.shouldSpinnerWork = true;
     this.loadingNotifierService.showDelayedMessage();
     try {
@@ -79,9 +94,12 @@ export class SearchArticlesComponent implements OnInit {
         creationDateTo: this.selectedDateTo
       };
 
-      const articles = await firstValueFrom(this.searchService.searchWithFilters(0, 10, filter));
-      this.articlesResults = articles;
-      this.handleResultsMessage(articles);
+      const result: SearchResult = await firstValueFrom(this.searchService.searchWithFilters(pageNumber, pageSize, filter));
+      console.log('articles total size: ' + result.totalElements);
+
+      this.articles = result.articles;
+      this.handleResultsMessage(result.articles);
+      this.totalSearchRecords = result.totalElements;
     } catch (error) {
       console.log('Error while searching for articles');
     } finally {
@@ -118,4 +136,21 @@ export class SearchArticlesComponent implements OnInit {
     this.selectedTags = undefined;
   }
 
+  onPageChange(event: PageEvent) {
+    if (!event) {
+      console.warn('(EID: 202507251202) PageEvent is null or undefined!');
+      return;
+    }
+
+    if (typeof event.page !== 'number' || typeof event.rows !== 'number' || typeof event.first !== 'number') {
+      console.warn('(EID: 202507251203) Invalid page event properties:', event);
+      return;
+    }
+
+    this.first = event.first;
+    this.pageSize = event.rows;
+    this.pageNumber = event.page;
+
+    this.searchForArticles(event.page, event.rows);
+  }
 }

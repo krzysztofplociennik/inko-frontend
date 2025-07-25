@@ -39,6 +39,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CalendarModule } from 'primeng/calendar';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { DividerModule } from 'primeng/divider';
+import { PaginatorModule } from 'primeng/paginator';
 
 import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER } from '@angular/core';
@@ -108,6 +109,7 @@ export function loadConfig(http: HttpClient) {
         CalendarModule,
         InputSwitchModule,
         DividerModule,
+        PaginatorModule,
     ]
 })
 export class AppModule { }
