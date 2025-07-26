@@ -6,6 +6,8 @@ import { firstValueFrom } from 'rxjs';
 import { LoadingNotifierService } from '../shared/services/loading-notifier-service';
 import { SearchFilter } from './search-service/search-filter.api';
 import { SearchResult } from './search-result-item/search-result.api';
+import { ArticleType } from '../new-article/article';
+import { ArticleReadService } from '../shared/services/article-read.service';
 
 interface AutoCompleteEvent {
   originalEvent: Event;
@@ -38,13 +40,7 @@ export class SearchArticlesComponent implements OnInit {
 
   autocompleteSuggestions: string[] = [];
 
-  articleTypes = [
-    { label: 'All Types', value: null },
-    { label: 'Programming', value: 'PROGRAMMING' },
-    { label: 'Tools', value: 'TOOLS' },
-    { label: 'Database', value: 'DATABASE' },
-    { label: 'OS', value: 'OS' },
-  ];
+  articleTypes: ArticleType[] = [];
 
   selectedPhrase: string | undefined;
   selectedType: string | undefined;
@@ -60,17 +56,21 @@ export class SearchArticlesComponent implements OnInit {
   constructor(
     public searchService: SearchService,
     private authService: AuthService,
-    private loadingNotifierService: LoadingNotifierService
+    private loadingNotifierService: LoadingNotifierService,
+    private articleReadService: ArticleReadService
   ) {
     this.isUserLoggedIn = false;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.authService.loginState$.subscribe((state) => {
       this.isUserLoggedIn = state;
     });
     this.first = 0;
     this.pageNumber = 0;
+    this.articleReadService.fetchArticleTypes().subscribe((types) => {
+      this.articleTypes = types;
+    })
   }
 
   searchForAutocompletes(event: AutoCompleteEvent) {

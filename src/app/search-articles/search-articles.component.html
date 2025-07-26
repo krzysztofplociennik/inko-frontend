@@ -19,7 +19,7 @@
             <div id="filtersPanel" [class.expanded]="showFilters">
                 <div *ngIf="showFilters" class="filter-controls">
                     <p-button id="clearFiltersButton" label="clear" icon="pi pi-times" (onClick)="clearFilters()" />
-                    <p-dropdown id="typeFilterDropdown" [options]="articleTypes" [(ngModel)]="selectedType"
+                    <p-dropdown id="typeFilterDropdown" [options]="articleTypes" [(ngModel)]="selectedType" optionLabel="name"
                         placeholder="type" />
                     <p-calendar id="dateFromFilterCalendar" [(ngModel)]="selectedDateFrom" placeholder="created from" />
                     -

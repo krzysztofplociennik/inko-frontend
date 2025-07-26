@@ -25,14 +25,12 @@ export class NewArticleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.articleService.fetchAllArticleTypes().subscribe(
-      (response: string[]) => {
-        response.forEach(element => {
-          this.articleTypes.push(
-            { name: element }
-          )
-        });
-    });
+
+    this.articleService.fetchArticleTypes().subscribe(
+      (response: ArticleType[]) => {
+        this.articleTypes = response;
+      } 
+    )
   }
 
   async createArticle() {
