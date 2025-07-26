@@ -64,14 +64,16 @@ export class ArticleDetailsComponent implements OnInit {
   }
 
   private async loadTypes(): Promise<void> {
-    return new Promise((resolve) => {
-      this.articleReadService.fetchAllArticleTypes().subscribe(response => {
-        response.forEach(element => {
-          this.articleTypes.push({ name: element });
-        });
-        resolve();
-      });
-    });
+    return new Promise(
+      (resolve) => {
+        this.articleReadService.fetchArticleTypes().subscribe(
+          (response: ArticleType[]) => {
+            this.articleTypes = response;
+            resolve();
+          },
+        )
+      }
+    )
   }
   
   private loadLoginState() {
@@ -150,7 +152,6 @@ export class ArticleDetailsComponent implements OnInit {
   }  
 
   deleteArticle(): void {
-
     this.confirmationService.confirm({
       message: 'Are you sure that you want to proceed?',
       header: 'Confirmation',
