@@ -1,4 +1,3 @@
-
 <div id="bodyDiv">
     <app-header class="header"></app-header>
     <div id="contentWrapper">
@@ -8,9 +7,20 @@
         </div>
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="login">
-            <div>
+            <div id="usernameSection">
                 <label id="usernameLabel" for="username">Username</label>
                 <input id="usernameInput" formControlName="username" type="text" pInputText />
+
+                <p-button id="credentialsDialogButton" (onClick)="showCredentialsDialog()" severity="secondary" [raised]="true" [rounded]="true"
+                    [outlined]="true" icon="pi pi-info-circle" />
+                <p-dialog header="Credentials for demo"  [(visible)]="credentialsDialogVisible" [style]="{ width: '20rem' }" >
+                    <p>
+                        login: river
+                    </p>
+                    <p>
+                        password: wind
+                    </p>
+                </p-dialog>
 
             </div>
             <div>
@@ -18,13 +28,8 @@
                 <input id="passwordInput" formControlName="password" type="password" pInputText />
             </div>
 
-            <p-button 
-                [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
-                id="loginButton" 
-                type="submit" 
-                label="log in" 
-                [disabled]="loginForm.invalid"
-            />
+            <p-button [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}" id="loginButton"
+                type="submit" label="log in" [disabled]="loginForm.invalid" />
 
         </form>
 

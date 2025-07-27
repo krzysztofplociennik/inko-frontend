@@ -10,10 +10,12 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+
   loginForm: FormGroup;
   errorMessage: string = '';
 
   shouldSpinnerWork: boolean = false;
+  credentialsDialogVisible: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -31,7 +33,7 @@ export class LoginComponent {
     this.errorMessage = '';
     if (this.loginForm.valid) {
 
-      this.shouldSpinnerWork = true;      
+      this.shouldSpinnerWork = true;
       try {
         await this.login();
       } catch (error) {
@@ -45,12 +47,12 @@ export class LoginComponent {
   private async login() {
     this.authService.login(this.loginForm.value).subscribe({
       next: (response: AuthResponse) => {
-        this.messageService.add({severity:'success', summary:'Success', detail:'You are logged in!'});
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You are logged in!' });
         this.authService.setToken(response.token);
         this.router.navigate(['/']);
       },
       error: (err) => {
-        this.messageService.add({severity:'error', summary:'Error', detail:'Wrong credentials, try again.'});
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Wrong credentials, try again.' });
         this.errorMessage = 'Login failed: ' + err.error;
         this.clearFormInputs();
       },
@@ -59,5 +61,9 @@ export class LoginComponent {
 
   clearFormInputs() {
     this.loginForm.reset();
+  }
+
+  showCredentialsDialog() {
+    this.credentialsDialogVisible = true;
   }
 }

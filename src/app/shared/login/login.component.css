@@ -53,3 +53,11 @@
 #passwordInput {
     margin-bottom: 10px;
 }
+
+#usernameSection {
+    margin-left: 4rem;
+}
+
+#credentialsDialogButton {
+    margin-left: 1rem;
+}
