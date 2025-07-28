@@ -5,15 +5,20 @@
         <div *ngIf="shouldSpinnerWork" class="overlay">
             <p-progressSpinner styleClass="overlay-spinner"></p-progressSpinner>
         </div>
-        
+
         <div id="allArticlesDiv">
             <ul *ngFor="let item of articlesResults; let i = index">
                 <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
-                    <app-all-articles-item [routerLink]="['/article-details', item.id]" [article]="item" [isHovered]="hoveredIndex === i"></app-all-articles-item>
+                    <app-all-articles-item [routerLink]="['/article-details', item.id]" [article]="item"
+                        [isHovered]="hoveredIndex === i"></app-all-articles-item>
                 </div>
             </ul>
         </div>
 
     </div>
+
+    <p-paginator [hidden]="totalSearchRecords === 0" (onPageChange)="onPageChange($event)" [first]="first"
+        [rows]="pageSize" [totalRecords]="totalSearchRecords" [rowsPerPageOptions]="[10, 20, 30, 50, 100]" />
+
     <app-footer class="footer" id="footer"></app-footer>
 </div>

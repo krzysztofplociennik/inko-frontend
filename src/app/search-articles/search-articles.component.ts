@@ -8,17 +8,11 @@ import { SearchFilter } from './search-service/search-filter.api';
 import { SearchResult } from './search-result-item/search-result.api';
 import { ArticleType } from '../new-article/article';
 import { ArticleReadService } from '../shared/services/article-read.service';
+import { PageEvent } from '../shared/pagination/page-event.api';
 
 interface AutoCompleteEvent {
   originalEvent: Event;
   query: string;
-}
-
-interface PageEvent {
-  first?: number;
-  rows?: number;
-  page?: number;
-  pageCount?: number;
 }
 
 @Component({
@@ -94,8 +88,7 @@ export class SearchArticlesComponent implements OnInit {
         creationDateTo: this.selectedDateTo
       };
 
-      const result: SearchResult = await firstValueFrom(this.searchService.searchWithFilters(pageNumber, pageSize, filter));
-      console.log('articles total size: ' + result.totalElements);
+      const result: SearchResult = await firstValueFrom(this.searchService.search(pageNumber, pageSize, filter));
 
       this.articles = result.articles;
       this.handleResultsMessage(result.articles);
