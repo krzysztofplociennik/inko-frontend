@@ -75,6 +75,10 @@
     margin-right: .8rem;
 }
 
+#showFiltersSwitch {
+    padding-top: .2rem;
+}
+
 #createNewArticleDiv {
     display: flex;
     justify-content: center;
