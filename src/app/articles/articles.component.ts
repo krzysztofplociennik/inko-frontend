@@ -5,6 +5,10 @@ import { AuthService } from '../shared/auth/auth.service';
 import { ExportService } from '../shared/services/export.service';
 import { firstValueFrom } from 'rxjs';
 import { LoadingNotifierService } from '../shared/services/loading-notifier-service';
+import { PageEvent } from '../shared/pagination/page-event.api';
+import { SearchService } from '../search-articles/search-service/search.service';
+import { createEmptySearchFilter } from '../search-articles/search-service/search-filter.api';
+import { SearchResult } from '../search-articles/search-result-item/search-result.api';
 
 @Component({
   selector: 'app-articles',
@@ -15,21 +19,29 @@ export class ArticlesComponent {
 
   shouldSpinnerWork: boolean = false;
 
-  @Input() 
+  @Input()
   isHovered: boolean = false;
-  hoveredIndex: number|null = null;
+  hoveredIndex: number | null = null;
 
   articlesResults: AllArticlesItem[] = [];
 
   isLoggedIn: boolean;
 
+  first: number = 0;
+  pageNumber: number = 0;
+  pageSize: number = 10;
+  totalSearchRecords: number = 0;
+
   constructor(
     public articlesService: ArticlesService,
     private authService: AuthService,
     private exportService: ExportService,
-    private loadingNotifier: LoadingNotifierService
+    private loadingNotifier: LoadingNotifierService,
+    private searchService: SearchService
   ) {
     this.isLoggedIn = false;
+    this.first = 0;
+    this.pageNumber = 0;
   }
 
   async ngOnInit(): Promise<void> {
@@ -42,10 +54,11 @@ export class ArticlesComponent {
   async getAllArticles() {
     this.shouldSpinnerWork = true;
     this.loadingNotifier.showDelayedMessage();
-  
+
     try {
-      const response: AllArticlesItem[] = await firstValueFrom(this.articlesService.getAllArticles());
-      this.articlesResults = response;
+      const response: SearchResult = await firstValueFrom(this.searchService.search(this.pageNumber, this.pageSize, createEmptySearchFilter()));
+      this.articlesResults = response.articles;
+      this.totalSearchRecords = response.totalElements;
     } catch (error) {
       console.error('Error fetching articles:', error);
     } finally {
@@ -56,7 +69,7 @@ export class ArticlesComponent {
 
   mouseEnter(index: number) {
     this.hoveredIndex = index;
-  }  
+  }
 
   mouseLeave() {
     this.hoveredIndex = null;
@@ -68,5 +81,23 @@ export class ArticlesComponent {
 
   exportWithoutHTML() {
     this.exportService.exportWithoutHTML();
+  }
+
+  onPageChange(event: PageEvent) {
+    if (!event) {
+      console.warn('(EID: 202507281202) PageEvent is null or undefined!');
+      return;
+    }
+
+    if (typeof event.page !== 'number' || typeof event.rows !== 'number' || typeof event.first !== 'number') {
+      console.warn('(EID: 202507281203) Invalid page event properties:', event);
+      return;
+    }
+
+    this.first = event.first;
+    this.pageSize = event.rows;
+    this.pageNumber = event.page;
+
+    this.getAllArticles();
   }
 }
