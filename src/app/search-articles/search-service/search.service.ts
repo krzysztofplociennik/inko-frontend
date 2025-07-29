@@ -18,56 +18,42 @@ export class SearchService {
     this.baseBackendUrl = getBaseUrl();
   }
 
-  search(page: number, itemsPerPage: number, searchPhrase: string): Observable<ArticleSearch[]> {
+  search(pageNumber: number, itemsPerPage: number, filter: SearchFilter): Observable<SearchResult> {
     const url: string = this.baseBackendUrl + '/search-articles';
     const params = new HttpParams()
-      .set('page', page)
-      .set('size', itemsPerPage)
-      .set('searchPhrase', searchPhrase);
+      .set('page', pageNumber.toString())
+      .set('size', itemsPerPage.toString());
 
-    return this.http.get<ArticleSearch[]>(url, { params }).pipe(
-      map((response: ArticleSearch[]) => {
-        return response;
+    return this.http.post<PaginationResponse<ArticleSearch>>(url, filter, { params }).pipe(
+      map((response: PaginationResponse<ArticleSearch>) => {
+        const result: SearchResult = {
+          articles: response.content || [],
+          totalElements: response.totalElements || 0,
+          totalPages: response.totalPages || 0,
+          currentPage: response.number || 0,
+          pageSize: response.size || itemsPerPage,
+          hasNext: !response.last,
+          hasPrevious: !response.first
+        };
+        return result;
+      }),
+      catchError(error => {
+        console.error('(EID: 202507191357) Error while searching for articles!', error);
+
+        const emptyResult: SearchResult = {
+          articles: [],
+          totalElements: 0,
+          totalPages: 0,
+          currentPage: pageNumber,
+          pageSize: itemsPerPage,
+          hasNext: false,
+          hasPrevious: false
+        };
+
+        return of(emptyResult);
       })
     );
   }
-
-searchWithFilters(pageNumber: number, itemsPerPage: number, filter: SearchFilter): Observable<SearchResult> {
-  const url: string = this.baseBackendUrl + '/search-articles';
-  const params = new HttpParams()
-    .set('page', pageNumber.toString())
-    .set('size', itemsPerPage.toString());
-    
-  return this.http.post<PaginationResponse<ArticleSearch>>(url, filter, { params }).pipe(
-    map((response: PaginationResponse<ArticleSearch>) => {      
-      const result: SearchResult = {
-        articles: response.content || [],
-        totalElements: response.totalElements || 0,
-        totalPages: response.totalPages || 0,
-        currentPage: response.number || 0,
-        pageSize: response.size || itemsPerPage,
-        hasNext: !response.last,
-        hasPrevious: !response.first
-      };
-      return result;
-    }),
-    catchError(error => {
-      console.error('(EID: 202507191357) Error while searching for articles!', error);
-      
-      const emptyResult: SearchResult = {
-        articles: [],
-        totalElements: 0,
-        totalPages: 0,
-        currentPage: pageNumber,
-        pageSize: itemsPerPage,
-        hasNext: false,
-        hasPrevious: false
-      };
-      
-      return of(emptyResult);
-    })
-  );
-}
 
   getAutocompletes(searchPhrase: string): Observable<string[]> {
     const url: string = this.baseBackendUrl + '/autocomplete';
