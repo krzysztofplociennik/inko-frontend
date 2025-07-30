@@ -36,15 +36,15 @@
                 />
         </div>
         
-        <div id="titleDiv" *ngIf="!isEditMode">{{article?.title}}</div>
-        <div id="titleDiv2" *ngIf="isEditMode">
+        <div id="titleDivNonEdit" *ngIf="!isEditMode">{{article?.title}}</div>
+        <div id="titleDivEdit" *ngIf="isEditMode">
             <label> Title: </label>
             <input pInputText [(ngModel)]="editedArticle.title" 
             [style]="{'width': '960px'}" 
             class="w-full"/>
         </div>
 
-        <div id="typeContainer" *ngIf="isEditMode">
+        <div id="typeDiv" *ngIf="isEditMode">
             <label id="typeLabel"> Type: </label>
             <p-dropdown 
                 *ngIf="areArticleTypesPopulated()"
@@ -57,7 +57,7 @@
         </div>
 
 
-        <div id="tags" *ngIf="!isEditMode">
+        <div id="tagsDivNonEdit" *ngIf="!isEditMode">
             <div *ngFor="let tag of article?.tags" style="display: inline-block; margin-left: 5px;">
                 <p-chip [style]="{
                     'height': '30px',
@@ -67,7 +67,7 @@
                     }">{{ tag }}</p-chip>
             </div>
         </div>
-        <div id="tagsContainer" *ngIf="isEditMode">
+        <div id="tagsDivEdit" *ngIf="isEditMode">
             <label> Tags: </label>
             <div id="tags">
                 <p-chips [(ngModel)]="editedArticle.tags" [separator]="','" placeholder="Add tags"></p-chips>
@@ -75,9 +75,8 @@
         </div>
 
         <div id="contentOutline">
-
-            <div id="contentDiv" *ngIf="!isEditMode" [innerHTML]="article?.content"></div>
-            <div id="contentDiv" *ngIf="isEditMode">    
+            <div id="contentDivNonEdit" *ngIf="!isEditMode" [innerHTML]="article?.content"></div>
+            <div id="contentDivEdit" *ngIf="isEditMode">    
                 <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="editedArticle.content" [style]="{ height: 'auto', width: '960px' }" />
             </div>
         </div>
