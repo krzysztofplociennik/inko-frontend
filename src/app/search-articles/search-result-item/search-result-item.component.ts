@@ -3,9 +3,10 @@ import { ArticleSearch } from './article-result';
 import { DateUtils } from 'src/app/shared/utils/dateUtils';
 
 @Component({
-  selector: 'app-result-item',
-  templateUrl: './search-result-item.component.html',
-  styleUrl: './search-result-item.component.css',
+    selector: 'app-result-item',
+    templateUrl: './search-result-item.component.html',
+    styleUrl: './search-result-item.component.css',
+    standalone: false
 })
 export class ResultItemComponent {
 

@@ -16,9 +16,10 @@ interface AutoCompleteEvent {
 }
 
 @Component({
-  selector: 'app-search-articles',
-  templateUrl: './search-articles.component.html',
-  styleUrls: ['./search-articles.component.css']
+    selector: 'app-search-articles',
+    templateUrl: './search-articles.component.html',
+    styleUrls: ['./search-articles.component.css'],
+    standalone: false
 })
 export class SearchArticlesComponent implements OnInit {
 

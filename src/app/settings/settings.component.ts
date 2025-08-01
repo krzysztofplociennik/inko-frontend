@@ -6,9 +6,10 @@ import { getBaseUrl } from '../shared/utils/urlUtils';
 import { JwtUtils } from '../shared/utils/jwtUtils';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrl: './settings.component.css'
+    selector: 'app-settings',
+    templateUrl: './settings.component.html',
+    styleUrl: './settings.component.css',
+    standalone: false
 })
 export class SettingsComponent {
 

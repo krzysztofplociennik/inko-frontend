@@ -5,9 +5,10 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
+    standalone: false
 })
 export class LoginComponent {
   loginForm: FormGroup;

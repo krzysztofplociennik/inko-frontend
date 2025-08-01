@@ -4,9 +4,10 @@ import { DateUtils } from 'src/app/shared/utils/dateUtils';
 import { StringUtils } from 'src/app/shared/utils/stringUtils';
 
 @Component({
-  selector: 'app-all-articles-item',
-  templateUrl: './all-articles-item.component.html',
-  styleUrl: './all-articles-item.component.css'
+    selector: 'app-all-articles-item',
+    templateUrl: './all-articles-item.component.html',
+    styleUrl: './all-articles-item.component.css',
+    standalone: false
 })
 export class AllArticlesItemComponent {
 

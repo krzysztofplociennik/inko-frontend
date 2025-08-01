@@ -11,9 +11,10 @@ import { createEmptySearchFilter } from '../search-articles/search-service/searc
 import { SearchResult } from '../search-articles/search-result-item/search-result.api';
 
 @Component({
-  selector: 'app-articles',
-  templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.css']
+    selector: 'app-articles',
+    templateUrl: './articles.component.html',
+    styleUrls: ['./articles.component.css'],
+    standalone: false
 })
 export class ArticlesComponent {
 

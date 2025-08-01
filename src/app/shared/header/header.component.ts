@@ -6,10 +6,11 @@ import { Router } from '@angular/router';
 import { getBaseUrl } from '../utils/urlUtils';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
-  encapsulation: ViewEncapsulation.Emulated,
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.css'],
+    encapsulation: ViewEncapsulation.Emulated,
+    standalone: false
 })
 export class HeaderComponent implements OnInit {
   search_articles: string | any[] | null | undefined = 'search';

@@ -8,10 +8,11 @@ import { ArticleReadService } from 'src/app/shared/services/article-read.service
 import { AuthService } from 'src/app/shared/auth/auth.service';
 
 @Component({
-  selector: 'app-article-details',
-  templateUrl: './article-details.component.html',
-  styleUrl: './article-details.component.css',
-  providers: [ConfirmationService]
+    selector: 'app-article-details',
+    templateUrl: './article-details.component.html',
+    styleUrl: './article-details.component.css',
+    providers: [ConfirmationService],
+    standalone: false
 })
 export class ArticleDetailsComponent implements OnInit {
   articleID: string = '';

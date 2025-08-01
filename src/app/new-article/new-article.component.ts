@@ -5,9 +5,10 @@ import { MessageService } from 'primeng/api';
 import { ArticleReadService } from '../shared/services/article-read.service';
 
 @Component({
-  selector: 'app-new-article',
-  templateUrl: './new-article.component.html',
-  styleUrls: ['./new-article.component.css'],
+    selector: 'app-new-article',
+    templateUrl: './new-article.component.html',
+    styleUrls: ['./new-article.component.css'],
+    standalone: false
 })
 export class NewArticleComponent implements OnInit {
   articleTypes: ArticleType[] = [];
