@@ -1,14 +1,33 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthResponse, AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
+import { CommonModule } from '@angular/common';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    standalone: false
+    imports: [
+      HeaderComponent,
+      FooterComponent,
+      CommonModule,
+      ProgressSpinnerModule,
+      ButtonModule,
+      FormsModule,
+      ReactiveFormsModule,
+    ],
+    providers: [
+      AuthService,
+      MessageService,
+      
+    ]
+    // standalone: false
 })
 export class LoginComponent {
   loginForm: FormGroup;

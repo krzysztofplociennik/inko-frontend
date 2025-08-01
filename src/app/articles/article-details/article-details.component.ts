@@ -6,13 +6,38 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ArticleType } from 'src/app/new-article/article';
 import { ArticleReadService } from 'src/app/shared/services/article-read.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from 'src/app/shared/header/header.component';
+import { FooterComponent } from 'src/app/shared/footer/footer.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { ChipModule } from 'primeng/chip';
+import { ChipsModule } from 'primeng/chips';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
     selector: 'app-article-details',
     templateUrl: './article-details.component.html',
     styleUrl: './article-details.component.css',
-    providers: [ConfirmationService],
-    standalone: false
+    providers: [
+      ConfirmationService,
+      AuthService,
+      MessageService,
+    ],
+    imports: [
+      CommonModule,
+      FormsModule,
+      HeaderComponent,
+      FooterComponent,
+      ConfirmDialogModule,
+      ButtonModule,
+      DropdownModule,
+      ChipModule,
+      ChipsModule,
+      ProgressSpinnerModule, 
+    ],
 })
 export class ArticleDetailsComponent implements OnInit {
   articleID: string = '';

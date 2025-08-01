@@ -9,12 +9,36 @@ import { PageEvent } from '../shared/pagination/page-event.api';
 import { SearchService } from '../search-articles/search-service/search.service';
 import { createEmptySearchFilter } from '../search-articles/search-service/search-filter.api';
 import { SearchResult } from '../search-articles/search-result-item/search-result.api';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from '../shared/header/header.component';
+import { FooterComponent } from '../shared/footer/footer.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { AllArticlesItemComponent } from './all-articles-item/all-articles-item.component';
+import { PaginatorModule } from 'primeng/paginator';
+import { RouterLink } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-articles',
     templateUrl: './articles.component.html',
     styleUrls: ['./articles.component.css'],
-    standalone: false
+    imports: [
+      CommonModule,
+      FormsModule,
+      HeaderComponent,
+      FooterComponent,
+      ProgressSpinnerModule,
+      AllArticlesItemComponent,
+      PaginatorModule,
+      RouterLink
+    ],
+    providers: [
+      AuthService,
+      MessageService,
+      LoadingNotifierService,
+
+    ]
 })
 export class ArticlesComponent {
 

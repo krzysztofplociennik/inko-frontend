@@ -1,12 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { ArticleSearch } from './article-result';
 import { DateUtils } from 'src/app/shared/utils/dateUtils';
+import { CardModule } from 'primeng/card';
+import { ChipModule } from 'primeng/chip';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-result-item',
     templateUrl: './search-result-item.component.html',
     styleUrl: './search-result-item.component.css',
-    standalone: false
+    imports: [
+      CommonModule,
+      CardModule,
+      ChipModule,
+    ]
 })
 export class ResultItemComponent {
 

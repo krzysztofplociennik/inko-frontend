@@ -5,6 +5,5 @@ import { Component, ViewEncapsulation } from '@angular/core';
     templateUrl: './footer.component.html',
     styleUrls: ['./footer.component.css'],
     encapsulation: ViewEncapsulation.Emulated,
-    standalone: false
 })
 export class FooterComponent {}

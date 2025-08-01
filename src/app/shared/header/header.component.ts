@@ -2,15 +2,21 @@ import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from '@an
 import { ThemeService } from '../services/theme.service';
 import { AuthService } from '../auth/auth.service';
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { getBaseUrl } from '../utils/urlUtils';
+import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css'],
     encapsulation: ViewEncapsulation.Emulated,
-    standalone: false
+    imports: [
+      CommonModule,
+      RouterLink,
+      ButtonModule,
+    ]
 })
 export class HeaderComponent implements OnInit {
   search_articles: string | any[] | null | undefined = 'search';

@@ -10,7 +10,7 @@ import { LoginComponent } from './shared/login/login.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   { 
     path: 'search-articles', 
     component: SearchArticlesComponent 
