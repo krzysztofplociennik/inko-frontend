@@ -1,17 +1,14 @@
-/* // import Quill styles in styles.scss */
 @import "../node_modules/quill/dist/quill.core.css";
 @import "../node_modules/quill/dist/quill.snow.css";
 @import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-/* @import 'highlight.js/styles/dark.css'; */
-
 
 @font-face {
   font-family: 'jersey';
   src: url(/src/assets/fonts/jersey/Jersey10Charted-Regular.ttf) format('truetype');
 }
 
-/* latin */
 @font-face {
   font-family: 'Raleway';
   font-style: normal;
@@ -21,48 +18,34 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-html,
-body {
-  height: 100%; 
-}
-
-body {
-  /* background-color: rgb(235, 232, 230); */
-  margin: 0;
-  font-family: "Inter var", sans-serif;
-}
-
-.ql-align-center {
-  text-align: center;
-}
-.ql-align-right {
-  text-align: right;
-}
-.ql-align-justify {
-  text-align: justify;
-}
-
-
 :root {
-  --bg-color: #E8F0FE;
-  --text-color: #000000;
-  --co-color: #F5F5F5;
+  --app-bg-color: #E8F0FE;
+  --app-text-color: #000000;
+  --app-co-color: #F5F5F5;
+  
+  --theme-transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.dark-mode {
-  --bg-color: #121212;
-  --text-color: #ffffff;
-  --co-color: #1f1f1f;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--bg-color);
-  color: var(--text-color);
+  font-family: "Inter var", sans-serif;
+  background: var(--app-bg-color);
+  transition: var(--theme-transition);
 }
 
 #contentOutline {
-  background-color: var(--co-color);
+  background-color: var(--app-co-color);
+  transition: var(--theme-transition);
 }
+
+.ql-align-center { text-align: center; }
+.ql-align-right { text-align: right; }
+.ql-align-justify { text-align: justify; }
 
 .blurred {
   filter: blur(4px);
@@ -93,7 +76,62 @@ body {
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
+  to { transform: rotate(360deg); }
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  color: var(--app-text-color);
+}
+
+.theme-toggle:hover {
+  background-color: rgba(var(--app-text-color), 0.1);
+  transform: scale(1.1);
+}
+
+#headerDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.center-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.user-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.banner-container {
+  flex-shrink: 0;
+}
+
+#banner {
+  max-height: 40px;
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  #headerDiv {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .center-buttons {
+    order: 3;
+    width: 100%;
+    justify-content: center;
   }
 }
