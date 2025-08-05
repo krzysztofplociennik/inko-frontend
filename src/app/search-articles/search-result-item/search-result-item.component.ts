@@ -18,20 +18,8 @@ import { CommonModule } from '@angular/common';
 export class ResultItemComponent {
 
   @Input() article: ArticleSearch | undefined;
-  @Input() isHovered: boolean = false;
 
   currentStyle: { [klass: string]: any; } | undefined;
-
-  getCurrentStyle(): { [klass: string]: any; } {
-    return {
-      'height': '125px',
-      'background': this.getBackgroundColor(),
-    };
-  }
-
-  getBackgroundColor(): string { 
-    return this.isHovered? '#e6eef5' : 'white';
-  }
 
   getFormattedDate(): string {
     if (this.article?.creationDate) {

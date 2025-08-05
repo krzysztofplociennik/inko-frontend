@@ -20,20 +20,6 @@ export class AllArticlesItemComponent {
 
   @Input() 
   article: AllArticlesItem | undefined;
-  
-  @Input() 
-  isHovered: boolean = false;
-
-  getCurrentStyle(): { [klass: string]: any; } {
-    return {
-      'height': '130px',
-      'background': this.getBackgroundColor(),
-    };
-  }
-
-  getBackgroundColor(): string { 
-    return this.isHovered? '#e6eef5' : 'white';
-  }
 
   getFormattedType(): string {
     return this.article?.type ? StringUtils.loseCaps(this.article.type) : 'Unknown Type';
