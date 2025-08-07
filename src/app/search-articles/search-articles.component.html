@@ -40,8 +40,7 @@
         <div id="searchArticlesContent">
             <ul *ngFor="let articleItem of articles; let i = index">
                 <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
-                    <app-result-item [routerLink]="['/article-details', articleItem.id]" [article]="articleItem"
-                        [isHovered]="hoveredIndex === i"></app-result-item>
+                    <app-result-item [routerLink]="['/article-details', articleItem.id]" [article]="articleItem"></app-result-item>
                 </div>
             </ul>
             <div id="resultsMessageDiv" *ngIf="articles.length === 0">{{ resultsMessage }}</div>
