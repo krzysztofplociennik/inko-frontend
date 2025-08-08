@@ -4,11 +4,25 @@ import { ImportService } from '../shared/services/import.service';
 import { MessageService } from 'primeng/api';
 import { getBaseUrl } from '../shared/utils/urlUtils';
 import { JwtUtils } from '../shared/utils/jwtUtils';
+import { HeaderComponent } from '../shared/header/header.component';
+import { FooterComponent } from '../shared/footer/footer.component';
+import { ButtonModule } from 'primeng/button';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrl: './settings.component.css'
+    selector: 'app-settings',
+    templateUrl: './settings.component.html',
+    styleUrl: './settings.component.css',
+    imports: [
+      HeaderComponent,
+      FooterComponent,
+      ButtonModule,
+      FileUploadModule,
+      ProgressSpinnerModule,
+      CommonModule,
+    ],
 })
 export class SettingsComponent {
 

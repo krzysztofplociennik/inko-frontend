@@ -3,11 +3,33 @@ import { CreateArticleService } from './service/create-article.service';
 import { ArticleType } from './article';
 import { MessageService } from 'primeng/api';
 import { ArticleReadService } from '../shared/services/article-read.service';
+import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../shared/header/header.component';
+import { FooterComponent } from '../shared/footer/footer.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DropdownModule } from 'primeng/dropdown';
+import { ChipsModule } from 'primeng/chips';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { EditorModule } from 'primeng/editor';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-new-article',
-  templateUrl: './new-article.component.html',
-  styleUrls: ['./new-article.component.css'],
+    selector: 'app-new-article',
+    templateUrl: './new-article.component.html',
+    styleUrls: ['./new-article.component.css'],
+    imports: [
+      CommonModule,
+      HeaderComponent,
+      FooterComponent,
+      ProgressSpinnerModule,
+      DropdownModule,
+      ChipsModule,
+      ButtonModule,
+      InputTextModule,
+      EditorModule,
+      FormsModule,
+    ]
 })
 export class NewArticleComponent implements OnInit {
   articleTypes: ArticleType[] = [];

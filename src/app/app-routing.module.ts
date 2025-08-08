@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { SearchArticlesComponent } from './search-articles/search-articles.component';
@@ -10,7 +9,7 @@ import { LoginComponent } from './shared/login/login.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   { 
     path: 'search-articles', 
     component: SearchArticlesComponent 
@@ -28,10 +27,6 @@ const routes: Routes = [
     component: NewArticleComponent,
     canActivate: [AuthGuard]
    },
-  { 
-    path: 'about', 
-    component: AboutComponent 
-  },
   { 
     path: 'login', 
     component: LoginComponent 

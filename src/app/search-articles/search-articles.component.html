@@ -5,7 +5,7 @@
         <div id="searchForArticlesDiv">
 
             <div id="searchInputArea">
-                <p-autoComplete id="searchInputText" placeholder="Search for articles here!" [size]="30"
+                <p-autoComplete id="searchInputText" placeholder="Search for articles here!"
                     [(ngModel)]="selectedPhrase" [suggestions]="autocompleteSuggestions"
                     (completeMethod)="searchForAutocompletes($event)" (keydown.enter)="searchForArticles(this.pageNumber, this.pageSize)" />
 
@@ -40,8 +40,7 @@
         <div id="searchArticlesContent">
             <ul *ngFor="let articleItem of articles; let i = index">
                 <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
-                    <app-result-item [routerLink]="['/article-details', articleItem.id]" [article]="articleItem"
-                        [isHovered]="hoveredIndex === i"></app-result-item>
+                    <app-result-item [routerLink]="['/article-details', articleItem.id]" [article]="articleItem"></app-result-item>
                 </div>
             </ul>
             <div id="resultsMessageDiv" *ngIf="articles.length === 0">{{ resultsMessage }}</div>
