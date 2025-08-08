@@ -1,29 +1,25 @@
 import { Component, Input } from '@angular/core';
 import { ArticleSearch } from './article-result';
 import { DateUtils } from 'src/app/shared/utils/dateUtils';
+import { CardModule } from 'primeng/card';
+import { ChipModule } from 'primeng/chip';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-result-item',
-  templateUrl: './search-result-item.component.html',
-  styleUrl: './search-result-item.component.css',
+    selector: 'app-result-item',
+    templateUrl: './search-result-item.component.html',
+    styleUrl: './search-result-item.component.css',
+    imports: [
+      CommonModule,
+      CardModule,
+      ChipModule,
+    ]
 })
 export class ResultItemComponent {
 
   @Input() article: ArticleSearch | undefined;
-  @Input() isHovered: boolean = false;
 
   currentStyle: { [klass: string]: any; } | undefined;
-
-  getCurrentStyle(): { [klass: string]: any; } {
-    return {
-      'height': '125px',
-      'background': this.getBackgroundColor(),
-    };
-  }
-
-  getBackgroundColor(): string { 
-    return this.isHovered? '#e6eef5' : 'white';
-  }
 
   getFormattedDate(): string {
     if (this.article?.creationDate) {

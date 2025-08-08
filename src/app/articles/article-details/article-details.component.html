@@ -4,60 +4,37 @@
 
         <div *ngIf="isLoggedIn" id="actionButtonsDiv">
             <p-confirmDialog />
-            <p-button 
-                *ngIf="!isEditMode"
-                label="Edit" 
-                severity="secondary"    
-                icon="pi pi-pencil"
+            <p-button *ngIf="!isEditMode" label="Edit" severity="secondary" icon="pi pi-pencil"
                 [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
                 (onClick)="enableEditMode()" />
-            <p-button 
-                *ngIf="!isEditMode"
-                label="Delete" 
-                severity="danger"    
-                icon="pi pi-trash"
+            <p-button *ngIf="!isEditMode" label="Delete" severity="danger" icon="pi pi-trash"
                 [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
                 (onClick)="deleteArticle()" />
-            <p-button
-                *ngIf="isEditMode"
-                icon="pi pi-check"
-                label="Update" 
-                severity="success"
+            <p-button *ngIf="isEditMode" icon="pi pi-check" label="Update" severity="success"
                 [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
-                (onClick)="updateArticle()"
-                />
-            <p-button
-                *ngIf="isEditMode"
-                icon="pi pi-times"
-                label="Cancel" 
-                severity="secondary"
-                [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"  
-                (onClick)="cancelEdit()"
-                />
-        </div>
-        
-        <div id="titleDiv" *ngIf="!isEditMode">{{article?.title}}</div>
-        <div id="titleDiv2" *ngIf="isEditMode">
-            <label> Title: </label>
-            <input pInputText [(ngModel)]="editedArticle.title" 
-            [style]="{'width': '960px'}" 
-            class="w-full"/>
+                (onClick)="updateArticle()" />
+            <p-button *ngIf="isEditMode" icon="pi pi-times" label="Cancel" severity="secondary"
+                [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}" (onClick)="cancelEdit()" />
         </div>
 
-        <div id="typeContainer" *ngIf="isEditMode">
-            <label id="typeLabel"> Type: </label>
-            <p-dropdown 
-                *ngIf="areArticleTypesPopulated()"
-                id="articleTypesDropdown"
-                [options]="articleTypes" 
-                [(ngModel)]="editedArticle.type" 
-                optionLabel="name"
-                placeholder="Select the new type"
-            />
+        <div id="titleDivNonEdit" *ngIf="!isEditMode">{{article?.title}}</div>
+        <div id="titleDivEdit" *ngIf="isEditMode">
+            <p-floatlabel>
+                <label> Title: </label>
+                <input pInputText [(ngModel)]="editedArticle.title" [style]="{'width': '960px'}" class="w-full" />
+            </p-floatlabel>
+        </div>
+
+        <div id="typeDiv" *ngIf="isEditMode">
+            <p-floatlabel> 
+                            <label id="typeLabel"> Type: </label>
+            <p-dropdown *ngIf="areArticleTypesPopulated()" id="articleTypesDropdown" [options]="articleTypes"
+                [(ngModel)]="editedArticle.type" optionLabel="name" placeholder="Select the new type" />
+            </p-floatlabel>
         </div>
 
 
-        <div id="tags" *ngIf="!isEditMode">
+        <div id="tagsDivNonEdit" *ngIf="!isEditMode">
             <div *ngFor="let tag of article?.tags" style="display: inline-block; margin-left: 5px;">
                 <p-chip [style]="{
                     'height': '30px',
@@ -67,25 +44,26 @@
                     }">{{ tag }}</p-chip>
             </div>
         </div>
-        <div id="tagsContainer" *ngIf="isEditMode">
-            <label> Tags: </label>
-            <div id="tags">
+        <div id="tagsDivEdit" *ngIf="isEditMode">
+            <p-floatLabel>
+                            <label> Tags: </label>
+            <div>
                 <p-chips [(ngModel)]="editedArticle.tags" [separator]="','" placeholder="Add tags"></p-chips>
             </div>
+            </p-floatLabel>
         </div>
 
         <div id="contentOutline">
-
-            <div id="contentDiv" *ngIf="!isEditMode" [innerHTML]="article?.content"></div>
-            <div id="contentDiv" *ngIf="isEditMode">    
-                <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="editedArticle.content" [style]="{ height: 'auto', width: '960px' }" />
+            <div id="contentDivNonEdit" *ngIf="!isEditMode" [innerHTML]="article?.content"></div>
+            <div id="contentDivEdit" *ngIf="isEditMode">
+                <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="editedArticle.content"
+                    [style]="{ height: 'auto', width: 'auto' }" />
             </div>
         </div>
 
         <div *ngIf="shouldSpinnerWork" class="overlay">
             <p-progressSpinner styleClass="overlay-spinner"></p-progressSpinner>
         </div>
-          
 
     </div>
     <app-footer class="footer" id="footer"></app-footer>

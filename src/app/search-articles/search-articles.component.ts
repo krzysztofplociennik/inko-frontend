@@ -9,6 +9,21 @@ import { SearchResult } from './search-result-item/search-result.api';
 import { ArticleType } from '../new-article/article';
 import { ArticleReadService } from '../shared/services/article-read.service';
 import { PageEvent } from '../shared/pagination/page-event.api';
+import { AutoCompleteModule } from "primeng/autocomplete";
+import { ButtonModule } from "primeng/button";
+import { InputSwitchModule } from "primeng/inputswitch";
+import { CalendarModule } from "primeng/calendar";
+import { ChipsModule } from "primeng/chips";
+import { ProgressSpinnerModule } from "primeng/progressspinner";
+import { PaginatorModule } from 'primeng/paginator';
+import { CommonModule } from '@angular/common';
+import { FooterComponent } from '../shared/footer/footer.component';
+import { ResultItemComponent } from './search-result-item/search-result-item.component';
+import { RouterLink } from '@angular/router';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from '../shared/header/header.component';
 
 interface AutoCompleteEvent {
   originalEvent: Event;
@@ -18,7 +33,28 @@ interface AutoCompleteEvent {
 @Component({
   selector: 'app-search-articles',
   templateUrl: './search-articles.component.html',
-  styleUrls: ['./search-articles.component.css']
+  styleUrls: ['./search-articles.component.css'],
+  imports: [
+    FormsModule,
+    AutoCompleteModule,
+    DropdownModule,
+    ButtonModule,
+    InputSwitchModule,
+    CalendarModule,
+    ChipsModule,
+    ProgressSpinnerModule,
+    PaginatorModule,
+    CommonModule,
+    FooterComponent, 
+    ResultItemComponent, 
+    RouterLink, 
+    InputTextModule, 
+    HeaderComponent,
+  ],
+  providers: [
+    AuthService,
+    LoadingNotifierService,
+  ]
 })
 export class SearchArticlesComponent implements OnInit {
 

@@ -6,12 +6,43 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ArticleType } from 'src/app/new-article/article';
 import { ArticleReadService } from 'src/app/shared/services/article-read.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from 'src/app/shared/header/header.component';
+import { FooterComponent } from 'src/app/shared/footer/footer.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { ChipModule } from 'primeng/chip';
+import { ChipsModule } from 'primeng/chips';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { InputTextModule } from 'primeng/inputtext';
+import { EditorModule } from 'primeng/editor';
+import { FloatLabelModule } from 'primeng/floatlabel'
 
 @Component({
-  selector: 'app-article-details',
-  templateUrl: './article-details.component.html',
-  styleUrl: './article-details.component.css',
-  providers: [ConfirmationService]
+    selector: 'app-article-details',
+    templateUrl: './article-details.component.html',
+    styleUrl: './article-details.component.css',
+    providers: [
+      ConfirmationService,
+      AuthService,
+    ],
+    imports: [
+      CommonModule,
+      FormsModule,
+      HeaderComponent,
+      FooterComponent,
+      ConfirmDialogModule,
+      ButtonModule,
+      DropdownModule,
+      ChipModule,
+      ChipsModule,
+      ProgressSpinnerModule, 
+      InputTextModule,
+      EditorModule,
+      FloatLabelModule,
+    ],
 })
 export class ArticleDetailsComponent implements OnInit {
   articleID: string = '';
@@ -130,7 +161,7 @@ export class ArticleDetailsComponent implements OnInit {
             this.isEditMode = false;
             this.messageService.add({ 
               severity: 'success', 
-              summary: 'Success', 
+              summary: 'Updated!', 
               detail: 'Article updated successfully!',
               life: 3000 
             });
@@ -140,7 +171,7 @@ export class ArticleDetailsComponent implements OnInit {
             console.error('Error updating article', error);
             this.messageService.add({ 
               severity: 'error', 
-              summary: 'Error', 
+              summary: 'Error!', 
               detail: 'Failed to update article.',
               life: 3000 
             });
@@ -162,12 +193,12 @@ export class ArticleDetailsComponent implements OnInit {
       accept: () => {
         this.articleService.deleteArticle(this.articleID).subscribe({
           next: () => {
-            this.messageService.add({ severity: 'success', summary: 'Accepted', detail: 'The article has been deleted!', life: 3000 });
+            this.messageService.add({ severity: 'success', summary: 'Deleted!', detail: 'The article has been deleted!', life: 3000 });
             this.router.navigate(['/articles']);
           },
           error: (e) => {
             console.error('Error deleting article', e);
-            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'There was an error during deleting the article.', life: 3000 });
+            this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'There was an error during deleting the article.', life: 3000 });
           }
         });
       },

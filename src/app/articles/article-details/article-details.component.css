@@ -26,19 +26,19 @@
 }
 /* header/footer wrapper */
 
-#titleDiv {
+#titleDivNonEdit {
     font-size: 300%;
     margin: 40px 40px 40px 40px;
 }
 
-#titleDiv2 {
+#titleDivEdit {
     width: 40%;
     height: auto;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-#contentDiv {
+#contentDivNonEdit, #contentDivEdit {
     display: flex;
     flex-direction: column;
     width: 90%;
@@ -51,16 +51,16 @@
     border-radius: 20px;
 }
 
-#tagsContainer {
+#tagsDivEdit {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 40%;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 1.7rem;
+    margin-bottom: 1rem;
 }
 
-#tags {
+#tagsDivNonEdit {
     margin-top: 5px;
     margin-bottom: 5px;
     width: auto;
@@ -79,7 +79,7 @@ label {
     margin-right: 13px;
 }
 
-#typeContainer {
+#typeDiv {
     width: 40%;
-    margin-top: 4px;
+    margin-top: 1.5rem;
 }

@@ -2,30 +2,24 @@ import { Component, Input } from '@angular/core';
 import { AllArticlesItem } from '../articles-service/all-articles-item';
 import { DateUtils } from 'src/app/shared/utils/dateUtils';
 import { StringUtils } from 'src/app/shared/utils/stringUtils';
+import { CardModule } from 'primeng/card';
+import { ChipModule } from 'primeng/chip';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-all-articles-item',
-  templateUrl: './all-articles-item.component.html',
-  styleUrl: './all-articles-item.component.css'
+    selector: 'app-all-articles-item',
+    templateUrl: './all-articles-item.component.html',
+    styleUrl: './all-articles-item.component.css',
+    imports: [
+      CardModule,
+      ChipModule,
+      CommonModule,
+    ]
 })
 export class AllArticlesItemComponent {
 
   @Input() 
   article: AllArticlesItem | undefined;
-  
-  @Input() 
-  isHovered: boolean = false;
-
-  getCurrentStyle(): { [klass: string]: any; } {
-    return {
-      'height': '130px',
-      'background': this.getBackgroundColor(),
-    };
-  }
-
-  getBackgroundColor(): string { 
-    return this.isHovered? '#e6eef5' : 'white';
-  }
 
   getFormattedType(): string {
     return this.article?.type ? StringUtils.loseCaps(this.article.type) : 'Unknown Type';
