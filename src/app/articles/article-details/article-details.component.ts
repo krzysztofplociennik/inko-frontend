@@ -16,6 +16,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ChipModule } from 'primeng/chip';
 import { ChipsModule } from 'primeng/chips';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { InputTextModule } from 'primeng/inputtext';
+import { EditorModule } from 'primeng/editor';
+import { FloatLabelModule } from 'primeng/floatlabel'
 
 @Component({
     selector: 'app-article-details',
@@ -36,6 +39,9 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
       ChipModule,
       ChipsModule,
       ProgressSpinnerModule, 
+      InputTextModule,
+      EditorModule,
+      FloatLabelModule,
     ],
 })
 export class ArticleDetailsComponent implements OnInit {

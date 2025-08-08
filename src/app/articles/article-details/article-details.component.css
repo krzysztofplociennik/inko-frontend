@@ -56,8 +56,8 @@
     flex-direction: row;
     align-items: center;
     width: 40%;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 1.7rem;
+    margin-bottom: 1rem;
 }
 
 #tagsDivNonEdit {
@@ -81,5 +81,5 @@ label {
 
 #typeDiv {
     width: 40%;
-    margin-top: 4px;
+    margin-top: 1.5rem;
 }

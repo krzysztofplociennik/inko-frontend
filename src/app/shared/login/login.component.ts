@@ -8,6 +8,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
     selector: 'app-login',
@@ -21,6 +22,7 @@ import { ButtonModule } from 'primeng/button';
       ButtonModule,
       FormsModule,
       ReactiveFormsModule,
+      InputTextModule
     ],
     providers: [
       AuthService,
