@@ -24,7 +24,6 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     providers: [
       ConfirmationService,
       AuthService,
-      MessageService,
     ],
     imports: [
       CommonModule,
@@ -156,7 +155,7 @@ export class ArticleDetailsComponent implements OnInit {
             this.isEditMode = false;
             this.messageService.add({ 
               severity: 'success', 
-              summary: 'Success', 
+              summary: 'Updated!', 
               detail: 'Article updated successfully!',
               life: 3000 
             });
@@ -166,7 +165,7 @@ export class ArticleDetailsComponent implements OnInit {
             console.error('Error updating article', error);
             this.messageService.add({ 
               severity: 'error', 
-              summary: 'Error', 
+              summary: 'Error!', 
               detail: 'Failed to update article.',
               life: 3000 
             });
@@ -188,12 +187,12 @@ export class ArticleDetailsComponent implements OnInit {
       accept: () => {
         this.articleService.deleteArticle(this.articleID).subscribe({
           next: () => {
-            this.messageService.add({ severity: 'success', summary: 'Accepted', detail: 'The article has been deleted!', life: 3000 });
+            this.messageService.add({ severity: 'success', summary: 'Deleted!', detail: 'The article has been deleted!', life: 3000 });
             this.router.navigate(['/articles']);
           },
           error: (e) => {
             console.error('Error deleting article', e);
-            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'There was an error during deleting the article.', life: 3000 });
+            this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'There was an error during deleting the article.', life: 3000 });
           }
         });
       },

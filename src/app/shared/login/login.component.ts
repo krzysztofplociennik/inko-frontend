@@ -24,10 +24,7 @@ import { ButtonModule } from 'primeng/button';
     ],
     providers: [
       AuthService,
-      MessageService,
-      
     ]
-    // standalone: false
 })
 export class LoginComponent {
   loginForm: FormGroup;

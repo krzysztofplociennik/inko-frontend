@@ -24,7 +24,6 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../shared/header/header.component';
-import { MessageService } from 'primeng/api';
 
 interface AutoCompleteEvent {
   originalEvent: Event;
@@ -53,10 +52,8 @@ interface AutoCompleteEvent {
     HeaderComponent,
   ],
   providers: [
-    MessageService,
     AuthService,
     LoadingNotifierService,
-
   ]
 })
 export class SearchArticlesComponent implements OnInit {
