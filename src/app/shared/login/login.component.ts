@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
     selector: 'app-login',
@@ -22,7 +23,8 @@ import { InputTextModule } from 'primeng/inputtext';
       ButtonModule,
       FormsModule,
       ReactiveFormsModule,
-      InputTextModule
+      InputTextModule,
+      DialogModule,
     ],
     providers: [
       AuthService,
