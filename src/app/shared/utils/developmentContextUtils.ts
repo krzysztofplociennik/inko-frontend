@@ -3,7 +3,7 @@ import { getBaseUrl } from "./urlUtils";
 export class DevelopmentContextUtils {
 
     static isDev() {
-        return getBaseUrl().includes('localhost:8080');
+        return getBaseUrl().includes('localhost');
     }
 
     static isDemo() {

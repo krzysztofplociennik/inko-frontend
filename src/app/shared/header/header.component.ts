@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, computed, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, computed, signal, isDevMode } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -8,7 +8,7 @@ import { MessageService } from 'primeng/api';
 
 import { ThemeService, ThemeConfig } from '../services/theme.service';
 import { AuthService } from '../auth/auth.service';
-import { getBaseUrl } from '../utils/urlUtils';
+import { DevelopmentContextUtils } from '../utils/developmentContextUtils';
 
 interface BannerConfig {
   path: string;
@@ -23,30 +23,18 @@ interface BannerConfig {
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
-  
+
   isLoggedIn = signal(false);
   currentTheme = signal<ThemeConfig>({ dark: false });
-  
-  bannerConfig = computed<BannerConfig | null>(() => {
-    const baseUrl = getBaseUrl();
-    const bannerMap: Record<string, BannerConfig> = {
-      'http://localhost:8080': {
-        path: '../../../assets/graphics/banner/dev.png',
-        alt: 'Development Environment'
-      },
-      'demo': {
-        path: '../../../assets/graphics/banner/demo.png',
-        alt: 'Demo Environment'
-      }
-    };
-    return bannerMap[baseUrl] || null;
-  });
 
-  themeIcon = computed(() => 
+  bannerDevPath = '../../../assets/graphics/banner/dev.png';
+  bannerDemoPath = '../../../assets/graphics/banner/demo.png';
+
+  themeIcon = computed(() =>
     this.currentTheme().dark ? 'fa-solid fa-moon' : 'fa-solid fa-sun'
   );
 
-  themeLabel = computed(() => 
+  themeLabel = computed(() =>
     this.currentTheme().dark ? 'Switch to Light Mode' : 'Switch to Dark Mode'
   );
 
@@ -55,7 +43,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private messageService: MessageService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.authService.loginState$
@@ -75,6 +63,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   toggleTheme(): void {
     this.themeService.toggleDarkMode();
   }
+
+  getBannerPath() {
+    if (DevelopmentContextUtils.isDev()) {
+      return this.bannerDevPath;
+    }
+    return this.bannerDemoPath;
+  }
+
 
   logout() {
     try {
