@@ -64,6 +64,7 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 })
 export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
   @ViewChild('contentContainer', { static: false }) contentContainer!: ElementRef;
+  private codeBlocksEnhanced = false;
 
   articleID: string = '';
   article: ArticleDetails | null = null;
@@ -96,7 +97,6 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
 
   async ngOnInit(): Promise<void> {
     this.shouldSpinnerWork = true;
-
     try {
       this.articleID = this.activatedRoute.snapshot.url[1].path;
       this.loadLoginState();
@@ -105,18 +105,16 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
         this.loadArticleDetails()
       ]);
     } catch (error) {
-      console.log('Error while loading the article\'s details');
+      console.log('Error while loading the article\'s details -> ' + error);
     } finally {
       this.shouldSpinnerWork = false;
     }
   }
 
-  private codeBlocksEnhanced = false;
-
   ngAfterViewChecked(): void {
     if (!this.codeBlocksEnhanced && !this.isEditMode && this.article?.content) {
       const codeContainers = this.contentContainer?.nativeElement.querySelectorAll('.code-block-container');
-      if (codeContainers.length > 0) {
+      if (codeContainers && codeContainers.length > 0) {
         this.enhanceCodeBlocks();
         this.codeBlocksEnhanced = true;
       }
@@ -339,7 +337,7 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
               life: 3000
             });
             this.shouldSpinnerWork = false;
-            setTimeout(() => this.enhanceCodeBlocks(), 200);
+            this.codeBlocksEnhanced = false;
           },
           error: (error) => {
             console.error('Error updating article', error);
