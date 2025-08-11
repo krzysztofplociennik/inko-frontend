@@ -5,9 +5,11 @@
     height: 100%;
     min-height: 100vh;
 }
+
 .header {
     width: 100%;
 }
+
 #contentWrapper {
     display: flex;
     flex-direction: column;
@@ -15,12 +17,14 @@
     width: 100%;
     flex: 1;
 }
+
 .footer {
     position: relative;
-    bottom: 0;  
+    bottom: 0;
     width: 100%;
     margin-top: 30px;
 }
+
 /* header/footer wrapper */
 
 #titleDivNonEdit {
@@ -35,12 +39,14 @@
     margin-bottom: 5px;
 }
 
-#contentDivNonEdit, #contentDivEdit {
+#contentDivNonEdit,
+#contentDivEdit {
     display: flex;
     flex-direction: column;
     width: 90%;
-    margin: 45px;  
+    margin: 45px;
     line-height: 1.5;
+    overflow-wrap: break-word;
 }
 
 #contentOutline {
@@ -70,7 +76,7 @@
 
 label {
     margin-right: 21px;
-}  
+}
 
 #typeLabel {
     margin-right: 13px;
@@ -123,7 +129,7 @@ label {
     border-radius: 6px;
     padding: 8px;
     cursor: pointer;
-    opacity: 0.8; 
+    opacity: 0.8;
     transition: all 0.3s ease;
     font-size: 14px;
     display: flex;
@@ -207,13 +213,13 @@ label {
         margin: 15px 0;
         border-radius: 8px;
     }
-    
+
     ::ng-deep .code-block-container pre {
         padding: 16px 50px 16px 16px;
         font-size: 13px;
         border-radius: 8px;
     }
-    
+
     ::ng-deep .copy-button {
         top: 8px;
         right: 8px;
@@ -221,7 +227,7 @@ label {
         width: 32px;
         height: 32px;
     }
-    
+
     ::ng-deep .code-block-container::before {
         top: 8px;
         left: 16px;
