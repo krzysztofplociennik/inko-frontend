@@ -92,7 +92,6 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -140,12 +139,10 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
     );
   }
 
-
   private enhanceCodeBlocks(): void {
     if (!this.contentContainer?.nativeElement) {
       return;
     }
-
     const codeContainers = this.contentContainer.nativeElement.querySelectorAll('.code-block-container');
 
     codeContainers.forEach((container: HTMLElement) => {
