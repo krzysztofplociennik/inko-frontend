@@ -53,10 +53,9 @@
             </p-floatLabel>
         </div>
 
-        <!-- Replace your contentOutline div with this simpler version: -->
         <div id="contentOutline">
             <div id="contentDivNonEdit" *ngIf="!isEditMode" #contentContainer>
-                <div [innerHTML]="processedContent"></div>
+                <div [innerHTML]="processContent()"></div>
             </div>
             <div id="contentDivEdit" *ngIf="isEditMode">
                 <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="editedArticle.content"

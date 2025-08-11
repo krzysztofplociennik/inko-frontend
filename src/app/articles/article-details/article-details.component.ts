@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ArticlesService } from '../articles-service/articles.service';
 import { ArticleDetails } from './article-details';
@@ -22,47 +22,47 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
 @Component({
-    selector: 'app-article-details',
-    templateUrl: './article-details.component.html',
-    styleUrl: './article-details.component.css',
-    providers: [
-      ConfirmationService,
-      AuthService,
-      {
-        provide: HIGHLIGHT_OPTIONS,
-        useValue: {
-          coreLibraryLoader: () => import('highlight.js/lib/core'),
-          languages: {
-            bash: () => import('highlight.js/lib/languages/bash'),
-            plaintext: () => import('highlight.js/lib/languages/plaintext'),
-            javascript: () => import('highlight.js/lib/languages/javascript'),
-            typescript: () => import('highlight.js/lib/languages/typescript'),
-            json: () => import('highlight.js/lib/languages/json'),
-            xml: () => import('highlight.js/lib/languages/xml'),
-            css: () => import('highlight.js/lib/languages/css'),
-            shell: () => import('highlight.js/lib/languages/shell'),
-          }
+  selector: 'app-article-details',
+  templateUrl: './article-details.component.html',
+  styleUrl: './article-details.component.css',
+  providers: [
+    ConfirmationService,
+    AuthService,
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        coreLibraryLoader: () => import('highlight.js/lib/core'),
+        languages: {
+          bash: () => import('highlight.js/lib/languages/bash'),
+          plaintext: () => import('highlight.js/lib/languages/plaintext'),
+          javascript: () => import('highlight.js/lib/languages/javascript'),
+          typescript: () => import('highlight.js/lib/languages/typescript'),
+          json: () => import('highlight.js/lib/languages/json'),
+          xml: () => import('highlight.js/lib/languages/xml'),
+          css: () => import('highlight.js/lib/languages/css'),
+          shell: () => import('highlight.js/lib/languages/shell'),
         }
       }
-    ],
-    imports: [
-      CommonModule,
-      FormsModule,
-      HeaderComponent,
-      FooterComponent,
-      ConfirmDialogModule,
-      ButtonModule,
-      DropdownModule,
-      ChipModule,
-      ChipsModule,
-      ProgressSpinnerModule, 
-      InputTextModule,
-      EditorModule,
-      FloatLabelModule,
-      HighlightModule,
-    ],
+    }
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HeaderComponent,
+    FooterComponent,
+    ConfirmDialogModule,
+    ButtonModule,
+    DropdownModule,
+    ChipModule,
+    ChipsModule,
+    ProgressSpinnerModule,
+    InputTextModule,
+    EditorModule,
+    FloatLabelModule,
+    HighlightModule,
+  ],
 })
-export class ArticleDetailsComponent implements OnInit, AfterViewInit {
+export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
   @ViewChild('contentContainer', { static: false }) contentContainer!: ElementRef;
 
   articleID: string = '';
@@ -92,16 +92,15 @@ export class ArticleDetailsComponent implements OnInit, AfterViewInit {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private authService: AuthService,
-  ) {}
+    private cdr: ChangeDetectorRef
+  ) { }
 
   async ngOnInit(): Promise<void> {
     this.shouldSpinnerWork = true;
-  
+
     try {
       this.articleID = this.activatedRoute.snapshot.url[1].path;
-  
       this.loadLoginState();
-  
       await Promise.all([
         this.loadTypes(),
         this.loadArticleDetails()
@@ -113,76 +112,151 @@ export class ArticleDetailsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
-    if (!this.isEditMode) {
-      this.enhanceCodeBlocks();
+  private codeBlocksEnhanced = false;
+
+  ngAfterViewChecked(): void {
+    if (!this.codeBlocksEnhanced && !this.isEditMode && this.article?.content) {
+      const codeContainers = this.contentContainer?.nativeElement.querySelectorAll('.code-block-container');
+      if (codeContainers.length > 0) {
+        this.enhanceCodeBlocks();
+        this.codeBlocksEnhanced = true;
+      }
     }
   }
 
-  get processedContent(): string {
+  processContent(): string {
     if (!this.article?.content) return '';
-    
-    // Process the content to enhance code blocks
     return this.article.content.replace(
       /<pre data-language="([^"]*)">([\s\S]*?)<\/pre>/g,
       (match, lang, code) => {
         const language = lang || 'plaintext';
         const cleanCode = this.decodeHtmlEntities(code.trim());
         const escapedCode = this.escapeHtml(cleanCode);
-        
+
         return `<div class="code-block-container" data-language="${language}">
-                  <pre><code class="hljs language-${language}">${escapedCode}</code></pre>
-                  <button class="copy-button" onclick="window.copyCodeToClipboard(this, \`${cleanCode.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)">
-                    <i class="pi pi-copy"></i>
-                  </button>
-                </div>`;
+                <pre><code class="hljs language-${language}">${escapedCode}</code></pre>
+              </div>`;
       }
     );
   }
 
-  private enhanceCodeBlocks(): void {
-    // Add global copy function
-    (window as any).copyCodeToClipboard = (button: HTMLElement, code: string) => {
-      navigator.clipboard.writeText(code).then(() => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Copied!',
-          detail: 'Code copied to clipboard',
-          life: 2000
-        });
-        
-        // Visual feedback
-        const icon = button.querySelector('i');
-        if (icon) {
-          const originalClass = icon.className;
-          icon.className = 'pi pi-check';
-          setTimeout(() => {
-            icon.className = originalClass;
-          }, 1000);
-        }
-      }).catch(err => {
-        console.error('Failed to copy text: ', err);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Copy Failed',
-          detail: 'Failed to copy code to clipboard',
-          life: 2000
-        });
-      });
-    };
 
-    // Apply syntax highlighting after DOM update
-    setTimeout(() => {
-      if (this.contentContainer?.nativeElement) {
-        const codeBlocks = this.contentContainer.nativeElement.querySelectorAll('pre code');
-        codeBlocks.forEach((block: HTMLElement) => {
-          // Manually trigger highlight.js if needed
-          if (typeof (window as any).hljs !== 'undefined') {
-            (window as any).hljs.highlightElement(block);
-          }
-        });
+  private enhanceCodeBlocks(): void {
+    if (!this.contentContainer?.nativeElement) {
+      return;
+    }
+
+    const codeContainers = this.contentContainer.nativeElement.querySelectorAll('.code-block-container');
+
+    codeContainers.forEach((container: HTMLElement) => {
+
+      const existingButton = container.querySelector('.copy-button');
+      if (existingButton) {
+        existingButton.remove();
       }
-    }, 100);
+
+      const codeElement = container.querySelector('code');
+      if (!codeElement) {
+        return;
+      }
+
+      const codeText = codeElement.textContent || '';
+
+      const copyButton = document.createElement('button');
+      copyButton.className = 'copy-button';
+      copyButton.innerHTML = '<i class="pi pi-copy"></i>';
+      copyButton.title = 'Copy to clipboard';
+      copyButton.style.cssText = `
+        position: absolute !important;
+        top: 12px !important;
+        right: 12px !important;
+        background: black !important;
+        color: white !important;
+        border: 2px solid white !important;
+        border-radius: 20px !important;
+        padding: 8px !important;
+        cursor: pointer !important;
+        width: 2.2rem !important;
+        height: 2.2rem !important;
+        z-index: 1000 !important;
+        display: block !important;
+      `;
+
+      copyButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.copyCodeToClipboard(codeText, copyButton);
+      });
+
+      container.style.position = 'relative';
+      container.appendChild(copyButton);
+    });
+
+    const codeBlocks = this.contentContainer.nativeElement.querySelectorAll('pre code');
+    codeBlocks.forEach((block: HTMLElement) => {
+      if (typeof (window as any).hljs !== 'undefined') {
+        (window as any).hljs.highlightElement(block);
+      }
+    });
+  }
+
+  private copyCodeToClipboard(code: string, button: HTMLButtonElement): void {
+    navigator.clipboard.writeText(code).then(() => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Copied!',
+        detail: 'Code copied to clipboard',
+        life: 2000
+      });
+
+      const icon = button.querySelector('i');
+      if (icon) {
+        const originalClass = icon.className;
+        icon.className = 'pi pi-check';
+        icon.style.color = 'green';
+        button.style.background = 'white';
+
+        setTimeout(() => {
+          icon.className = originalClass;
+          icon.style.color = 'white';
+          button.style.background = 'black';
+        }, 2000);
+      }
+    }).catch(err => {
+      this.fallbackCopyTextToClipboard(code);
+    });
+  }
+
+  private fallbackCopyTextToClipboard(text: string): void {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.top = '0';
+    textArea.style.left = '0';
+    textArea.style.opacity = '0';
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      document.execCommand('copy');
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Copied!',
+        detail: 'Code copied to clipboard',
+        life: 2000
+      });
+    } catch (err) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Copy Failed',
+        detail: 'Failed to copy code to clipboard',
+        life: 2000
+      });
+    }
+
+    document.body.removeChild(textArea);
   }
 
   private decodeHtmlEntities(text: string): string {
@@ -209,7 +283,7 @@ export class ArticleDetailsComponent implements OnInit, AfterViewInit {
       }
     )
   }
-  
+
   private loadLoginState() {
     this.authService.loginState$.subscribe((state) => {
       this.isLoggedIn = state;
@@ -256,35 +330,34 @@ export class ArticleDetailsComponent implements OnInit, AfterViewInit {
       rejectButtonStyleClass: "p-button-text",
       accept: async () => {
         this.shouldSpinnerWork = true;
-  
+
         this.articleService.updateArticle(this.editedArticle).subscribe({
           next: (response) => {
             this.article = response;
             this.isEditMode = false;
-            this.messageService.add({ 
-              severity: 'success', 
-              summary: 'Updated!', 
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Updated!',
               detail: 'Article updated successfully!',
-              life: 3000 
+              life: 3000
             });
             this.shouldSpinnerWork = false;
-            // Re-enhance code blocks after update
-            setTimeout(() => this.enhanceCodeBlocks(), 100);
+            setTimeout(() => this.enhanceCodeBlocks(), 200);
           },
           error: (error) => {
             console.error('Error updating article', error);
-            this.messageService.add({ 
-              severity: 'error', 
-              summary: 'Error!', 
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error!',
               detail: 'Failed to update article.',
-              life: 3000 
+              life: 3000
             });
             this.shouldSpinnerWork = false;
           }
         });
       }
     });
-  }  
+  }
 
   deleteArticle(): void {
     this.confirmationService.confirm({
@@ -302,7 +375,7 @@ export class ArticleDetailsComponent implements OnInit, AfterViewInit {
           },
           error: (e) => {
             console.error('Error deleting article', e);
-            this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'There was an error during deleting the article.', life: 3000 });
+            this.messageService.add({ severity: 'error', summary: 'Error!', detail: 'There was an error during deleting the article.', life: 2000 });
           }
         });
       },
