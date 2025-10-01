@@ -6,6 +6,10 @@
             <p-progressSpinner styleClass="overlay-spinner"></p-progressSpinner>
         </div>
 
+        <div id="noArticlesMessage" *ngIf="totalSearchRecords === 0">
+            There are no articles yet!
+        </div>
+
         <div id="allArticlesDiv">
             <ul *ngFor="let item of articlesResults; let i = index">
                 <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
