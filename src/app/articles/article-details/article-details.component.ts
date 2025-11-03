@@ -20,6 +20,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { EditorModule } from 'primeng/editor';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import { LastActivePageService } from 'src/app/shared/services/last-active-page.service';
 
 @Component({
   selector: 'app-article-details',
@@ -93,6 +94,7 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private authService: AuthService,
+    private lastActivePageService: LastActivePageService
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -108,6 +110,7 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
       console.log('Error while loading the article\'s details -> ' + error);
     } finally {
       this.shouldSpinnerWork = false;
+      this.lastActivePageService.updateLastActiveUrl('/article-details/' + this.articleID)
     }
   }
 
