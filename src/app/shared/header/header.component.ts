@@ -9,6 +9,8 @@ import { MessageService } from 'primeng/api';
 import { ThemeService, ThemeConfig } from '../services/theme.service';
 import { AuthService } from '../auth/auth.service';
 import { DevelopmentContextUtils } from '../utils/developmentContextUtils';
+import { getBaseUrl } from '../utils/urlUtils';
+import { LastActivePageService } from '../services/last-active-page.service';
 
 interface BannerConfig {
   path: string;
@@ -42,8 +44,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private themeService: ThemeService,
     private authService: AuthService,
     private messageService: MessageService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private lastActivePageService: LastActivePageService
+  ) {}
 
   ngOnInit(): void {
     this.authService.loginState$
@@ -80,7 +83,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         summary: 'Success',
         detail: 'You have been successfully logged out!'
       });
-      this.router.navigate(['/']);
+      // this.router.navigate(['/']);
+      this.router.navigate([this.lastActivePageService.getLastActiveUrl()]);
     } catch (error) {
       this.messageService.add({
         severity: 'error',

@@ -18,6 +18,7 @@ import { AllArticlesItemComponent } from './all-articles-item/all-articles-item.
 import { PaginatorModule } from 'primeng/paginator';
 import { RouterLink } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { LastActivePageService } from '../shared/services/last-active-page.service';
 
 @Component({
     selector: 'app-articles',
@@ -62,11 +63,13 @@ export class ArticlesComponent {
     private authService: AuthService,
     private exportService: ExportService,
     private loadingNotifier: LoadingNotifierService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private lastActivePageService: LastActivePageService
   ) {
     this.isLoggedIn = false;
     this.first = 0;
     this.pageNumber = 0;
+    this.lastActivePageService.updateLastActiveUrl('/articles')
   }
 
   async ngOnInit(): Promise<void> {

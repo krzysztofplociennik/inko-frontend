@@ -97,6 +97,7 @@ export class SettingsComponent {
     } finally {
       this.isUploading = false;
       this.shouldSpinnerWork = false;
+      this.uploadedFiles = [];
     }
   }
 }

@@ -10,6 +10,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { DialogModule } from 'primeng/dialog';
+import { LastActivePageService } from '../services/last-active-page.service';
 
 @Component({
     selector: 'app-login',
@@ -43,6 +44,7 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router,
     private messageService: MessageService,
+    private lastActivePageService: LastActivePageService
   ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -70,7 +72,8 @@ export class LoginComponent {
       next: (response: AuthResponse) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You are logged in!' });
         this.authService.setToken(response.token);
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
+        this.router.navigate([this.lastActivePageService.getLastActiveUrl()]);
       },
       error: (err) => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Wrong credentials, try again.' });
