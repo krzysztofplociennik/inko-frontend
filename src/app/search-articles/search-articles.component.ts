@@ -24,6 +24,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../shared/header/header.component';
+import { LastActivePageService } from '../shared/services/last-active-page.service';
 
 interface AutoCompleteEvent {
   originalEvent: Event;
@@ -87,9 +88,11 @@ export class SearchArticlesComponent implements OnInit {
     public searchService: SearchService,
     private authService: AuthService,
     private loadingNotifierService: LoadingNotifierService,
-    private articleReadService: ArticleReadService
+    private articleReadService: ArticleReadService,
+    private lastActivePageService: LastActivePageService
   ) {
     this.isUserLoggedIn = false;
+    this.lastActivePageService.updateLastActiveUrl('/search-articles')
   }
 
   ngOnInit() {
