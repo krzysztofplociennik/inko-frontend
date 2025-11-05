@@ -104,3 +104,11 @@
 #resultsMessageDiv {
     text-align: center;
 }
+
+#sortingTypesDropdown {
+    margin-left: 1rem;
+}
+
+#applySortButton {
+    margin-left: 1rem;
+}

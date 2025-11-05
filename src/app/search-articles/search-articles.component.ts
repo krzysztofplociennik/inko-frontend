@@ -25,6 +25,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../shared/header/header.component';
 import { LastActivePageService } from '../shared/services/last-active-page.service';
+import { SortField, SortType } from '../shared/sorting/sort-types.api';
 
 interface AutoCompleteEvent {
   originalEvent: Event;
@@ -84,6 +85,9 @@ export class SearchArticlesComponent implements OnInit {
   pageSize: number = 5;
   totalSearchRecords: number = 0;
 
+  articleFieldSorts: SortField[] = Object.values(SortField);
+  articleTypeSorts: SortType[] = Object.values(SortType);
+
   constructor(
     public searchService: SearchService,
     private authService: AuthService,
@@ -104,6 +108,9 @@ export class SearchArticlesComponent implements OnInit {
     this.articleReadService.fetchArticleTypes().subscribe((types) => {
       this.articleTypes = types;
     })
+
+    console.log(this.articleFieldSorts);
+    
   }
 
   searchForAutocompletes(event: AutoCompleteEvent) {
