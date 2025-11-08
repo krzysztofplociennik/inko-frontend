@@ -8,10 +8,10 @@
                 <p-autoComplete id="searchInputText" placeholder="Search for articles here!"
                     [(ngModel)]="selectedPhrase" [suggestions]="autocompleteSuggestions"
                     (completeMethod)="searchForAutocompletes($event)"
-                    (keydown.enter)="searchForArticles(this.pageNumber, this.pageSize)" />
+                    (keydown.enter)="searchForArticles()" />
 
                 <p-button id="searchArticlesButton" icon="pi pi-search" [rounded]="true" [severity]="'secondary'"
-                    (onClick)="searchForArticles(this.pageNumber, this.pageSize)" />
+                    (onClick)="searchForArticles()" />
 
                 <span id="showFiltersLabel"> filters </span>
                 <p-inputSwitch id="showFiltersSwitch" [(ngModel)]="showFilters" />
@@ -30,9 +30,9 @@
             </div>
 
             <div id="sorting" *ngIf="totalSearchRecords > 0">
-                <p-dropdown id="sortingFieldsDropdown" [options]="articleFieldSorts" placeholder="Field" />
-                <p-dropdown id="sortingTypesDropdown" [options]="articleTypeSorts" placeholder="Type" />
-                <p-button id="applySortButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'" [label]="'apply'" (onClick)="searchForArticles(this.pageNumber, this.pageSize)" />
+                <p-dropdown id="sortingFieldsDropdown" [(ngModel)]="selectedSortingField" [options]="articleFieldSorts" placeholder="Field" />
+                <p-dropdown id="sortingTypesDropdown" [(ngModel)]="selectedSortingType" [options]="articleTypeSorts" placeholder="Type" />
+                <p-button id="applySortButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'" [label]="'apply'" (onClick)="searchForArticles()" />
             </div>
 
         </div>

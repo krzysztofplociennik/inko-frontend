@@ -10,10 +10,20 @@
             There are no articles yet!
         </div>
 
+        <div id="sorting" *ngIf="totalSearchRecords > 0">
+            <p-dropdown id="sortingFieldsDropdown" [(ngModel)]="selectedSortingField" [options]="articleFieldSorts"
+                placeholder="Field" />
+            <p-dropdown id="sortingTypesDropdown" [(ngModel)]="selectedSortingType" [options]="articleTypeSorts"
+                placeholder="Type" />
+            <p-button id="applySortButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'"
+                [label]="'apply'" (onClick)="getAllArticles()" />
+        </div>
+
         <div id="allArticlesDiv">
             <ul *ngFor="let item of articlesResults; let i = index">
                 <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
-                    <app-all-articles-item [routerLink]="['/article-details', item.id]" [article]="item"></app-all-articles-item>
+                    <app-all-articles-item [routerLink]="['/article-details', item.id]"
+                        [article]="item"></app-all-articles-item>
                 </div>
             </ul>
         </div>

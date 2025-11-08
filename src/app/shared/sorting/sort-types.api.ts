@@ -1,13 +1,13 @@
 export enum SortField {
-  TITLE = 'Title',
-  TYPE = 'Type',
-  CREATED = 'Created',
-  UPDATED = 'Updated'
+  TITLE = 'title',
+  TYPE = 'type',
+  CREATED = 'date of creation',
+  UPDATED = 'date of modification'
 }
 
 export enum SortType {
-  ASCENDING = 'Ascending',
-  DESCENDING = 'Descending'
+  ASCENDING = 'ascending',
+  DESCENDING = 'descending'
 }
 
 export interface ArticleSort {

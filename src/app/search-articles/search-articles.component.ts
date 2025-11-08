@@ -25,7 +25,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../shared/header/header.component';
 import { LastActivePageService } from '../shared/services/last-active-page.service';
-import { SortField, SortType } from '../shared/sorting/sort-types.api';
+import { ArticleSort, SortField, SortType } from '../shared/sorting/sort-types.api';
 
 interface AutoCompleteEvent {
   originalEvent: Event;
@@ -47,10 +47,10 @@ interface AutoCompleteEvent {
     ProgressSpinnerModule,
     PaginatorModule,
     CommonModule,
-    FooterComponent, 
-    ResultItemComponent, 
-    RouterLink, 
-    InputTextModule, 
+    FooterComponent,
+    ResultItemComponent,
+    RouterLink,
+    InputTextModule,
     HeaderComponent,
   ],
   providers: [
@@ -87,6 +87,8 @@ export class SearchArticlesComponent implements OnInit {
 
   articleFieldSorts: SortField[] = Object.values(SortField);
   articleTypeSorts: SortType[] = Object.values(SortType);
+  selectedSortingField: SortField = SortField.TITLE;
+  selectedSortingType: SortType = SortType.ASCENDING;
 
   constructor(
     public searchService: SearchService,
@@ -108,9 +110,6 @@ export class SearchArticlesComponent implements OnInit {
     this.articleReadService.fetchArticleTypes().subscribe((types) => {
       this.articleTypes = types;
     })
-
-    console.log(this.articleFieldSorts);
-    
   }
 
   searchForAutocompletes(event: AutoCompleteEvent) {
@@ -121,20 +120,29 @@ export class SearchArticlesComponent implements OnInit {
     )
   }
 
-  async searchForArticles(pageNumber: number, pageSize: number) {
+  async searchForArticles() {
     this.shouldSpinnerWork = true;
     this.loadingNotifierService.showDelayedMessage();
     try {
 
-      const filter: SearchFilter = {
+      const filter : SearchFilter = {
         searchPhrase: this.selectedPhrase,
         type: this.selectedType,
         tags: this.selectedTags,
         creationDateFrom: this.selectedDateFrom,
-        creationDateTo: this.selectedDateTo
-      };
+        creationDateTo: this.selectedDateTo,
+        sort: {
+          sortField: this.selectedSortingField,
+          sortType: this.selectedSortingType
+        }
+      }
 
-      const result: SearchResult = await firstValueFrom(this.searchService.search(pageNumber, pageSize, filter));
+      const sort: ArticleSort = {
+        sortField: this.selectedSortingField,
+        sortType: this.selectedSortingType
+      }
+
+      const result: SearchResult = await firstValueFrom(this.searchService.search(this.pageNumber, this.pageSize, filter));
 
       this.articles = result.articles;
       this.handleResultsMessage(result.articles);
@@ -190,6 +198,6 @@ export class SearchArticlesComponent implements OnInit {
     this.pageSize = event.rows;
     this.pageNumber = event.page;
 
-    this.searchForArticles(event.page, event.rows);
+    this.searchForArticles();
   }
 }
