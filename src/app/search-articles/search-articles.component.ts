@@ -67,6 +67,7 @@ export class SearchArticlesComponent implements OnInit {
   isUserLoggedIn: boolean;
   shouldSpinnerWork: boolean = false;
   showFilters: boolean = false;
+  showSorting: boolean = false;
 
   hoveredIndex: number | null = null;
 
@@ -169,10 +170,6 @@ export class SearchArticlesComponent implements OnInit {
     } else {
       this.resultsMessage = '';
     }
-  }
-
-  toggleFilters() {
-    this.showFilters = !this.showFilters;
   }
 
   clearFilters() {

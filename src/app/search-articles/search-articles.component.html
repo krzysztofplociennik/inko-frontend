@@ -7,14 +7,18 @@
             <div id="searchInputArea">
                 <p-autoComplete id="searchInputText" placeholder="Search for articles here!"
                     [(ngModel)]="selectedPhrase" [suggestions]="autocompleteSuggestions"
-                    (completeMethod)="searchForAutocompletes($event)"
-                    (keydown.enter)="searchForArticles()" />
+                    (completeMethod)="searchForAutocompletes($event)" (keydown.enter)="searchForArticles()" />
 
                 <p-button id="searchArticlesButton" icon="pi pi-search" [rounded]="true" [severity]="'secondary'"
                     (onClick)="searchForArticles()" />
+            </div>
 
+            <div id="filtersSortingDiv">
                 <span id="showFiltersLabel"> filters </span>
                 <p-inputSwitch id="showFiltersSwitch" [(ngModel)]="showFilters" />
+
+                <span id="showSortingLabel"> sorting </span>
+                <p-inputSwitch id="showSortingSwitch" [(ngModel)]="showSorting" />
             </div>
 
             <div id="filtersPanel" [class.expanded]="showFilters">
@@ -29,10 +33,13 @@
                 </div>
             </div>
 
-            <div id="sorting" *ngIf="totalSearchRecords > 0">
-                <p-dropdown id="sortingFieldsDropdown" [(ngModel)]="selectedSortingField" [options]="articleFieldSorts" placeholder="Field" />
-                <p-dropdown id="sortingTypesDropdown" [(ngModel)]="selectedSortingType" [options]="articleTypeSorts" placeholder="Type" />
-                <p-button id="applySortButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'" [label]="'apply'" (onClick)="searchForArticles()" />
+            <div id="sorting" *ngIf="showSorting">
+                <p-dropdown id="sortingFieldsDropdown" [(ngModel)]="selectedSortingField" [options]="articleFieldSorts"
+                    placeholder="Field" />
+                <p-dropdown id="sortingTypesDropdown" [(ngModel)]="selectedSortingType" [options]="articleTypeSorts"
+                    placeholder="Type" />
+                <p-button id="applySortButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'"
+                    [label]="'apply'" (onClick)="searchForArticles()" />
             </div>
 
         </div>
