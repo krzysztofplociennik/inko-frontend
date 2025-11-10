@@ -7,7 +7,7 @@ import { firstValueFrom } from 'rxjs';
 import { LoadingNotifierService } from '../shared/services/loading-notifier-service';
 import { PageEvent } from '../shared/pagination/page-event.api';
 import { SearchService } from '../search-articles/search-service/search.service';
-import { createEmptySearchFilter } from '../search-articles/search-service/search-filter.api';
+import { createEmptySearchFilter, SearchFilter } from '../search-articles/search-service/search-filter.api';
 import { SearchResult } from '../search-articles/search-result-item/search-result.api';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -19,27 +19,32 @@ import { PaginatorModule } from 'primeng/paginator';
 import { RouterLink } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { LastActivePageService } from '../shared/services/last-active-page.service';
+import { SortField, SortType } from '../shared/sorting/sort-types.api';
+import { ButtonModule } from "primeng/button";
+import { DropdownModule } from 'primeng/dropdown';
 
 @Component({
-    selector: 'app-articles',
-    templateUrl: './articles.component.html',
-    styleUrls: ['./articles.component.css'],
-    imports: [
-      CommonModule,
-      FormsModule,
-      HeaderComponent,
-      FooterComponent,
-      ProgressSpinnerModule,
-      AllArticlesItemComponent,
-      PaginatorModule,
-      RouterLink
-    ],
-    providers: [
-      AuthService,
-      MessageService,
-      LoadingNotifierService,
+  selector: 'app-articles',
+  templateUrl: './articles.component.html',
+  styleUrls: ['./articles.component.css'],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HeaderComponent,
+    FooterComponent,
+    ProgressSpinnerModule,
+    AllArticlesItemComponent,
+    PaginatorModule,
+    RouterLink,
+    ButtonModule,
+    DropdownModule
+  ],
+  providers: [
+    AuthService,
+    MessageService,
+    LoadingNotifierService,
 
-    ]
+  ]
 })
 export class ArticlesComponent {
 
@@ -57,6 +62,11 @@ export class ArticlesComponent {
   pageNumber: number = 0;
   pageSize: number = 10;
   totalSearchRecords: number = 0;
+
+  articleFieldSorts: SortField[] = Object.values(SortField);
+  articleTypeSorts: SortType[] = Object.values(SortType);
+  selectedSortingField: SortField = SortField.TITLE;
+  selectedSortingType: SortType = SortType.ASCENDING;
 
   constructor(
     public articlesService: ArticlesService,
@@ -84,7 +94,12 @@ export class ArticlesComponent {
     this.loadingNotifier.showDelayedMessage();
 
     try {
-      const response: SearchResult = await firstValueFrom(this.searchService.search(this.pageNumber, this.pageSize, createEmptySearchFilter()));
+      const defaultFilter: SearchFilter = createEmptySearchFilter();
+      defaultFilter.sort = {
+        sortField: this.selectedSortingField,
+        sortType: this.selectedSortingType
+      }
+      const response: SearchResult = await firstValueFrom(this.searchService.search(this.pageNumber, this.pageSize, defaultFilter));
       this.articlesResults = response.articles;
       this.totalSearchRecords = response.totalElements;
     } catch (error) {

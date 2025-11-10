@@ -37,3 +37,15 @@
 #noArticlesMessage {
     justify-content: center;
 }
+
+#sorting {
+    margin-top: 2rem;
+}
+
+#sortingTypesDropdown {
+    margin-left: 1rem;
+}
+
+#applySortButton {
+    margin-left: 1rem;
+}
