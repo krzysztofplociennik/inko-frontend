@@ -7,25 +7,39 @@
             <div id="searchInputArea">
                 <p-autoComplete id="searchInputText" placeholder="Search for articles here!"
                     [(ngModel)]="selectedPhrase" [suggestions]="autocompleteSuggestions"
-                    (completeMethod)="searchForAutocompletes($event)" (keydown.enter)="searchForArticles(this.pageNumber, this.pageSize)" />
+                    (completeMethod)="searchForAutocompletes($event)" (keydown.enter)="searchForArticles()" />
 
                 <p-button id="searchArticlesButton" icon="pi pi-search" [rounded]="true" [severity]="'secondary'"
-                    (onClick)="searchForArticles(this.pageNumber, this.pageSize)" />
+                    (onClick)="searchForArticles()" />
+            </div>
 
+            <div id="filtersSortingDiv">
                 <span id="showFiltersLabel"> filters </span>
                 <p-inputSwitch id="showFiltersSwitch" [(ngModel)]="showFilters" />
+
+                <span id="showSortingLabel"> sorting </span>
+                <p-inputSwitch id="showSortingSwitch" [(ngModel)]="showSorting" />
             </div>
 
             <div id="filtersPanel" [class.expanded]="showFilters">
                 <div *ngIf="showFilters" class="filter-controls">
                     <p-button id="clearFiltersButton" label="clear" icon="pi pi-times" (onClick)="clearFilters()" />
-                    <p-dropdown id="typeFilterDropdown" [options]="articleTypes" [(ngModel)]="selectedType" optionLabel="name"
-                        placeholder="type" />
+                    <p-dropdown id="typeFilterDropdown" [options]="articleTypes" [(ngModel)]="selectedType"
+                        optionLabel="name" placeholder="type" />
                     <p-calendar id="dateFromFilterCalendar" [(ngModel)]="selectedDateFrom" placeholder="created from" />
                     -
                     <p-calendar id="dateToFilterCalendar" [(ngModel)]="selectedDateTo" placeholder="created to" />
                     <p-chips id="tagsInput" placeholder="add tags (max 5)" [(ngModel)]="selectedTags" [max]="5" />
                 </div>
+            </div>
+
+            <div id="sorting" *ngIf="showSorting">
+                <p-dropdown id="sortingFieldsDropdown" [(ngModel)]="selectedSortingField" [options]="articleFieldSorts"
+                    placeholder="Field" />
+                <p-dropdown id="sortingTypesDropdown" [(ngModel)]="selectedSortingType" [options]="articleTypeSorts"
+                    placeholder="Type" />
+                <p-button id="applySortButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'"
+                    [label]="'apply'" (onClick)="searchForArticles()" />
             </div>
 
         </div>
@@ -40,15 +54,16 @@
         <div id="searchArticlesContent">
             <ul *ngFor="let articleItem of articles; let i = index">
                 <div (mouseenter)="mouseEnter(i)" (mouseleave)="mouseLeave()">
-                    <app-result-item [routerLink]="['/article-details', articleItem.id]" [article]="articleItem"></app-result-item>
+                    <app-result-item [routerLink]="['/article-details', articleItem.id]"
+                        [article]="articleItem"></app-result-item>
                 </div>
             </ul>
             <div id="resultsMessageDiv" *ngIf="articles.length === 0">{{ resultsMessage }}</div>
         </div>
     </div>
 
-    <p-paginator [hidden]="totalSearchRecords === 0" (onPageChange)="onPageChange($event)" [first]="first" [rows]="pageSize" [totalRecords]="totalSearchRecords"
-        [rowsPerPageOptions]="[5, 10, 20, 30, 50, 100]" />
+    <p-paginator [hidden]="totalSearchRecords === 0" (onPageChange)="onPageChange($event)" [first]="first"
+        [rows]="pageSize" [totalRecords]="totalSearchRecords" [rowsPerPageOptions]="[5, 10, 20, 30, 50, 100]" />
 
     <app-footer class="footer" id="footer"></app-footer>
 
