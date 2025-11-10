@@ -42,16 +42,17 @@
 }
 
 #usernameInput {
-    margin-bottom: .4rem;
-
+    margin-bottom: 5px;
 }
 
 #passwordLabel {
-    margin-left: .3rem;
-
+    margin-right: 1.2rem;
 }
 
 #passwordInput {
-    margin-left: 1.2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
+}
+
+#credentialsDialogButton {
+    margin-left: 1rem;
 }
