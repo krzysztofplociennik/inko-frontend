@@ -76,7 +76,7 @@ export class SearchArticlesComponent implements OnInit {
   articleTypes: ArticleType[] = [];
 
   selectedPhrase: string | undefined;
-  selectedType: string | undefined;
+  selectedType: ArticleType | undefined;
   selectedDateFrom: Date | undefined;
   selectedDateTo: Date | undefined;
   selectedTags: string[] | undefined;
@@ -128,7 +128,7 @@ export class SearchArticlesComponent implements OnInit {
 
       const filter : SearchFilter = {
         searchPhrase: this.selectedPhrase,
-        type: this.selectedType,
+        type: this.selectedType?.name,
         tags: this.selectedTags,
         creationDateFrom: this.selectedDateFrom,
         creationDateTo: this.selectedDateTo,
@@ -149,7 +149,7 @@ export class SearchArticlesComponent implements OnInit {
       this.handleResultsMessage(result.articles);
       this.totalSearchRecords = result.totalElements;
     } catch (error) {
-      console.log('Error while searching for articles');
+      console.log('(EID: 121120251139) Error while searching for articles. Error: [' + error + ']');
     } finally {
       this.loadingNotifierService.clearMessage();
       this.shouldSpinnerWork = false;
