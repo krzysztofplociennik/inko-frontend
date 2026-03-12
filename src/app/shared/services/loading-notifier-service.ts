@@ -9,14 +9,14 @@ export class LoadingNotifierService {
 
   constructor(private messageService: MessageService) {}
 
-  showDelayedMessage(delayMs: number = 10000, message?: string): void {
+  showDelayedMessage(delayMs: number = 6000, message?: string): void {
     this.clearMessage();
 
     this.timeoutHandle = setTimeout(() => {
       this.messageService.add({
         severity: 'info',
         summary: 'Still loading...',
-        detail: message ?? 'Fetching the data may take longer than usual. Hang on tight!',
+        detail: message ?? 'This may take up to 20–30 seconds on first load',
         life: 6000
       });
     }, delayMs);
