@@ -41,9 +41,7 @@ import { DropdownModule } from 'primeng/dropdown';
   ],
   providers: [
     AuthService,
-    MessageService,
     LoadingNotifierService,
-
   ]
 })
 export class ArticlesComponent {
