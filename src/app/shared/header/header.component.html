@@ -1,7 +1,4 @@
 <div id="headerDiv">
-  <button (click)="toggleTheme()" class="theme-toggle" [attr.aria-label]="themeLabel()" [title]="themeLabel()">
-    <i [class]="themeIcon()"></i>
-  </button>
 
   <div>
     <img id="banner" [src]="getBannerPath()" />
@@ -17,6 +14,11 @@
   </div>
 
   <div class="user-actions" *ngIf="isLoggedIn()">
+
+    <button (click)="toggleTheme()" class="theme-toggle" [attr.aria-label]="themeLabel()" [title]="themeLabel()">
+      <i [class]="themeIcon()"></i>
+    </button>
+
     <p-button id="settingsButton" [routerLink]="['/settings']" icon="pi pi-sliders-h" [severity]="'secondary'"
       class="btn action-btn" pTooltip="Settings" tooltipPosition="bottom" [style]="{'height': '35px', 'margin': '5px'}"
       aria-label="Settings" />
