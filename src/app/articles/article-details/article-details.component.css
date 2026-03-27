@@ -39,6 +39,10 @@
     margin-bottom: 5px;
 }
 
+#articleTypesDropdown {
+    width: 20%;
+}
+
 #contentDivNonEdit,
 #contentDivEdit {
     display: flex;
