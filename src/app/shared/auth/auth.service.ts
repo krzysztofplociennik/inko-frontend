@@ -106,7 +106,6 @@ export class AuthService {
     this.refreshInProgress = true;
     this.refreshToken().subscribe({
       next: () => {
-        this.showRefreshTokenMessage();
         this.refreshInProgress = false;
       },
       error: () => {
@@ -145,14 +144,6 @@ export class AuthService {
     this.loginStateSubject.next(isLoggedIn);
   }
 
-  private showRefreshTokenMessage() {
-    this.messageService.add({
-      severity: 'info',
-      summary: 'Info',
-      detail: 'The login token has been successfully refreshed!',
-      life: 5000
-    });
-  }
 }
 
 export interface AuthResponse {
