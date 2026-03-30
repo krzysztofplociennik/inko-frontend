@@ -29,7 +29,7 @@
             <p-floatlabel>
                 <label id="typeLabel"> Type: </label>
                 <p-dropdown *ngIf="areArticleTypesPopulated()" id="articleTypesDropdown" [options]="articleTypes"
-                    [(ngModel)]="editedArticle.type" optionLabel="name" placeholder="Select the new type" />
+                    [(ngModel)]="selectedType" optionLabel="name" placeholder="Select type" />
             </p-floatlabel>
         </div>
 
