@@ -301,6 +301,7 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
   enableEditMode(): void {
     this.isEditMode = true;
     this.editedArticle = { ...this.article! };
+    this.selectedType = this.articleTypes.find(t => t.name === this.article!.type) ?? { name: this.article!.type };
   }
 
   cancelEdit(): void {
@@ -327,6 +328,7 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
       rejectIcon: "none",
       rejectButtonStyleClass: "p-button-text",
       accept: async () => {
+        this.editedArticle.type = this.selectedType.name;
         this.shouldSpinnerWork = true;
 
         this.articleService.updateArticle(this.editedArticle).subscribe({
