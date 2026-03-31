@@ -53,6 +53,11 @@
     overflow-wrap: break-word;
 }
 
+::ng-deep #contentDivNonEdit p:empty {
+    min-height: 1.5em;
+    display: block;
+}
+
 #contentOutline {
     width: 60%;
     border-radius: 20px;
