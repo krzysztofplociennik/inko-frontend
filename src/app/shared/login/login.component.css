@@ -34,24 +34,33 @@
     flex-direction: column; 
     justify-content: center;
     align-items: center;
+}
 
+#labelsInputsDiv {
+    display: flex;
+    flex-direction: row;
+    margin-right: 5rem;
+    margin-bottom: 1rem;
+}
+
+#labelsDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding-top: .5rem;
+    padding-right: 1rem;
+}
+
+#inputsDiv {
+    display: flex;
+    flex-direction: column;
 }
 
 #usernameLabel {
-    margin-right: 20px;
+    margin-bottom: 1.4rem;
 }
 
 #usernameInput {
     margin-bottom: .4rem;
 
-}
-
-#passwordLabel {
-    margin-left: .3rem;
-
-}
-
-#passwordInput {
-    margin-left: 1.2rem;
-    margin-bottom: 1rem;
 }

@@ -7,15 +7,16 @@
             <p-progressSpinner styleClass="overlay-spinner"></p-progressSpinner>
         </div>
 
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="login">
-            <div>
-                <label id="usernameLabel" for="username">Username</label>
-                <input id="usernameInput" formControlName="username" type="text" pInputText />
-
-            </div>
-            <div>
-                <label id="passwordLabel" for="password">Password</label>
-                <input id="passwordInput" formControlName="password" type="password" pInputText />
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="login">   
+            <div id="labelsInputsDiv">
+                <div id="labelsDiv">
+                    <label id="usernameLabel" for="username">Username</label>
+                    <label id="passwordLabel" for="password">Password</label>
+                </div>
+                <div id="inputsDiv">
+                    <input id="usernameInput" formControlName="username" type="text" pInputText />
+                    <input id="passwordInput" formControlName="password" type="password" pInputText />
+                </div>
             </div>
 
             <p-button 
