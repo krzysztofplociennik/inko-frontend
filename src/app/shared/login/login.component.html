@@ -7,13 +7,22 @@
         </div>
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="login">
-            <div id="usernameSection">
-                <label id="usernameLabel" for="username">Username</label>
-                <input id="usernameInput" formControlName="username" type="text" pInputText />
+            <div id="labelsInputsDiv">
+                <div id="labelsDiv">
+                    <label id="usernameLabel" for="username">Username</label>
+                    <label id="passwordLabel" for="password">Password</label>
+                </div>
+                <div id="inputsDiv">
+                    <input id="usernameInput" formControlName="username" type="text" pInputText />
+                    <input id="passwordInput" formControlName="password" type="password" pInputText />
 
-                <p-button id="credentialsDialogButton" (onClick)="showCredentialsDialog()" severity="secondary" [raised]="true" [rounded]="true"
-                    [outlined]="true" icon="pi pi-info-circle" />
-                <p-dialog header="Credentials for demo"  [(visible)]="credentialsDialogVisible" [style]="{ width: '20rem' }" >
+
+                </div>
+
+                <p-button id="credentialsDialogButton" (onClick)="showCredentialsDialog()" severity="secondary"
+                    [raised]="true" [rounded]="true" [outlined]="true" icon="pi pi-info-circle" />
+                <p-dialog header="Credentials for demo" [(visible)]="credentialsDialogVisible"
+                    [style]="{ width: '20rem' }">
                     <p>
                         login: river
                     </p>
@@ -21,11 +30,6 @@
                         password: wind
                     </p>
                 </p-dialog>
-
-            </div>
-            <div>
-                <label id="passwordLabel" for="password">Password</label>
-                <input id="passwordInput" formControlName="password" type="password" pInputText />
             </div>
 
             <p-button [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}" id="loginButton"
