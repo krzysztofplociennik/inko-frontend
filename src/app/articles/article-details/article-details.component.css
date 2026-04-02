@@ -34,7 +34,7 @@
 #titleDivEdit {
     width: 40%;
     height: auto;
-    margin-top: 5px;
+    margin-top: 40px;
     margin-bottom: 5px;
 }
 
@@ -78,10 +78,26 @@
 }
 
 #actionButtonsDiv {
-    display:flex;
-    justify-content: space-between;
-    width: 35%;
+    width: 40%;
     margin-top: 2rem;
+}
+
+#nonEditingMode {
+    display: flex;
+    justify-content: space-between;
+}
+
+#editingMode {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+}
+
+#editingMode>div:first-child {
+  justify-self: start;
+}
+
+#editingMode>div:last-child {
+  justify-self: center;
 }
 
 label {

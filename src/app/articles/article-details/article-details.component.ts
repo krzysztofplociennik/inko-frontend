@@ -385,4 +385,8 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
   areArticleTypesPopulated(): boolean {
     return this.articleTypes.length > 0;
   }
+
+  goBack() {
+    this.router.navigate(['/articles']);
+  }
 }
