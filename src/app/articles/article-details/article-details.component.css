@@ -24,7 +24,6 @@
     width: 100%;
     margin-top: 30px;
 }
-
 /* header/footer wrapper */
 
 #titleDivNonEdit {
@@ -79,8 +78,10 @@
 }
 
 #actionButtonsDiv {
+    display:flex;
+    justify-content: space-between;
     width: 35%;
-    margin: 20px 0px 20px 0px;
+    margin-top: 2rem;
 }
 
 label {

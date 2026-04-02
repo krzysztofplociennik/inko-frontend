@@ -1,9 +1,9 @@
 <div id="bodyDiv">
+    <p-confirmDialog />
     <app-header class="header"></app-header>
     <div id="contentWrapper">
 
         <div *ngIf="isLoggedIn" id="actionButtonsDiv">
-            <p-confirmDialog />
             <p-button *ngIf="!isEditMode" label="Edit" severity="secondary" icon="pi pi-pencil"
                 [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
                 (onClick)="enableEditMode()" />
@@ -14,7 +14,8 @@
                 [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
                 (onClick)="updateArticle()" />
             <p-button *ngIf="isEditMode" icon="pi pi-times" label="Cancel" severity="secondary"
-                [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}" (onClick)="cancelEdit()" />
+                [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}" 
+                (onClick)="cancelEdit()" />
         </div>
 
         <div id="titleDivNonEdit" *ngIf="!isEditMode">{{article?.title}}</div>
