@@ -6,8 +6,7 @@
         <div *ngIf="isLoggedIn" id="actionButtonsDiv">
             <div *ngIf="!isEditMode" id="nonEditingMode">
                 <p-button *ngIf="!isEditMode" label="Go back" severity="secondary" icon="pi pi-arrow-left"
-                    [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
-                    (onClick)="goBack()" />
+                    [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}" (onClick)="goBack()" />
                 <p-button *ngIf="!isEditMode" label="Edit" severity="secondary" icon="pi pi-pencil"
                     [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
                     (onClick)="enableEditMode()" />
@@ -68,6 +67,17 @@
             <div id="contentDivEdit" *ngIf="isEditMode">
                 <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="editedArticle.content"
                     [style]="{ height: 'auto', width: 'auto' }" />
+            </div>
+        </div>
+
+        <div *ngIf="isLoggedIn" id="actionButtonsDiv">
+            <div *ngIf="isEditMode" id="editingMode">
+                <p-button icon="pi pi-times" label="Cancel" severity="secondary"
+                    [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
+                    (onClick)="cancelEdit()" />
+                <p-button icon="pi pi-check" label="Update" severity="success"
+                    [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
+                    (onClick)="updateArticle()" />
             </div>
         </div>
 

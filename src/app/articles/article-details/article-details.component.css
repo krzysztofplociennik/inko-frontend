@@ -52,6 +52,10 @@
     overflow-wrap: break-word;
 }
 
+#editor {
+    margin-left: 4rem;
+}
+
 ::ng-deep #contentDivNonEdit p:empty {
     min-height: 1.5em;
     display: block;
