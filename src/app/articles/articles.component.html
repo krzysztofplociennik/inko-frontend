@@ -16,7 +16,7 @@
             <p-dropdown id="sortingTypesDropdown" [(ngModel)]="selectedSortingType" [options]="articleTypeSorts"
                 placeholder="Type" />
             <p-button id="applySortButton" icon="pi pi-arrow-right" [rounded]="true" [severity]="'primary'"
-                [label]="'apply'" (onClick)="getAllArticles()" />
+                [label]="'apply'" (onClick)="getArticles()" />
         </div>
 
         <div id="allArticlesDiv">

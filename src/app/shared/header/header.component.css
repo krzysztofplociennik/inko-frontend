@@ -1,101 +1,108 @@
 #headerDiv {
-    background: #324a68;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 30px;
-    width: 100%;
-  }
-  
-  .center-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-grow: 1;
-    margin-left: 80px;
-  }
-  
-  .theme-toggle {
-    background: none;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 0;
-    padding: 0;
-    color: inherit;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-    width: 2rem;
-    height: 2rem;
-    margin-bottom: .1rem;
-    margin-right: .5rem;
-  }
-  
-  .theme-toggle i {
-    font-size: 1.8rem;
-    line-height: 1;
-    position: relative;
-    left: 0.0rem;
-    top: 0.1rem;
-    transition: opacity 0.3s ease;
-  }
-  
-  .theme-toggle:active {
-    transform: scale(0.9);
-  }
-  
-  .theme-toggle .fa-sun {
-    color: #ffffff;
-    transition: color 0.3s ease;
-  }
-  
-  #navigationButton {
-    cursor: pointer;
-    border: 1px solid rgb(167, 224, 255);
-    font-size: 34px;
-    font-family: 'Raleway';
-    color: rgb(255, 255, 255);
-    padding: 10px 30px;
-    margin: 10px;
-    transition: 40ms;
-    width: 266px;
-    height: 60px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
-                rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
-                rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
-    border-radius: 23px;
-    background: linear-gradient(90deg, rgb(0, 102, 204) 18%, rgb(23, 37, 60) 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row-reverse;
-    font-weight: 400;
-  }
-  
-  #navigationButton:hover {
-    color: rgb(123, 182, 240);
-    background: rgb(0, 102, 204);
-    border-color: rgb(123, 182, 240);
-    border-width: 3px;
-    border-style: solid;
-  }
-  
-  #loginButton {
-    margin-left: auto;
-  }
+  background: #324a68;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+}
 
-  #logoutButton {
-    margin-left: auto;
-  }
+#headerDiv>div:first-child {
+  justify-self: start;
+}
 
-  #banner {
-    margin-left: 3rem;
-    margin-right: -12rem;
-    scale: 1.5;
-  }
+.center-buttons {
+  display: flex;
+  justify-content: center;
+  grid-column: 2;
+}
 
-  #settingsButton {
-    margin-left: auto;
-  }
+.right-side {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0;
+  padding: 0;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: .1rem;
+  margin-right: .5rem;
+}
+
+.theme-toggle i {
+  font-size: 1.8rem;
+  line-height: 1;
+  position: relative;
+  left: 0.0rem;
+  top: 0.1rem;
+  transition: opacity 0.3s ease;
+}
+
+.theme-toggle:active {
+  transform: scale(0.9);
+}
+
+.theme-toggle .fa-sun {
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+#navigationButton {
+  cursor: pointer;
+  border: 1px solid rgb(167, 224, 255);
+  font-size: 34px;
+  font-family: 'Raleway';
+  color: rgb(255, 255, 255);
+  padding: 10px 30px;
+  margin: 10px;
+  transition: 40ms;
+  width: 266px;
+  height: 60px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  border-radius: 23px;
+  background: linear-gradient(90deg, rgb(0, 102, 204) 18%, rgb(23, 37, 60) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
+  font-weight: 400;
+}
+
+#navigationButton:hover {
+  color: rgb(123, 182, 240);
+  background: rgb(0, 102, 204);
+  border-color: rgb(123, 182, 240);
+  border-width: 3px;
+  border-style: solid;
+}
+
+#loginButton {
+  margin-left: auto;
+}
+
+#logoutButton {
+  margin-left: auto;
+}
+
+#banner {
+  margin-left: 3rem;
+  margin-right: -12rem;
+  scale: 1.5;
+}
+
+#settingsButton {
+  margin-left: auto;
+}

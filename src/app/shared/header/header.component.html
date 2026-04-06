@@ -1,5 +1,4 @@
 <div id="headerDiv">
-
   <div>
     <img id="banner" [src]="getBannerPath()" />
   </div>
@@ -13,24 +12,24 @@
     </button>
   </div>
 
+  <div class="right-side">
     <button (click)="toggleTheme()" class="theme-toggle" [attr.aria-label]="themeLabel()" [title]="themeLabel()">
       <i [class]="themeIcon()"></i>
     </button>
+    <div class="user-actions" *ngIf="isLoggedIn()">
 
-  <div class="user-actions" *ngIf="isLoggedIn()">
+      <p-button id="settingsButton" [routerLink]="['/settings']" icon="pi pi-sliders-h" [severity]="'secondary'"
+        class="btn action-btn" pTooltip="Settings" tooltipPosition="bottom"
+        [style]="{'height': '35px', 'margin': '5px'}" aria-label="Settings" />
 
-    <p-button id="settingsButton" [routerLink]="['/settings']" icon="pi pi-sliders-h" [severity]="'secondary'"
-      class="btn action-btn" pTooltip="Settings" tooltipPosition="bottom" [style]="{'height': '35px', 'margin': '5px'}"
-      aria-label="Settings" />
+      <p-button id="logoutButton" icon="pi pi-sign-out" label="log out" (onClick)="logout()" [severity]="'secondary'"
+        class="btn action-btn" [style]="{'height': '35px', 'margin': '5px'}" aria-label="Log Out" />
 
-    <p-button id="logoutButton" icon="pi pi-sign-out" label="log out" (onClick)="logout()" [severity]="'secondary'"
-      class="btn action-btn" [style]="{'height': '35px', 'margin': '5px'}" aria-label="Log Out" />
+    </div>
 
+    <div class="user-actions" *ngIf="!isLoggedIn()">
+      <p-button id="loginButton" [routerLink]="['/login']" icon="pi pi-sign-in" label="log in" [severity]="'secondary'"
+        class="btn action-btn" [style]="{'height': '35px', 'margin': '5px'}" aria-label="Log In" />
+    </div>
   </div>
-
-  <div class="user-actions" *ngIf="!isLoggedIn()">
-    <p-button id="loginButton" [routerLink]="['/login']" icon="pi pi-sign-in" label="log in" [severity]="'secondary'"
-      class="btn action-btn" [style]="{'height': '35px', 'margin': '5px'}" aria-label="Log In" />
-  </div>
-
 </div>

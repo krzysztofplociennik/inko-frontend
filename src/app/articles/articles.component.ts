@@ -17,7 +17,6 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AllArticlesItemComponent } from './all-articles-item/all-articles-item.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { RouterLink } from '@angular/router';
-import { MessageService } from 'primeng/api';
 import { LastActivePageService } from '../shared/services/last-active-page.service';
 import { SortField, SortType } from '../shared/sorting/sort-types.api';
 import { ButtonModule } from "primeng/button";
@@ -84,10 +83,10 @@ export class ArticlesComponent {
     this.authService.loginState$.subscribe((state) => {
       this.isLoggedIn = state;
     });
-    await this.getAllArticles();
+    await this.getArticles();
   }
 
-  async getAllArticles() {
+  async getArticles() {
     this.shouldSpinnerWork = true;
     this.loadingNotifier.showDelayedMessage();
 
@@ -139,6 +138,6 @@ export class ArticlesComponent {
     this.pageSize = event.rows;
     this.pageNumber = event.page;
 
-    this.getAllArticles();
+    this.getArticles();
   }
 }
