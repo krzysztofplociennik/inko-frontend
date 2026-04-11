@@ -81,7 +81,7 @@
     width: auto;
 }
 
-#actionButtonsDiv {
+#actionButtonsDivLogged, #actionButtonsDivNotLogged {
     width: 40%;
     margin-top: 2rem;
 }
