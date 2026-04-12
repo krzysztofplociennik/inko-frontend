@@ -24,6 +24,7 @@
     width: 100%;
     margin-top: 30px;
 }
+
 /* header/footer wrapper */
 
 #titleDivNonEdit {
@@ -66,22 +67,28 @@
     border-radius: 20px;
 }
 
+::ng-deep p-button .p-button {
+  border: .1rem solid;
+  border-radius: .5rem;
+}
+
 #tagsDivEdit {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 40%;
-    margin-top: 1.7rem;
-    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 #tagsDivNonEdit {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
     width: auto;
 }
 
-#actionButtonsDivLogged, #actionButtonsDivNotLogged {
+#actionButtonsDivLogged,
+#actionButtonsDivNotLogged {
     width: 40%;
     margin-top: 2rem;
 }
@@ -97,11 +104,11 @@
 }
 
 #editingMode>div:first-child {
-  justify-self: start;
+    justify-self: start;
 }
 
 #editingMode>div:last-child {
-  justify-self: center;
+    justify-self: center;
 }
 
 label {
