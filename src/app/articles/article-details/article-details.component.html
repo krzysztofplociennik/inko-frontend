@@ -3,9 +3,9 @@
     <app-header class="header"></app-header>
     <div id="contentWrapper">
 
-        <div *ngIf="isLoggedIn" id="actionButtonsDiv">
+        <div *ngIf="isLoggedIn" id="actionButtonsDivLogged">
             <div *ngIf="!isEditMode" id="nonEditingMode">
-                <p-button *ngIf="!isEditMode" label="Go back" severity="secondary" icon="pi pi-arrow-left"
+                <p-button *ngIf="!isEditMode" label="Go back" severity="info" icon="pi pi-arrow-left"
                     [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}" (onClick)="goBack()" />
                 <p-button *ngIf="!isEditMode" label="Edit" severity="secondary" icon="pi pi-pencil"
                     [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
@@ -22,6 +22,11 @@
                     [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}"
                     (onClick)="updateArticle()" />
             </div>
+        </div>
+
+        <div *ngIf="!isLoggedIn" id="actionButtonsDivNotLogged">
+            <p-button *ngIf="!isLoggedIn" id="goBackButton" label="Go back" severity="info" icon="pi pi-arrow-left"
+                [style]="{'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px'}" (onClick)="goBack()" />
         </div>
 
         <div id="titleDivNonEdit" *ngIf="!isEditMode">{{article?.title}}</div>
