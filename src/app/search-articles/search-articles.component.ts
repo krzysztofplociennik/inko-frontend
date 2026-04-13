@@ -19,7 +19,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { ResultItemComponent } from './search-result-item/search-result-item.component';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
@@ -96,22 +96,46 @@ export class SearchArticlesComponent implements OnInit {
     private authService: AuthService,
     private loadingNotifierService: LoadingNotifierService,
     private articleReadService: ArticleReadService,
-    private lastActivePageService: LastActivePageService
+    private lastActivePageService: LastActivePageService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
     this.isUserLoggedIn = false;
     this.lastActivePageService.updateLastActiveUrl('/search-articles')
   }
 
-  ngOnInit() {
-    this.authService.loginState$.subscribe((state) => {
-      this.isUserLoggedIn = state;
-    });
-    this.first = 0;
-    this.pageNumber = 0;
-    this.articleReadService.fetchArticleTypes().subscribe((types) => {
-      this.articleTypes = types;
-    })
-  }
+ngOnInit() {
+  this.authService.loginState$.subscribe(state => this.isUserLoggedIn = state);
+
+  this.articleReadService.fetchArticleTypes().subscribe(types => {
+    this.articleTypes = types;
+  });
+
+  this.route.queryParamMap.subscribe(params => {
+    if (params.keys.length === 0) return;
+
+    this.pageNumber = +(params.get('page') ?? 0);
+    this.pageSize = +(params.get('size') ?? 5);
+    this.selectedSortingField = (params.get('sortField') as SortField) ?? SortField.TITLE;
+    this.selectedSortingType = (params.get('sortType') as SortType) ?? SortType.ASCENDING;
+    this.first = this.pageNumber * this.pageSize;
+
+    this.selectedPhrase = params.get('searchPhrase') ?? undefined;
+    this.selectedTags = params.getAll('tags').length ? params.getAll('tags') : undefined;
+
+    const dateFrom = params.get('dateFrom');
+    const dateTo = params.get('dateTo');
+    this.selectedDateFrom = dateFrom ? new Date(dateFrom) : undefined;
+    this.selectedDateTo = dateTo ? new Date(dateTo) : undefined;
+
+    const typeName = params.get('type');
+    this.selectedType = typeName
+      ? this.articleTypes.find(t => t.name === typeName)
+      : undefined;
+
+    this.searchForArticles();
+  });
+}
 
   searchForAutocompletes(event: AutoCompleteEvent) {
     this.searchService.getAutocompletes(event.query).subscribe(
@@ -124,9 +148,22 @@ export class SearchArticlesComponent implements OnInit {
   async searchForArticles() {
     this.shouldSpinnerWork = true;
     this.loadingNotifierService.showDelayedMessage();
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        page: this.pageNumber,
+        size: this.pageSize,
+        sortField: this.selectedSortingField,
+        sortType: this.selectedSortingType
+      },
+      queryParamsHandling: 'merge',
+      replaceUrl: false
+    });
+
     try {
 
-      const filter : SearchFilter = {
+      const filter: SearchFilter = {
         searchPhrase: this.selectedPhrase,
         type: this.selectedType?.name,
         tags: this.selectedTags,

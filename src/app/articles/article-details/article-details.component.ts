@@ -6,7 +6,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ArticleType } from 'src/app/new-article/article';
 import { ArticleReadService } from 'src/app/shared/services/article-read.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 import { FooterComponent } from 'src/app/shared/footer/footer.component';
@@ -94,7 +94,8 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private authService: AuthService,
-    private lastActivePageService: LastActivePageService
+    private lastActivePageService: LastActivePageService,
+    private location: Location
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -387,6 +388,6 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
   }
 
   goBack() {
-    this.router.navigate(['/articles']);
+    this.location.back();
   }
 }

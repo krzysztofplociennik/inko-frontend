@@ -20,11 +20,34 @@ export class SearchService {
 
   search(pageNumber: number, itemsPerPage: number, filter: SearchFilter): Observable<SearchResult> {
     const url: string = this.baseBackendUrl + '/search-articles';
-    const params = new HttpParams()
+
+    let params = new HttpParams()
       .set('page', pageNumber.toString())
       .set('size', itemsPerPage.toString());
 
-    return this.http.post<PaginationResponse<ArticleSearch>>(url, filter, { params }).pipe(
+    if (filter.searchPhrase) {
+      params = params.set('searchPhrase', filter.searchPhrase);
+    }
+    if (filter.type) {
+      params = params.set('type', filter.type);
+    }
+    if (filter.tags?.length) {
+      filter.tags.forEach(tag => params = params.append('tags', tag));
+    }
+    if (filter.creationDateFrom) {
+      params = params.set('creationDateFrom', filter.creationDateFrom.toISOString().split('T')[0]);
+    }
+    if (filter.creationDateTo) {
+      params = params.set('creationDateTo', filter.creationDateTo.toISOString().split('T')[0]);
+    }
+    if (filter.sort?.sortField) {
+      params = params.set('sortField', filter.sort.sortField);
+    }
+    if (filter.sort?.sortType) {
+      params = params.set('sortType', filter.sort.sortType);
+    }
+
+    return this.http.get<PaginationResponse<ArticleSearch>>(url, { params }).pipe(
       map((response: PaginationResponse<ArticleSearch>) => {
         const result: SearchResult = {
           articles: response.content || [],

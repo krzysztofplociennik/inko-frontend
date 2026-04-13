@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { ArticleDetails } from '../article-details/article-details';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { getBaseUrl } from 'src/app/shared/utils/urlUtils';
-import { AllArticlesItem } from './all-articles-item';
 import { JwtUtils } from 'src/app/shared/utils/jwtUtils';
 
 @Injectable({
@@ -28,16 +27,6 @@ export class ArticlesService {
 
     return this.http.get<ArticleDetails>(url, { params }).pipe(
       map((response: ArticleDetails) => {
-        return response;
-      })
-    );
-  }
-
-  getAllArticles(): Observable<AllArticlesItem[]> {
-    const url: string = this.baseBackendUrl + '/article/getAll';
-
-    return this.http.get<AllArticlesItem[]>(url).pipe(
-      map((response: AllArticlesItem[]) => {
         return response;
       })
     );

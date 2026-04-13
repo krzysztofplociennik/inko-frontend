@@ -16,7 +16,7 @@ import { FooterComponent } from '../shared/footer/footer.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AllArticlesItemComponent } from './all-articles-item/all-articles-item.component';
 import { PaginatorModule } from 'primeng/paginator';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LastActivePageService } from '../shared/services/last-active-page.service';
 import { SortField, SortType } from '../shared/sorting/sort-types.api';
 import { ButtonModule } from "primeng/button";
@@ -71,7 +71,9 @@ export class ArticlesComponent {
     private exportService: ExportService,
     private loadingNotifier: LoadingNotifierService,
     private searchService: SearchService,
-    private lastActivePageService: LastActivePageService
+    private lastActivePageService: LastActivePageService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
     this.isLoggedIn = false;
     this.first = 0;
@@ -83,12 +85,32 @@ export class ArticlesComponent {
     this.authService.loginState$.subscribe((state) => {
       this.isLoggedIn = state;
     });
+
+    const params = this.route.snapshot.queryParamMap;
+    this.pageNumber = +(params.get('page') ?? 0);
+    this.pageSize = +(params.get('size') ?? 10);
+    this.selectedSortingField = (params.get('sortField') as SortField) ?? SortField.TITLE;
+    this.selectedSortingType = (params.get('sortType') as SortType) ?? SortType.ASCENDING;
+    this.first = this.pageNumber * this.pageSize;
+    
     await this.getArticles();
   }
 
   async getArticles() {
     this.shouldSpinnerWork = true;
     this.loadingNotifier.showDelayedMessage();
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        page: this.pageNumber,
+        size: this.pageSize,
+        sortField: this.selectedSortingField,
+        sortType: this.selectedSortingType
+      },
+      queryParamsHandling: 'merge',
+      replaceUrl: false
+    });
 
     try {
       const defaultFilter: SearchFilter = createEmptySearchFilter();
