@@ -316,6 +316,7 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
       accept: () => {
         this.isEditMode = false;
         this.editedArticle = { ...this.article! };
+        this.codeBlocksEnhanced = false;
       }
     });
   }
