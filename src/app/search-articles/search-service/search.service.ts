@@ -6,6 +6,7 @@ import { getBaseUrl } from 'src/app/shared/utils/urlUtils';
 import { SearchFilter } from './search-filter.api';
 import { SearchResult } from '../search-result-item/search-result.api';
 import { PaginationResponse } from 'src/app/shared/pagination/pagination-response.api';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,11 @@ export class SearchService {
 
   baseBackendUrl: string = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private messageService: MessageService
+  ) {
     this.baseBackendUrl = getBaseUrl();
+    this.messageService.clear();
   }
 
   search(pageNumber: number, itemsPerPage: number, filter: SearchFilter): Observable<SearchResult> {
@@ -62,6 +66,24 @@ export class SearchService {
       }),
       catchError(error => {
         console.error('(EID: 202507191357) Error while searching for articles!', error);
+
+        if (error.status === 500) {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Server Error',
+            detail: 'An unexpected error occurred. Please try again later or contact support if the problem persists.',
+            life: 6000
+          });
+        }
+
+        if (error.status === 403) {
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'Access Denied',
+            detail: 'You do not have permission to perform this action.',
+            life: 6000
+          });
+        }
 
         const emptyResult: SearchResult = {
           articles: [],
