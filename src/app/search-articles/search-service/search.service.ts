@@ -67,24 +67,6 @@ export class SearchService {
       catchError(error => {
         console.error('(EID: 202507191357) Error while searching for articles!', error);
 
-        if (error.status === 500) {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Server Error',
-            detail: 'An unexpected error occurred. Please try again later or contact support if the problem persists.',
-            life: 6000
-          });
-        }
-
-        if (error.status === 403) {
-          this.messageService.add({
-            severity: 'warn',
-            summary: 'Access Denied',
-            detail: 'You do not have permission to perform this action.',
-            life: 6000
-          });
-        }
-
         const emptyResult: SearchResult = {
           articles: [],
           totalElements: 0,
