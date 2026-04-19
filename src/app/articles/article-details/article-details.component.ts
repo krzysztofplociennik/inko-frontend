@@ -306,19 +306,9 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
   }
 
   cancelEdit(): void {
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to cancel? All changes will be lost.',
-      header: 'Cancel Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      acceptIcon: "none",
-      rejectIcon: "none",
-      rejectButtonStyleClass: "p-button-text",
-      accept: () => {
-        this.isEditMode = false;
-        this.editedArticle = { ...this.article! };
-        this.codeBlocksEnhanced = false;
-      }
-    });
+    this.isEditMode = false;
+    this.editedArticle = { ...this.article! };
+    this.codeBlocksEnhanced = false;
   }
 
   updateArticle(): void {
