@@ -6,6 +6,7 @@ import { getBaseUrl } from 'src/app/shared/utils/urlUtils';
 import { SearchFilter } from './search-filter.api';
 import { SearchResult } from '../search-result-item/search-result.api';
 import { PaginationResponse } from 'src/app/shared/pagination/pagination-response.api';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,11 @@ export class SearchService {
 
   baseBackendUrl: string = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private messageService: MessageService
+  ) {
     this.baseBackendUrl = getBaseUrl();
+    this.messageService.clear();
   }
 
   search(pageNumber: number, itemsPerPage: number, filter: SearchFilter): Observable<SearchResult> {

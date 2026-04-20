@@ -37,7 +37,7 @@
   width: 2rem;
   height: 2rem;
   margin-bottom: .1rem;
-  margin-right: .5rem;
+  margin-right: 1rem;
 }
 
 .theme-toggle i {
@@ -93,10 +93,6 @@
   margin-left: auto;
 }
 
-#logoutButton {
-  margin-left: auto;
-}
-
 #banner {
   margin-left: 3rem;
   margin-right: -12rem;
@@ -104,5 +100,5 @@
 }
 
 #settingsButton {
-  margin-left: auto;
+  margin-right: .5rem;
 }

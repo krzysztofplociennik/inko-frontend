@@ -72,11 +72,9 @@ export class LoginComponent {
       next: (response: AuthResponse) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You are logged in!' });
         this.authService.setToken(response.token);
-        // this.router.navigate(['/']);
         this.router.navigate([this.lastActivePageService.getLastActiveUrl()]);
       },
       error: (err) => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Wrong credentials, try again.' });
         this.errorMessage = 'Login failed: ' + err.error;
         this.clearFormInputs();
       },
