@@ -4,7 +4,6 @@ import { DevelopmentContextUtils } from './shared/utils/developmentContextUtils'
 import { RouterOutlet } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { HttpClient } from '@angular/common/http';
-import { MessageService } from 'primeng/api';
 import { AuthInterceptor } from './shared/auth/auth.interceptor';
 
 @Component({
@@ -16,7 +15,6 @@ import { AuthInterceptor } from './shared/auth/auth.interceptor';
     ToastModule,
   ],
   providers: [
-    MessageService,
     AuthInterceptor,
     HttpClient,
   ],
