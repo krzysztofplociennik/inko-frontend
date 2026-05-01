@@ -25,35 +25,42 @@
     bottom: 0;
     width: 100%;
 }
-
 /* header/footer wrapper */
 
 #articleTitle {
-    width: 70%;
-    margin: 30px 10px 10px 0px;
+    width: 100%;
 }
 
-#tagsInput {
-    width: 70%;
-    margin: 10px 10px 10px 0px;
+.tagsInput {
+    margin-bottom: 1rem;
 }
 
 #articleTypesDropdown {
-    width: 70%;
-    margin: 10px 10px 10px 0px;
+    width: 100%;
 }
 
 #editor {
     width: 70%;
-    margin: 10px 10px 10px 0px;
 }
 
 #createArticleButton {
-    margin: 10px 10px 10px 0px;
+    margin-top: 1rem;
     align-items: center;
 }
 
 :host ::ng-deep .custom-messages {
     height: 10%;
     width: 55rem;
-  }
+}
+
+.field-wrapper {
+    margin-top: 1rem;
+    width: 70%;
+}
+
+.p-error {
+    display: block;
+    text-align: left;
+    color: red;
+    margin-top: 0.25rem;
+}
