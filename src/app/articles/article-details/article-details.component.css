@@ -68,8 +68,8 @@
 }
 
 ::ng-deep p-button .p-button {
-  border: .1rem solid;
-  border-radius: .5rem;
+    border: .1rem solid;
+    border-radius: .5rem;
 }
 
 #tagsDivEdit {
@@ -248,4 +248,11 @@ label {
         left: 16px;
         font-size: 9px;
     }
+}
+
+.p-error {
+    display: block;
+    text-align: left;
+    color: red;
+    margin-top: 0.25rem;
 }

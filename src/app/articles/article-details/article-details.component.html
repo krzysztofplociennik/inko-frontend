@@ -30,11 +30,13 @@
         </div>
 
         <div id="titleDivNonEdit" *ngIf="!isEditMode">{{article?.title}}</div>
+
         <div id="titleDivEdit" *ngIf="isEditMode">
             <p-floatlabel>
                 <label> Title: </label>
                 <input pInputText [(ngModel)]="editedArticle.title" [style]="{'width': '960px'}" class="w-full" />
             </p-floatlabel>
+            <small *ngIf="fieldErrors['title']" class="p-error">{{ fieldErrors['title'] }}</small>
         </div>
 
         <div id="typeDiv" *ngIf="isEditMode">
@@ -43,6 +45,7 @@
                 <p-dropdown *ngIf="areArticleTypesPopulated()" id="articleTypesDropdown" [options]="articleTypes"
                     [(ngModel)]="selectedType" optionLabel="name" placeholder="Select type" />
             </p-floatlabel>
+            <small *ngIf="fieldErrors['type']" class="p-error">{{ fieldErrors['type'] }}</small>
         </div>
 
 
@@ -69,9 +72,12 @@
             <div id="contentDivNonEdit" *ngIf="!isEditMode" #contentContainer>
                 <div [innerHTML]="processContent()"></div>
             </div>
+
             <div id="contentDivEdit" *ngIf="isEditMode">
                 <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="editedArticle.content"
                     [style]="{ height: 'auto', width: 'auto' }" />
+                <small *ngIf="fieldErrors['content']" class="p-error">{{ fieldErrors['content'] }}</small>
+
             </div>
         </div>
 
