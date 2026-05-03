@@ -24,7 +24,6 @@
     width: 100%;
     margin-top: 30px;
 }
-
 /* header/footer wrapper */
 
 #titleDivNonEdit {
@@ -47,14 +46,14 @@
 #contentDivEdit {
     display: flex;
     flex-direction: column;
-    width: 90%;
-    margin: 45px;
-    line-height: 1.5;
+    width: 50%;
     overflow-wrap: break-word;
+    border: solid;
+    align-items: center;
 }
 
 #editor {
-    margin-left: 4rem;
+    width: 80.5%;
 }
 
 ::ng-deep #contentDivNonEdit p:empty {
@@ -63,7 +62,7 @@
 }
 
 #contentOutline {
-    width: 60%;
+    width: 100%;
     border-radius: 20px;
 }
 

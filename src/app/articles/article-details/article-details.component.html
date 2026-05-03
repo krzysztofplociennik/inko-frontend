@@ -68,17 +68,18 @@
             </p-floatLabel>
         </div>
 
-        <div id="contentOutline">
-            <div id="contentDivNonEdit" *ngIf="!isEditMode" #contentContainer>
+        <div id="contentDivNonEdit" *ngIf="!isEditMode" #contentContainer>
+            <div id="contentOutline">
                 <div [innerHTML]="processContent()"></div>
             </div>
+        </div>
 
-            <div id="contentDivEdit" *ngIf="isEditMode">
-                <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="editedArticle.content"
-                    [style]="{ height: 'auto', width: 'auto' }" />
-                <small *ngIf="fieldErrors['content']" class="p-error">{{ fieldErrors['content'] }}</small>
+        <div id="contentDivEdit" *ngIf="isEditMode">
+            <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="editedArticle.content"
+                [style]="{ height: '22rem' }"   
+                />
+            <small *ngIf="fieldErrors['content']" class="p-error">{{ fieldErrors['content'] }}</small>
 
-            </div>
         </div>
 
         <div *ngIf="isLoggedIn" id="actionButtonsDivLogged">
