@@ -48,7 +48,6 @@
     flex-direction: column;
     width: 50%;
     overflow-wrap: break-word;
-    border: solid;
     align-items: center;
 }
 
