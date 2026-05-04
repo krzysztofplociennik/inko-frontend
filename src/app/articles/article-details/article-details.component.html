@@ -76,7 +76,7 @@
 
         <div id="contentDivEdit" *ngIf="isEditMode">
             <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="editedArticle.content"
-                [style]="{ height: '22rem' }"   
+                [style]="{ height: 'auto' }"   
                 />
             <small *ngIf="fieldErrors['content']" class="p-error">{{ fieldErrors['content'] }}</small>
 
