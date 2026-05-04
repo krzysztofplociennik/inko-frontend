@@ -52,7 +52,7 @@
 }
 
 #editor {
-    width: 80.5%;
+    width: 80%;
 }
 
 ::ng-deep #contentDivNonEdit p:empty {
