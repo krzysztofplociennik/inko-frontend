@@ -13,23 +13,24 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { EditorModule } from 'primeng/editor';
 import { FormsModule } from '@angular/forms';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
-    selector: 'app-new-article',
-    templateUrl: './new-article.component.html',
-    styleUrls: ['./new-article.component.css'],
-    imports: [
-      CommonModule,
-      HeaderComponent,
-      FooterComponent,
-      ProgressSpinnerModule,
-      DropdownModule,
-      ChipsModule,
-      ButtonModule,
-      InputTextModule,
-      EditorModule,
-      FormsModule,
-    ]
+  selector: 'app-new-article',
+  templateUrl: './new-article.component.html',
+  styleUrls: ['./new-article.component.css'],
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    FooterComponent,
+    ProgressSpinnerModule,
+    DropdownModule,
+    ChipsModule,
+    ButtonModule,
+    InputTextModule,
+    EditorModule,
+    FormsModule,
+  ]
 })
 export class NewArticleComponent implements OnInit {
   articleTypes: ArticleType[] = [];
@@ -39,6 +40,8 @@ export class NewArticleComponent implements OnInit {
   content = '';
 
   shouldSpinnerWork = false;
+
+  fieldErrors: { [key: string]: string } = {};
 
   constructor(
     public createArticleService: CreateArticleService,
@@ -51,7 +54,7 @@ export class NewArticleComponent implements OnInit {
     this.articleService.fetchArticleTypes().subscribe(
       (response: ArticleType[]) => {
         this.articleTypes = response;
-      } 
+      }
     )
   }
 
@@ -68,18 +71,31 @@ export class NewArticleComponent implements OnInit {
 
   async callCreateArticle() {
     const type: string = this.selectedType.name;
+    this.fieldErrors = {};
 
-    this.createArticleService.create(this.articleTitle, type, this.tags, this.content).subscribe({
-      next: () => {
-        this.messageService.add({severity:'success', summary:'Success', detail:'The article has been successfully saved!'});
-        this.clearInputs();
-        this.scheduleMessageClear();
-      },
-      error: (err) => {
-        this.messageService.add({severity:'error', summary:'Error', detail:'There was an error! Try again.'});
-        console.error('Error creating article:', err);
+    try {
+      await firstValueFrom(
+        this.createArticleService.create(this.articleTitle, type, this.tags, this.content)
+      );
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Article saved!' });
+      this.clearInputs();
+      this.scheduleMessageClear();
+    } catch (err: any) {
+      if (err.status === 400) {
+        const errorBody = typeof err.error === 'string'
+          ? JSON.parse(err.error)
+          : err.error;
+        if (errorBody?.errors) {
+          this.fieldErrors = Object.fromEntries(
+            Object.entries(errorBody.errors).map(([key, value]) => [
+              key.includes(':') ? key.split(':')[1] : key,
+              (value as string).replace(/\[EID:[^\]]+\]\s*/, '').trim()
+            ])
+          );
+        }
       }
-    });
+      throw err;
+    }
   }
 
   clearInputs(): void {
@@ -96,6 +112,6 @@ export class NewArticleComponent implements OnInit {
   }
 
   public areArticleTypesPopulated(): boolean {
-      return this.articleTypes.length > 0;
+    return this.articleTypes.length > 0;
   }
 }

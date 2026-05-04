@@ -6,23 +6,32 @@
             <p-progressSpinner styleClass="overlay-spinner"></p-progressSpinner>
         </div>
 
-        <div class="card">
+        <div class="card"></div>
+
+        <div class="field-wrapper">
+            <input id="articleTitle" type="text" placeholder="Write your title here!" pInputText
+                [(ngModel)]="articleTitle" />
+            <small *ngIf="fieldErrors['title']" class="p-error">{{ fieldErrors['title'] }}</small>
         </div>
 
-        <input id="articleTitle" type="text" placeholder="Write your title here!" pInputText [(ngModel)]="articleTitle" />
+        <div class="field-wrapper">
+            <p-dropdown *ngIf="areArticleTypesPopulated()" id="articleTypesDropdown" [options]="articleTypes"
+                [(ngModel)]="selectedType" optionLabel="name" placeholder="Select a type"
+                [class.ng-invalid]="fieldErrors['type']" />
+            <small *ngIf="fieldErrors['type']" class="p-error">{{ fieldErrors['type'] }}</small>
+        </div>
 
-        <p-dropdown 
-            *ngIf="areArticleTypesPopulated()"
-            id="articleTypesDropdown"
-            [options]="articleTypes" 
-            [(ngModel)]="selectedType" 
-            optionLabel="name"
-            placeholder="Select a type" />
-    
-        <p-chips id="tagsInput" placeholder="Add your tags!" [(ngModel)]="tags" />
-    
-        <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="content" [style]="{ height: '470px' }" />
-    
+
+        <div class="field-wrapper tagsInput">
+            <p-chips placeholder="Add your tags!" [(ngModel)]="tags" />
+        </div>
+
+        <div class="field-wrapper">
+            <p-editor id="editor" placeholder="Write your content here!" [(ngModel)]="content"
+                [style]="{ height: '470px' }" />
+            <small *ngIf="fieldErrors['content']" class="p-error">{{ fieldErrors['content'] }}</small>
+        </div>
+
         <p-button id="createArticleButton" label="Create!" (onClick)="createArticle()" />
 
     </div>
