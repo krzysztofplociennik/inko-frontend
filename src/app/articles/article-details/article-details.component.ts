@@ -86,6 +86,8 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
   isLoggedIn: boolean = false;
   shouldSpinnerWork: boolean = false;
 
+  fieldErrors: { [key: string]: string } = {};
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -311,6 +313,7 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
     this.codeBlocksEnhanced = false;
   }
 
+
   updateArticle(): void {
     this.confirmationService.confirm({
       message: 'Are you sure you want to save these changes?',
@@ -322,6 +325,7 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
       accept: async () => {
         this.editedArticle.type = this.selectedType.name;
         this.shouldSpinnerWork = true;
+        this.fieldErrors = {};
 
         this.articleService.updateArticle(this.editedArticle).subscribe({
           next: (response) => {
@@ -336,14 +340,23 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
             this.shouldSpinnerWork = false;
             this.codeBlocksEnhanced = false;
           },
-          error: (error) => {
-            console.error('Error updating article', error);
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error!',
-              detail: 'Failed to update article.',
-              life: 3000
-            });
+          error: (err) => {
+            if (err.status === 400) {
+              const errorBody = typeof err.error === 'string'
+                ? JSON.parse(err.error)
+                : err.error;
+
+              if (errorBody?.errors) {
+                this.fieldErrors = errorBody.errors;
+              } else {
+                this.messageService.add({
+                  severity: 'error',
+                  summary: 'Error!',
+                  detail: 'Failed to update article.',
+                  life: 3000
+                });
+              }
+            }
             this.shouldSpinnerWork = false;
           }
         });

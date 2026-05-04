@@ -24,7 +24,6 @@
     width: 100%;
     margin-top: 30px;
 }
-
 /* header/footer wrapper */
 
 #titleDivNonEdit {
@@ -47,14 +46,12 @@
 #contentDivEdit {
     display: flex;
     flex-direction: column;
-    width: 90%;
-    margin: 45px;
-    line-height: 1.5;
+    width: 40%;
     overflow-wrap: break-word;
 }
 
 #editor {
-    margin-left: 4rem;
+    width: 100%;
 }
 
 ::ng-deep #contentDivNonEdit p:empty {
@@ -63,13 +60,14 @@
 }
 
 #contentOutline {
-    width: 60%;
+    width: 100%;
     border-radius: 20px;
+    padding: 4rem;
 }
 
 ::ng-deep p-button .p-button {
-  border: .1rem solid;
-  border-radius: .5rem;
+    border: .1rem solid;
+    border-radius: .5rem;
 }
 
 #tagsDivEdit {
@@ -248,4 +246,11 @@ label {
         left: 16px;
         font-size: 9px;
     }
+}
+
+.p-error {
+    display: block;
+    text-align: left;
+    color: red;
+    margin-top: 0.25rem;
 }
