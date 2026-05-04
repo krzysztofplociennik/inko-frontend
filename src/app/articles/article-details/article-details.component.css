@@ -63,6 +63,7 @@
 #contentOutline {
     width: 100%;
     border-radius: 20px;
+    padding: 4rem;
 }
 
 ::ng-deep p-button .p-button {
