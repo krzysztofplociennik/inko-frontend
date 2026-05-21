@@ -25,7 +25,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../shared/header/header.component';
 import { LastActivePageService } from '../shared/services/last-active-page.service';
-import { ArticleSort, SortField, SortType } from '../shared/sorting/sort-types.api';
+import { SortField, SortType } from '../shared/sorting/sort-types.api';
 
 interface AutoCompleteEvent {
   originalEvent: Event;
@@ -104,38 +104,38 @@ export class SearchArticlesComponent implements OnInit {
     this.lastActivePageService.updateLastActiveUrl('/search-articles')
   }
 
-ngOnInit() {
-  this.authService.loginState$.subscribe(state => this.isUserLoggedIn = state);
+  ngOnInit() {
+    this.authService.loginState$.subscribe(state => this.isUserLoggedIn = state);
 
-  this.articleReadService.fetchArticleTypes().subscribe(types => {
-    this.articleTypes = types;
-  });
+    this.articleReadService.fetchArticleTypes().subscribe(types => {
+      this.articleTypes = types;
+    });
 
-  this.route.queryParamMap.subscribe(params => {
-    if (params.keys.length === 0) return;
+    this.route.queryParamMap.subscribe(params => {
+      if (params.keys.length === 0) return;
 
-    this.pageNumber = +(params.get('page') ?? 0);
-    this.pageSize = +(params.get('size') ?? 5);
-    this.selectedSortingField = (params.get('sortField') as SortField) ?? SortField.TITLE;
-    this.selectedSortingType = (params.get('sortType') as SortType) ?? SortType.ASCENDING;
-    this.first = this.pageNumber * this.pageSize;
+      this.pageNumber = +(params.get('page') ?? 0);
+      this.pageSize = +(params.get('size') ?? 5);
+      this.selectedSortingField = (params.get('sortField') as SortField) ?? SortField.TITLE;
+      this.selectedSortingType = (params.get('sortType') as SortType) ?? SortType.ASCENDING;
+      this.first = this.pageNumber * this.pageSize;
 
-    this.selectedPhrase = params.get('searchPhrase') ?? undefined;
-    this.selectedTags = params.getAll('tags').length ? params.getAll('tags') : undefined;
+      this.selectedPhrase = params.get('searchPhrase') ?? undefined;
+      this.selectedTags = params.getAll('tags').length ? params.getAll('tags') : undefined;
 
-    const dateFrom = params.get('dateFrom');
-    const dateTo = params.get('dateTo');
-    this.selectedDateFrom = dateFrom ? new Date(dateFrom) : undefined;
-    this.selectedDateTo = dateTo ? new Date(dateTo) : undefined;
+      const dateFrom = params.get('dateFrom');
+      const dateTo = params.get('dateTo');
+      this.selectedDateFrom = dateFrom ? new Date(dateFrom) : undefined;
+      this.selectedDateTo = dateTo ? new Date(dateTo) : undefined;
 
-    const typeName = params.get('type');
-    this.selectedType = typeName
-      ? this.articleTypes.find(t => t.name === typeName)
-      : undefined;
+      const typeName = params.get('type');
+      this.selectedType = typeName
+        ? this.articleTypes.find(t => t.name === typeName)
+        : undefined;
 
-    this.searchForArticles();
-  });
-}
+      this.searchForArticles();
+    });
+  }
 
   searchForAutocompletes(event: AutoCompleteEvent) {
     this.searchService.getAutocompletes(event.query).subscribe(
@@ -175,11 +175,6 @@ ngOnInit() {
         }
       }
 
-      const sort: ArticleSort = {
-        sortField: this.selectedSortingField,
-        sortType: this.selectedSortingType
-      }
-
       const result: SearchResult = await firstValueFrom(this.searchService.search(this.pageNumber, this.pageSize, filter));
 
       this.articles = result.articles;
@@ -190,6 +185,7 @@ ngOnInit() {
     } finally {
       this.loadingNotifierService.clearMessage();
       this.shouldSpinnerWork = false;
+      window.scrollTo(0, 0);
     }
   }
 
