@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ExportService } from '../shared/services/export.service';
 import { ImportService } from '../shared/services/import.service';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { getBaseUrl } from '../shared/utils/urlUtils';
 import { JwtUtils } from '../shared/utils/jwtUtils';
 import { HeaderComponent } from '../shared/header/header.component';
@@ -10,19 +10,25 @@ import { ButtonModule } from 'primeng/button';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { CommonModule } from '@angular/common';
+import { ResetService } from '../shared/services/reset.service';
+import { ConfirmDialogModule } from "primeng/confirmdialog";
 
 @Component({
-    selector: 'app-settings',
-    templateUrl: './settings.component.html',
-    styleUrl: './settings.component.css',
-    imports: [
-      HeaderComponent,
-      FooterComponent,
-      ButtonModule,
-      FileUploadModule,
-      ProgressSpinnerModule,
-      CommonModule,
-    ],
+  selector: 'app-settings',
+  templateUrl: './settings.component.html',
+  styleUrl: './settings.component.css',
+  providers: [
+    ConfirmationService
+  ],
+  imports: [
+    HeaderComponent,
+    FooterComponent,
+    ButtonModule,
+    FileUploadModule,
+    ProgressSpinnerModule,
+    CommonModule,
+    ConfirmDialogModule
+  ],
 })
 export class SettingsComponent {
 
@@ -35,12 +41,14 @@ export class SettingsComponent {
     private exportService: ExportService,
     private importService: ImportService,
     private messageService: MessageService,
-  ) {}
+    private resetService: ResetService,
+    private confirmationService: ConfirmationService,
+  ) { }
 
   ngOnChanges() {
     this.toggleBodyScroll(this.isUploading);
   }
-  
+
   ngOnDestroy() {
     this.toggleBodyScroll(false);
   }
@@ -76,7 +84,7 @@ export class SettingsComponent {
       this.shouldSpinnerWork = false;
     }
   }
-  
+
   async onUpload(event: any) {
     this.isUploading = true;
     this.shouldSpinnerWork = true;
@@ -99,5 +107,34 @@ export class SettingsComponent {
       this.shouldSpinnerWork = false;
       this.uploadedFiles = [];
     }
+  }
+
+  showResetDialog(): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to proceed?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      rejectButtonStyleClass: "p-button-text",
+      accept: () => {
+        this.reset();
+      },
+    });
+  }
+
+  reset() {
+    this.shouldSpinnerWork = true;
+
+    this.resetService.reset().subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'success', summary: 'Reset finished successfully.' });
+      },
+      error: (err) => {
+        this.messageService.add({ severity: 'error', summary: 'Something happened during the reset.' });
+        console.error('error:', err);
+      },
+      complete: () => {
+        this.shouldSpinnerWork = false;
+      }
+    });
   }
 }

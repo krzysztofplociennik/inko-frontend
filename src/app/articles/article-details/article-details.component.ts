@@ -376,7 +376,7 @@ export class ArticleDetailsComponent implements OnInit, AfterViewChecked {
         this.articleService.deleteArticle(this.articleID).subscribe({
           next: () => {
             this.messageService.add({ severity: 'success', summary: 'Deleted!', detail: 'The article has been deleted!', life: 3000 });
-            this.router.navigate(['/articles']);
+            this.goBack();
           },
           error: (e) => {
             console.error('Error deleting article', e);

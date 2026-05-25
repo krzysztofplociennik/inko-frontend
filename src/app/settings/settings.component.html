@@ -1,59 +1,57 @@
 <div id="bodyDiv">
-    <app-header class="header"></app-header>
-  
-    <div id="contentWrapper" [class.blurred]="isUploading">
-  
-      <div id="exportDiv">
-        <h2>Exporting articles</h2>
-  
-        <div>
-          <p-button 
-            label="export with HTML" 
-            severity="secondary"    
-            icon="pi pi-file-export"
-            [style]="{ 'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px' }"
-            (onClick)="exportWithHTML()" />
-  
-          <p-button 
-            label="export without HTML" 
-            severity="secondary"    
-            icon="pi pi-file-export"
-            [style]="{ 'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px' }"
-            (onClick)="exportWithoutHTML()" />
-        </div>
-      </div>
-  
-      <div id="importDiv">
-        <h2>Importing articles</h2>
-  
-        <p-fileUpload 
-          name="upload" 
-          customUpload="true" 
-          (uploadHandler)="onUpload($event)" 
-          [multiple]="true" 
-          accept=".txt" 
-          maxFileSize="1000000" 
-          mode="advanced"
-          [files]="uploadedFiles">
-  
-          <ng-template #empty>
-            <div>Drag and drop files to here to upload.</div>
-          </ng-template>
-  
-          <ng-template #content>
-            <ul *ngIf="uploadedFiles.length">
-              <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
-            </ul>
-          </ng-template>
-  
-        </p-fileUpload>
+  <p-confirmDialog />
+  <app-header class="header"></app-header>
+
+  <div id="contentWrapper" [class.blurred]="isUploading">
+
+    <div id="resetDiv">
+      <h2>Reset articles with current backup</h2>
+      <p>After clicking the button below:</p>
+      <p>1) existing articles and tags will be deleted,</p>
+      <p>2) new set of articles will be parsed out of a previously prepared zip file and saved to the database,</p>
+      <p>3) the page will be frozen/blocked until the operation is finished or prematurely interrupted,</p>
+      <p>4) the process should be pretty much instantaneous.</p>
+
+      <p-button label="Reset articles" severity="secondary" icon="pi pi-refresh"
+        [style]="{ 'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px' }" (onClick)="showResetDialog()" />
+    </div>
+
+    <div id="exportDiv">
+      <h2>Exporting articles</h2>
+
+      <div>
+        <p-button label="export with HTML" severity="secondary" icon="pi pi-file-export"
+          [style]="{ 'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px' }" (onClick)="exportWithHTML()" />
+
+        <p-button label="export without HTML" severity="secondary" icon="pi pi-file-export"
+          [style]="{ 'height': '35px', 'width': 'auto', 'margin': '5px 5px 5px 5px' }"
+          (onClick)="exportWithoutHTML()" />
       </div>
     </div>
-  
-    <div *ngIf="isUploading" class="overlay">
-      <p-progressSpinner styleClass="overlay-spinner"></p-progressSpinner>
+
+    <div id="importDiv">
+      <h2>Importing articles</h2>
+
+      <p-fileUpload name="upload" customUpload="true" (uploadHandler)="onUpload($event)" [multiple]="true" accept=".txt"
+        maxFileSize="1000000" mode="advanced" [files]="uploadedFiles">
+
+        <ng-template #empty>
+          <div>Drag and drop files to here to upload.</div>
+        </ng-template>
+
+        <ng-template #content>
+          <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+          </ul>
+        </ng-template>
+
+      </p-fileUpload>
     </div>
-  
-    <app-footer class="footer" id="footer"></app-footer>
   </div>
-  
+
+  <div *ngIf="isUploading" class="overlay">
+    <p-progressSpinner styleClass="overlay-spinner"></p-progressSpinner>
+  </div>
+
+  <app-footer class="footer" id="footer"></app-footer>
+</div>
