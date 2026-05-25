@@ -92,7 +92,7 @@ export class ArticlesComponent {
     this.selectedSortingField = (params.get('sortField') as SortField) ?? SortField.TITLE;
     this.selectedSortingType = (params.get('sortType') as SortType) ?? SortType.ASCENDING;
     this.first = this.pageNumber * this.pageSize;
-    
+
     await this.getArticles();
   }
 
@@ -126,6 +126,7 @@ export class ArticlesComponent {
     } finally {
       this.loadingNotifier.clearMessage();
       this.shouldSpinnerWork = false;
+      window.scrollTo(0, 100);
     }
   }
 

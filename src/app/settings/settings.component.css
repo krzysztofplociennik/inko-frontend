@@ -25,7 +25,6 @@
     bottom: 0;  
     width: 100%;
 }
-
 /* header/footer wrapper */
 
 #exportDiv {
@@ -34,6 +33,11 @@
 }
 
 #importDiv {
+    width: 50%;
+    margin-top: 3rem;
+}
+
+#resetDiv {
     width: 50%;
     margin-top: 3rem;
 }
